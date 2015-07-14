@@ -10,6 +10,8 @@
         <link href="<?php echo $this->webroot; ?>css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
         <link href="<?php echo $this->webroot; ?>css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <!-- DATA TABLES -->
+        <link href="<?php echo $this->webroot; ?>plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="<?php echo $this->webroot; ?>dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
         <!-- AdminLTE Skins. Choose a skin from the css/skins 
@@ -36,7 +38,7 @@
                     <span class="logo-lg"><b>Penfigo</b>SE</span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
-                <?php echo $this->element('menu/general')?>
+                <?php echo $this->element('menu/general') ?>
             </header>
 
             <!-- =============================================== -->
@@ -50,11 +52,12 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
+                <br>
                 <?php echo $this->Session->flash(); ?>
                 <?php echo $this->fetch('content') ?>
             </div><!-- /.content-wrapper -->
 
-            
+
 
             <div class='control-sidebar-bg'></div>
         </div><!-- ./wrapper -->
@@ -63,6 +66,10 @@
         <script src="<?php echo $this->webroot; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <!-- Bootstrap 3.3.2 JS -->
         <script src="<?php echo $this->webroot; ?>bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+        <script src="<?php echo $this->webroot; ?>plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="<?php echo $this->webroot; ?>plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+
         <!-- SlimScroll -->
         <script src="<?php echo $this->webroot; ?>plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- FastClick -->
@@ -72,5 +79,9 @@
 
         <!-- Demo -->
         <script src="<?php echo $this->webroot; ?>dist/js/demo.js" type="text/javascript"></script>
+        <?php echo $this->fetch('addscript');?>
+        <script>
+          $(".tabla-date").dataTable();
+        </script>
     </body>
 </html>
