@@ -22,17 +22,19 @@
                 </thead>
                 <tbody>
                     <?php foreach ($pacientes as $pa): ?>
-                    <tr>
-                        <td><?php echo $pa['Paciente']['id'];?></td>
-                        <td><?php echo $pa['Paciente']['nombres'].' '.$pa['Paciente']['ap_paterno'].' '.$pa['Paciente']['ap_materno']?></td>
-                        <td><?php echo $pa['Paciente']['ci'];?></td>
-                        <td><?php echo $pa['Paciente']['sexo'];?></td>
-                        <td><?php echo $pa['Paciente']['telefonos'];?></td>
-                        <td><?php echo $pa['Paciente']['lugar'];?></td>
-                        <td>
-                          <?php echo $this->Html->link('Editar',['action' => 'paciente',$pa['Paciente']['id']]);?>
-                        </td>
-                    </tr>
+                      <tr>
+                          <td><?php echo $pa['Paciente']['id']; ?></td>
+                          <td><?php echo $pa['Paciente']['nombres'] . ' ' . $pa['Paciente']['ap_paterno'] . ' ' . $pa['Paciente']['ap_materno'] ?></td>
+                          <td><?php echo $pa['Paciente']['ci']; ?></td>
+                          <td><?php echo $pa['Paciente']['sexo']; ?></td>
+                          <td><?php echo $pa['Paciente']['telefonos']; ?></td>
+                          <td><?php echo $pa['Paciente']['lugar']; ?></td>
+                          <td>
+                              <?php echo $this->Html->link('Editar', ['action' => 'paciente', $pa['Paciente']['id']]); ?>
+                              <?= $this->Html->link("Ver paciente", ['action' => 'datos', $pa['Paciente']['id']]) ?>
+                              <?= $this->Html->link('Sintomas', ['controller' => 'Sintomas', 'action' => 'pacientesintomas']) ?>
+                          </td>
+                      </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>

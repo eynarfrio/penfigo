@@ -44,14 +44,19 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <?php echo $this->Form->text('ci', ['class' => 'form-control','placeholder' => 'C.I.']); ?>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <?php echo $this->Form->select('lugar',$lugares, ['class' => 'form-control', 'empty' => 'Seleccione el Lugar']); ?>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <?php echo $this->Form->text('telefonos', ['class' => 'form-control', 'placeholder' => 'Telefonos']); ?>
                             </div>
                         </div>
                     </div>
