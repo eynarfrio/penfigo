@@ -55,5 +55,7 @@ class PacientesController extends AppController {
     $medico = $this->get_medico();
     return $medico['Medico']['id'];
   }
+  
+  
 
 }

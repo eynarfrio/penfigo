@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 13, 2015 at 09:37 AM
+-- Generation Time: Jul 16, 2015 at 03:03 PM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -71,6 +71,97 @@ INSERT INTO `medicos` (`id`, `user_id`, `nombres`, `ap_paterno`, `ap_materno`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pacientes`
+--
+
+CREATE TABLE IF NOT EXISTS `pacientes` (
+`id` int(11) NOT NULL,
+  `nombres` varchar(70) NOT NULL,
+  `ap_paterno` varchar(50) DEFAULT NULL,
+  `ap_materno` varchar(50) DEFAULT NULL,
+  `ci` varchar(20) NOT NULL,
+  `lugar` varchar(25) DEFAULT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `sexo` varchar(20) NOT NULL,
+  `telefonos` varchar(30) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `pacientes`
+--
+
+INSERT INTO `pacientes` (`id`, `nombres`, `ap_paterno`, `ap_materno`, `ci`, `lugar`, `fecha_nacimiento`, `sexo`, `telefonos`, `created`, `modified`) VALUES
+(1, 'Marcelo', 'Mayta', 'Salas', '456210655', 'La Paz', '1990-05-21', 'Masculino', '789456', '2015-07-14 00:16:25', '2015-07-16 12:55:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pacientes_medicos`
+--
+
+CREATE TABLE IF NOT EXISTS `pacientes_medicos` (
+`id` int(11) NOT NULL,
+  `paciente_id` int(11) NOT NULL,
+  `medico_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `pacientes_medicos`
+--
+
+INSERT INTO `pacientes_medicos` (`id`, `paciente_id`, `medico_id`, `created`, `modified`) VALUES
+(1, 1, 1, '2015-07-14 00:16:25', '2015-07-14 00:16:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pacientes_sintomas`
+--
+
+CREATE TABLE IF NOT EXISTS `pacientes_sintomas` (
+`id` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `paciente_id` int(11) NOT NULL,
+  `sintoma_id` int(11) NOT NULL,
+  `estado` int(1) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sintomas`
+--
+
+CREATE TABLE IF NOT EXISTS `sintomas` (
+`id` int(11) NOT NULL,
+  `nombre` varchar(70) NOT NULL,
+  `descripcion` text,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `sintomas`
+--
+
+INSERT INTO `sintomas` (`id`, `nombre`, `descripcion`, `created`, `modified`) VALUES
+(1, 'Fiebre', NULL, NULL, NULL),
+(2, 'Malestar General', NULL, NULL, NULL),
+(3, 'Debilidad', NULL, NULL, NULL),
+(4, 'Falta de apetito', NULL, NULL, NULL),
+(5, 'Dolor Cabeza', NULL, NULL, NULL),
+(6, 'Peso Bajo', NULL, NULL, NULL),
+(7, 'Ampollas', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -107,6 +198,30 @@ ALTER TABLE `medicos`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pacientes`
+--
+ALTER TABLE `pacientes`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pacientes_medicos`
+--
+ALTER TABLE `pacientes_medicos`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pacientes_sintomas`
+--
+ALTER TABLE `pacientes_sintomas`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sintomas`
+--
+ALTER TABLE `sintomas`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -126,6 +241,26 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 ALTER TABLE `medicos`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `pacientes`
+--
+ALTER TABLE `pacientes`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `pacientes_medicos`
+--
+ALTER TABLE `pacientes_medicos`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `pacientes_sintomas`
+--
+ALTER TABLE `pacientes_sintomas`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `sintomas`
+--
+ALTER TABLE `sintomas`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
