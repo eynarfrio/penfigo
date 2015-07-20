@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class PacientesController extends AppController {
 
-  public $uses = ['Paciente', 'PacientesMedico', 'Medico', 'Lugare', 'PacientesSintoma'];
+  public $uses = ['Paciente', 'PacientesMedico', 'Medico', 'Lugare', 'PacientesSintoma', 'Areaampolla', 'PacientesTipoampolla'];
 
   public function mispacientes() {
     $pacientes = $this->PacientesMedico->find('all', [
@@ -48,7 +48,7 @@ class PacientesController extends AppController {
   }
 
   public function get_medico() {
-    return $this->Medico->findByid($this->Session->read('Auth.User.id'));
+    return $this->Medico->findByuser_id($this->Session->read('Auth.User.id'));
   }
 
   public function get_id_medico() {
@@ -62,7 +62,75 @@ class PacientesController extends AppController {
       'recursive' => 0,
       'conditions' => ['PacientesSintoma.paciente_id' => $idPaciente]
     ]);
-    $this->set(compact('paciente', 'sintomas','idPaciente'));
+    $sintomas_amp = $this->PacientesSintoma->find('all', [
+      'recursive' => -1,
+      'conditions' => ['PacientesSintoma.paciente_id' => $idPaciente],
+      'group' => 'PacientesSintoma.numero'
+    ]);
+    $array_samp = [];
+    $iamp = 0;
+    foreach ($sintomas_amp as $sp) {
+      $preg_amp = $this->PacientesSintoma->find('first', [
+        'recursive' => 0,
+        'conditions' => [
+          'Sintoma.nombre' => 'Ampollas',
+          'PacientesSintoma.estado' => 1,
+          'PacientesSintoma.paciente_id' => $idPaciente,
+          'PacientesSintoma.numero' => $sp['PacientesSintoma']['numero']
+        ],
+        'fields' => 'PacientesSintoma.id'
+      ]);
+      $num_amp = $this->PacientesSintoma->find('count', [
+        'conditions' => [
+          'PacientesSintoma.estado' => 1,
+          'PacientesSintoma.paciente_id' => $idPaciente,
+          'PacientesSintoma.numero' => $sp['PacientesSintoma']['numero']
+        ]
+      ]);
+      $iamp++;
+      if (!empty($preg_amp) && $num_amp >= 2) {
+        $array_samp[$iamp]['estado'] = TRUE;
+        $array_samp[$iamp]['areas_mu'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'],'Mucosas');
+        $array_samp[$iamp]['areas_pi'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'],'Piel');
+      } else {
+        $array_samp[$iamp]['estado'] = FALSE;
+      }
+      $array_samp[$iamp]['numero'] = $sp['PacientesSintoma']['numero'];
+    }
+    /* debug($array_samp);
+      exit; */
+    $this->set(compact('paciente', 'sintomas', 'idPaciente', 'array_samp'));
+  }
+
+  function get_pac_areas($idPaciente, $numero, $tipo) {
+    $array = $this->Areaampolla->find('all', [
+      'recursive' => 0,
+      'conditions' => ['Areaampolla.paciente_id' => $idPaciente, 'Areaampolla.numero' => $numero, 'Areaampolla.estado' => 1,'Areaampolla.tipo' => $tipo],
+      'fields' => ['Area.nombre', 'Areaampolla.id', 'Areaampolla.modified']
+    ]);
+    if (!empty($array)) {
+      foreach ($array as $key => $a) {
+        $array[$key]['Areaampolla']['tipos'] = $this->get_pac_tipos_am($a['Areaampolla']['id']);
+      }
+    }
+    return $array;
+  }
+
+  function get_pac_tipos_am($idAreaampolla) {
+    $tipos = $this->PacientesTipoampolla->find('all', [
+      'recursive' => 0,
+      'conditions' => ['PacientesTipoampolla.areaampolla_id' => $idAreaampolla, 'PacientesTipoampolla.estado' => 1],
+      'fields' => ['Tipoampolla.nombre']
+    ]);
+    $cadena = "";
+    foreach ($tipos as $ti) {
+      if (!empty($cadena)) {
+        $cadena = $cadena . ", " . $ti['Tipoampolla']['nombre'];
+      } else {
+        $cadena = $ti['Tipoampolla']['nombre'];
+      }
+    }
+    return $cadena;
   }
 
   function calculaedad($fechanacimiento) {

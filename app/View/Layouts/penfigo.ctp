@@ -146,8 +146,8 @@
                   else {
                       setTimeout(function ()
                       {
-                          jQuery("#spin-cargando-mod").hide(600);
-                          $('#divmodal').show(600);
+                          jQuery("#spin-cargando-mod").hide();
+                          $('#divmodal').show();
                       }, 1500);
 
                   }
