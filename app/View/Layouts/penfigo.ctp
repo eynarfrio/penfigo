@@ -17,6 +17,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins 
              folder instead of downloading all of them to reduce the load. -->
         <link href="<?php echo $this->webroot; ?>dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+        
 
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

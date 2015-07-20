@@ -55,6 +55,8 @@ class PacientesController extends AppController {
     $medico = $this->get_medico();
     return $medico['Medico']['id'];
   }
+  
+  
 
   public function datos($idPaciente = null) {
     $paciente = $this->Paciente->findByid($idPaciente);

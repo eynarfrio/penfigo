@@ -31,8 +31,9 @@
                           <td class="hidden-xs"><?php echo $pa['Paciente']['lugar']; ?></td>
                           <td>
                               <?php echo $this->Html->link('Editar', ['action' => 'paciente', $pa['Paciente']['id']]); ?>
-                              <?= $this->Html->link("Ver paciente", ['action' => 'datos', $pa['Paciente']['id']]) ?>
+                 <?= $this->Html->link("Ver paciente", ['action' => 'datos', $pa['Paciente']['id']]) ?>
                               <?= $this->Html->link('Sintomas', ['controller' => 'Sintomas', 'action' => 'pacientesintomas']) ?>
+                              <!--amor-->
                           </td>
                       </tr>
                     <?php endforeach; ?>
