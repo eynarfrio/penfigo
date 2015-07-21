@@ -9,7 +9,7 @@ class AmpollasController extends AppController {
   public function areasampollas_mu($idPaciente = null, $numero = null, $tipo) {
     $areas_mu = $this->Areaampolla->find('all', [
       'recursive' => 0,
-      'conditions' => ['Areaampolla.paciente_id' => $numero, 'Areaampolla.paciente_id', 'Areaampolla.tipo' => $tipo],
+      'conditions' => ['Areaampolla.paciente_id' => $idPaciente, 'Areaampolla.numero' => $numero, 'Areaampolla.tipo' => $tipo],
       'fields' => ['Area.*', 'Areaampolla.*']
     ]);
     //debug($areas_mu);exit;

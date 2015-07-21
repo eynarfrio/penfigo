@@ -4,7 +4,15 @@ App::uses('AppController', 'Controller');
 
 class PacientesController extends AppController {
 
-  public $uses = ['Paciente', 'PacientesMedico', 'Medico', 'Lugare', 'PacientesSintoma', 'Areaampolla', 'PacientesTipoampolla'];
+  public $uses = [
+    'Paciente',
+    'PacientesMedico',
+    'Medico', 'Lugare',
+    'PacientesSintoma',
+    'Areaampolla',
+    'PacientesTipoampolla',
+    'PacientesPielsintoma'
+  ];
 
   public function mispacientes() {
     $pacientes = $this->PacientesMedico->find('all', [
@@ -90,8 +98,8 @@ class PacientesController extends AppController {
       $iamp++;
       if (!empty($preg_amp) && $num_amp >= 2) {
         $array_samp[$iamp]['estado'] = TRUE;
-        $array_samp[$iamp]['areas_mu'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'],'Mucosas');
-        $array_samp[$iamp]['areas_pi'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'],'Piel');
+        $array_samp[$iamp]['areas_mu'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'], 'Mucosas');
+        $array_samp[$iamp]['areas_pi'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'], 'Piel');
       } else {
         $array_samp[$iamp]['estado'] = FALSE;
       }
@@ -105,7 +113,7 @@ class PacientesController extends AppController {
   function get_pac_areas($idPaciente, $numero, $tipo) {
     $array = $this->Areaampolla->find('all', [
       'recursive' => 0,
-      'conditions' => ['Areaampolla.paciente_id' => $idPaciente, 'Areaampolla.numero' => $numero, 'Areaampolla.estado' => 1,'Areaampolla.tipo' => $tipo],
+      'conditions' => ['Areaampolla.paciente_id' => $idPaciente, 'Areaampolla.numero' => $numero, 'Areaampolla.estado' => 1, 'Areaampolla.tipo' => $tipo],
       'fields' => ['Area.nombre', 'Areaampolla.id', 'Areaampolla.modified']
     ]);
     if (!empty($array)) {
@@ -141,6 +149,18 @@ class PacientesController extends AppController {
     if ($dia_diferencia < 0 || $mes_diferencia < 0)
       $ano_diferencia--;
     return $ano_diferencia;
+  }
+
+  function get_sintomaspiel($idPaciente = null, $numero = null) {
+    $sintomas = $this->PacientesPielsintoma->find('all', [
+      'recursive' => 0,
+      'conditions' => [
+        'PacientesPielsintoma.paciente_id' => $idPaciente,
+        'PacientesPielsintoma.numero' => $numero
+      ],
+      'fields' => ['PacientesPielsintoma.*','Pielsintoma.*']
+    ]);
+    return $sintomas;
   }
 
 }

@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class SintomasController extends AppController {
 
-  public $uses = array('Medico', 'Paciente', 'Sintoma', 'PacientesSintoma');
+  public $uses = array('Medico', 'Paciente', 'Sintoma', 'PacientesSintoma', 'Pielsintoma', 'PacientesPielsintoma');
 
   public function pacientesintomas($idPaciente = null, $numero = NULL) {
     $sintomas = $this->Sintoma->find('all', ['recursive' => -1]);
@@ -17,15 +17,15 @@ class SintomasController extends AppController {
       $sintomas = $this->PacientesSintoma->find('all', [
         'recursive' => 0,
         'conditions' => ['PacientesSintoma.paciente_id' => $idPaciente, 'PacientesSintoma.numero' => $numero],
-        'fields' => ['PacientesSintoma.*','Sintoma.*']
+        'fields' => ['PacientesSintoma.*', 'Sintoma.*']
       ]);
-      foreach ($sintomas as $key => $sin){
+      foreach ($sintomas as $key => $sin) {
         $this->request->data['PacientesSintoma'][$key] = $sin['PacientesSintoma'];
       }
-    }else{
+    } else {
       $sintomas = $this->Sintoma->find('all', ['recursive' => -1]);
     }
-    $this->set(compact('sintomas', 'idPaciente','numero'));
+    $this->set(compact('sintomas', 'idPaciente', 'numero'));
   }
 
   public function get_ult_num($idPaciente = null) {
@@ -41,9 +41,9 @@ class SintomasController extends AppController {
     }
   }
 
-  public function regis_sin_pac($idPaciente = null,$numero = null) {
+  public function regis_sin_pac($idPaciente = null, $numero = null) {
     if (!empty($this->request->data['PacientesSintoma'])) {
-      if(empty($numero)){
+      if (empty($numero)) {
         $numero = $this->genera_numero();
       }
       foreach ($this->request->data['PacientesSintoma'] as $pa) {
@@ -68,11 +68,45 @@ class SintomasController extends AppController {
       return 1;
     }
   }
-  
-  public function elimina_sin($idPaciente = null,$numero = null){
-    $this->PacientesSintoma->deleteAll(['PacientesSintoma.paciente_id' => $idPaciente,'PacientesSintoma.numero' => $numero]);
-    $this->Session->setFlash('Se elimino correctamente los sintomas!!','msgbueno');
+
+  public function elimina_sin($idPaciente = null, $numero = null) {
+    $this->PacientesSintoma->deleteAll(['PacientesSintoma.paciente_id' => $idPaciente, 'PacientesSintoma.numero' => $numero]);
+    $this->Session->setFlash('Se elimino correctamente los sintomas!!', 'msgbueno');
     $this->redirect($this->referer());
+  }
+
+  public function sintomas_piel($idPaciente = null, $numero = null) {
+    $sintomas = $this->PacientesPielsintoma->find('all', [
+      'recursive' => 0,
+      'conditions' => ['PacientesPielsintoma.paciente_id' => $idPaciente, 'PacientesPielsintoma.numero' => $numero],
+      'fields' => ['Pielsintoma.*', 'PacientesPielsintoma.*']
+    ]);
+    if (empty($sintomas)) {
+      $sintomas = $this->Pielsintoma->find('all');
+    }
+    $idMedico = $this->get_id_medico();
+    $this->set(compact('idPaciente', 'sintomas', 'numero', 'idMedico'));
+  }
+  
+  public function regis_sin_piel($idPaciente = null) {
+    if (!empty($this->request->data['PacientesPielsintoma'])) {
+      foreach ($this->request->data['PacientesPielsintoma'] as $pa) {
+        $datos = $pa;
+        $this->PacientesPielsintoma->create();
+        $this->PacientesPielsintoma->save($datos);
+      }
+      $this->Session->setFlash("Se registro correctamente!!",'msgbueno');
+      $this->redirect(['controller' => 'Pacientes','action' => 'datos', $idPaciente]);
+    }
+  }
+
+  public function get_medico() {
+    return $this->Medico->findByuser_id($this->Session->read('Auth.User.id'));
+  }
+
+  public function get_id_medico() {
+    $medico = $this->get_medico();
+    return $medico['Medico']['id'];
   }
 
 }

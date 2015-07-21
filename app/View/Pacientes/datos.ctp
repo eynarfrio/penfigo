@@ -60,8 +60,8 @@
                         <?php if (!empty($num_sin)): ?>
                           <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'ajax_sintomas', $idPaciente, $num_sin]) ?>');"><i class="fa fa-edit"></i></button> 
                           <button class="btn btn-box-tool" title="Editar" onclick="if (confirm('Esta seguro de eliminar los sintomas??')) {
-                                    window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
-                                }"><i class="fa fa-remove"></i></button> 
+                                      window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
+                                  }"><i class="fa fa-remove"></i></button> 
                                 <?php endif; ?>
 
                     </div>
@@ -173,20 +173,37 @@
                     <div class="box-header text-center">
                         <h3 class="box-title">Sintomas en la Piel</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Ampollas', 'action' => 'areasampollas_mu', $idPaciente, $amp['numero'], 'Piel']) ?>'"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'sintomas_piel', $idPaciente, $amp['numero']]) ?>'"><i class="fa fa-edit"></i></button>
                         </div>
                     </div>
+                    <?php $sintomaspiel = $this->requestAction(['controller' => 'Pacientes', 'action' => 'get_sintomaspiel', $idPaciente, $amp['numero']]) ?>
                     <div class="box-body">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th class="hidden-xs">Nro</th>
                                     <th>Sintoma</th>
+                                    <th>Presenta</th>
                                     <th>Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php foreach ($sintomaspiel as $key => $sin): ?>
+                                  <tr>
+                                      <td><?= $key + 1 ?></td>
+                                      <td><?= $sin['Pielsintoma']['nombre'] ?></td>
+                                      <td>
+                                          <?php
+                                          if ($sin['PacientesPielsintoma']['estado']) {
+                                            echo '<span class="label label-primary">Si</span>';
+                                          } else {
+                                            echo 'No';
+                                          }
+                                          ?>
+                                      </td>
+                                      <td><?= $sin['PacientesPielsintoma']['modified'] ?></td>
+                                  </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
