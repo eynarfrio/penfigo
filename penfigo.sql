@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2015 at 12:53 AM
+-- Generation Time: Jul 21, 2015 at 09:21 AM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -169,6 +169,33 @@ CREATE TABLE IF NOT EXISTS `pacientes_medicos` (
 
 INSERT INTO `pacientes_medicos` (`id`, `paciente_id`, `medico_id`, `created`, `modified`) VALUES
 (1, 1, 1, '2015-07-14 00:16:25', '2015-07-14 00:16:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pacientes_pielsintomas`
+--
+
+CREATE TABLE IF NOT EXISTS `pacientes_pielsintomas` (
+`id` int(11) NOT NULL,
+  `paciente_id` int(11) NOT NULL,
+  `pielsintoma_id` int(11) NOT NULL,
+  `estado` int(1) NOT NULL,
+  `medico_id` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `pacientes_pielsintomas`
+--
+
+INSERT INTO `pacientes_pielsintomas` (`id`, `paciente_id`, `pielsintoma_id`, `estado`, `medico_id`, `numero`, `created`, `modified`) VALUES
+(1, 1, 1, 1, 1, 1, '2015-07-21 00:39:08', '2015-07-21 00:50:49'),
+(2, 1, 2, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 00:50:49'),
+(3, 1, 3, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 00:50:49'),
+(4, 1, 4, 1, 1, 1, '2015-07-21 00:39:09', '2015-07-21 00:50:49');
 
 -- --------------------------------------------------------
 
@@ -393,6 +420,12 @@ ALTER TABLE `pacientes_medicos`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pacientes_pielsintomas`
+--
+ALTER TABLE `pacientes_pielsintomas`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pacientes_sintomas`
 --
 ALTER TABLE `pacientes_sintomas`
@@ -468,6 +501,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 ALTER TABLE `pacientes_medicos`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `pacientes_pielsintomas`
+--
+ALTER TABLE `pacientes_pielsintomas`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `pacientes_sintomas`
 --
