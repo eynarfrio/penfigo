@@ -72,11 +72,10 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <br>
-                <?php echo $this->Session->flash(); ?>
-                <?php echo $this->fetch('content') ?>
-
-
-
+                
+                    <?php echo $this->Session->flash(); ?>
+                    <?php echo $this->fetch('content') ?>
+                
 
             </div><!-- /.content-wrapper -->
 

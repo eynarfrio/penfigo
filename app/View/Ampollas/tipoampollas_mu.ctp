@@ -1,7 +1,7 @@
 <link href="<?= $this->webroot; ?>plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
 <section class="content">
 
-    <?php echo $this->Form->create('Ampolla', ['action' => "regis_tipo_amp_m/$idPaciente"]) ?>
+    <?php echo $this->Form->create('Ampolla', ['action' => "regis_tipo_amp_m/$idPaciente/$numero/$tipo"]) ?>
     <?php $i = 0; ?>
     <?php foreach ($areasamp as $am): ?>
       <div class="box box-primary">
@@ -23,7 +23,7 @@
                   </thead>
                   <tbody>
                       <?php
-                      $tiposamp = $this->requestAction(['action' => 'get_tipoamp', $am['Areaampolla']['id'],$tipo]);
+                      $tiposamp = $this->requestAction(['action' => 'get_tipoamp', $am['Areaampolla']['id'], $tipo]);
                       //debug($tiposamp);exit;
                       ?>
                       <?php foreach ($tiposamp as $key => $ta): ?>
@@ -61,7 +61,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Siguiente</button>
+                <button type="submit" class="btn btn-primary">Siguiente</button> 
+                <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url(array('controller' => 'Pacientes', 'action' => 'datos', $idPaciente)) ?>';">Cancelar</button>
             </div>
         </div>
     </div>

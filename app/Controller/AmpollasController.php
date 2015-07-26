@@ -20,14 +20,14 @@ class AmpollasController extends AppController {
     $this->set(compact('idPaciente', 'areas_mu', 'numero', 'idMedico', 'tipo'));
   }
 
-  public function regis_are_amp_m($idPaciente = null, $numero = null,$tipo = null) {
+  public function regis_are_amp_m($idPaciente = null, $numero = null, $tipo = null) {
     if (!empty($this->request->data['Areaampolla'])) {
       foreach ($this->request->data['Areaampolla'] as $pa) {
         $datos = $pa;
         $this->Areaampolla->create();
         $this->Areaampolla->save($datos);
       }
-      $this->redirect(['action' => 'tipoampollas_mu', $idPaciente, $numero,$tipo]);
+      $this->redirect(['action' => 'tipoampollas_mu', $idPaciente, $numero, $tipo]);
     }
   }
 
@@ -42,7 +42,7 @@ class AmpollasController extends AppController {
     }
     /* debug($areasamp);
       exit; */
-    $this->set(compact('areasamp', 'idPaciente', 'numero','tipo'));
+    $this->set(compact('areasamp', 'idPaciente', 'numero', 'tipo'));
   }
 
   public function get_medico() {
@@ -54,10 +54,10 @@ class AmpollasController extends AppController {
     return $medico['Medico']['id'];
   }
 
-  public function get_tipoamp($id_areaampolla,$tipo) {
+  public function get_tipoamp($id_areaampolla, $tipo) {
     $tipos = $this->PacientesTipoampolla->find('all', [
       'recursive' => 0,
-      'conditions' => ['PacientesTipoampolla.areaampolla_id' => $id_areaampolla,'Tipoampolla.tipo' => $tipo],
+      'conditions' => ['PacientesTipoampolla.areaampolla_id' => $id_areaampolla, 'Tipoampolla.tipo' => $tipo],
       'fields' => ['Tipoampolla.*', 'PacientesTipoampolla.*']
     ]);
     if (empty($tipos)) {
@@ -69,15 +69,42 @@ class AmpollasController extends AppController {
     return $tipos;
   }
 
-  public function regis_tipo_amp_m($idPaciente = NULL) {
+  public function regis_tipo_amp_m($idPaciente = NULL, $numero = null, $tipo = null) {
     if (!empty($this->request->data['PacientesTipoampolla'])) {
       foreach ($this->request->data['PacientesTipoampolla'] as $pt) {
         $this->PacientesTipoampolla->create();
         $this->PacientesTipoampolla->save($pt);
       }
     }
-    $this->Session->setFlash("Se registro los datos correctamente!!", 'msgbueno');
-    $this->redirect(['controller' => 'Pacientes', 'action' => 'datos', $idPaciente]);
+
+    $this->redirect(array('action' => 'erociones', $idPaciente, $numero, $tipo));
+  }
+
+  public function erociones($idPaciente = NULL, $numero = null, $tipo = null) {
+
+    $sql = "SELECT ar.nombre FROM areas ar WHERE ar.id = Areaampolla.area_id";
+    $this->PacientesTipoampolla->virtualFields = array(
+      'area' => "($sql)"
+    );
+    $pasTipAmps = $this->PacientesTipoampolla->find('all', array(
+      'recursive' => 0,
+      'conditions' => array(
+        'Tipoampolla.nombre' => 'Erociones',
+        'Areaampolla.tipo' => $tipo,
+        'Areaampolla.paciente_id' => $idPaciente,
+        'Areaampolla.numero' => $numero,
+        'PacientesTipoampolla.estado' => 1
+      ),
+      'fields' => array(
+        'PacientesTipoampolla.id', 'PacientesTipoampolla.area'
+      )
+    ));
+    
+    if (empty($pasTipAmps)) {
+      $this->Session->setFlash("Se registro los datos correctamente!!", 'msgbueno');
+      $this->redirect(['controller' => 'Pacientes', 'action' => 'datos', $idPaciente]);
+    }
+    $this->set(compact('pasTipAmps'));
   }
 
 }
