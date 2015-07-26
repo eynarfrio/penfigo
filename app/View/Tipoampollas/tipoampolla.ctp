@@ -3,7 +3,7 @@
 
     <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Formulario de sintomas en la Piel</h3>
+            <h3 class="box-title">Formulario Tipo de Ampolla</h3>
         </div><!-- /.box-header -->
         <!-- form start -->
         <?php echo $this->Form->create('Tipoampolla')?>
