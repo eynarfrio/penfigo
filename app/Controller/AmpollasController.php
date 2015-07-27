@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class AmpollasController extends AppController {
 
-  public $uses = ['Area', 'Areaampolla', 'Medico', 'Tipoampolla', 'PacientesTipoampolla'];
+  public $uses = ['Area', 'Areaampolla', 'Medico', 'Tipoampolla', 'PacientesTipoampolla', 'PacientesTipoerocione', 'Tipoerocione'];
 
   public function areasampollas_mu($idPaciente = null, $numero = null, $tipo) {
     $areas_mu = $this->Areaampolla->find('all', [
@@ -96,15 +96,46 @@ class AmpollasController extends AppController {
         'PacientesTipoampolla.estado' => 1
       ),
       'fields' => array(
-        'PacientesTipoampolla.id', 'PacientesTipoampolla.area'
+        'PacientesTipoampolla.areaampolla_id', 'PacientesTipoampolla.area'
       )
     ));
-    
     if (empty($pasTipAmps)) {
       $this->Session->setFlash("Se registro los datos correctamente!!", 'msgbueno');
       $this->redirect(['controller' => 'Pacientes', 'action' => 'datos', $idPaciente]);
     }
-    $this->set(compact('pasTipAmps'));
+
+    $this->set(compact('pasTipAmps', 'idPaciente', 'numero', 'tipo'));
   }
 
+  public function get_tipoero($id_areaampolla, $tipo) {
+    $tipos = $this->PacientesTipoerocione->find('all', [
+      'recursive' => 0,
+      'conditions' => ['PacientesTipoerocione.areaampolla_id' => $id_areaampolla],
+      'fields' => ['Tipoerocione.*', 'PacientesTipoerocione.*']
+    ]);
+    if (empty($tipos)) {
+      $tipos = $this->Tipoerocione->find('all', [
+        'recursive' => -1,
+        'conditions' => ['Tipoerocione.tipo' => $tipo]
+      ]);
+    }
+    return $tipos;
+  }
+
+  public function regis_tipo_ero($idPaciente = NULL, $numero = null, $tipo = null) {
+    /*debug($this->request->data);
+    exit;*/
+    if (!empty($this->request->data['PacientesTipoerocione'])) {
+      foreach ($this->request->data['PacientesTipoerocione'] as $pt) {
+        $this->PacientesTipoerocione->create();
+        $this->PacientesTipoerocione->save($pt);
+      }
+    }
+    $this->Session->setFlash("Se registro los datos correctamente!!", 'msgbueno');
+    $this->redirect(['controller' => 'Pacientes', 'action' => 'datos', $idPaciente]);
+  }
+  
+  
+
+  
 }
