@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2015 at 09:21 AM
--- Server version: 5.5.43-0ubuntu0.14.04.1
+-- Generation Time: Jul 29, 2015 at 09:51 AM
+-- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -43,10 +43,10 @@ CREATE TABLE IF NOT EXISTS `areaampollas` (
 --
 
 INSERT INTO `areaampollas` (`id`, `tipo`, `area_id`, `paciente_id`, `medico_id`, `estado`, `numero`, `created`, `modified`) VALUES
-(1, 'Mucosas', 1, 1, 1, 1, 1, '2015-07-19 21:22:05', '2015-07-20 00:43:10'),
-(2, 'Mucosas', 2, 1, 1, 1, 1, '2015-07-19 21:22:05', '2015-07-20 00:43:10'),
-(3, 'Piel', 3, 1, 1, 1, 1, '2015-07-20 00:34:45', '2015-07-20 00:43:31'),
-(4, 'Piel', 4, 1, 1, 1, 1, '2015-07-20 00:34:45', '2015-07-20 00:43:31');
+(1, 'Mucosas', 1, 1, 1, 1, 1, '2015-07-19 21:22:05', '2015-07-27 16:04:22'),
+(2, 'Mucosas', 2, 1, 1, 1, 1, '2015-07-19 21:22:05', '2015-07-27 16:04:22'),
+(3, 'Piel', 3, 1, 1, 1, 1, '2015-07-20 00:34:45', '2015-07-26 19:33:12'),
+(4, 'Piel', 4, 1, 1, 1, 1, '2015-07-20 00:34:45', '2015-07-26 19:33:13');
 
 -- --------------------------------------------------------
 
@@ -192,10 +192,10 @@ CREATE TABLE IF NOT EXISTS `pacientes_pielsintomas` (
 --
 
 INSERT INTO `pacientes_pielsintomas` (`id`, `paciente_id`, `pielsintoma_id`, `estado`, `medico_id`, `numero`, `created`, `modified`) VALUES
-(1, 1, 1, 1, 1, 1, '2015-07-21 00:39:08', '2015-07-21 00:50:49'),
-(2, 1, 2, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 00:50:49'),
-(3, 1, 3, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 00:50:49'),
-(4, 1, 4, 1, 1, 1, '2015-07-21 00:39:09', '2015-07-21 00:50:49');
+(1, 1, 1, 1, 1, 1, '2015-07-21 00:39:08', '2015-07-21 11:14:21'),
+(2, 1, 2, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 11:14:21'),
+(3, 1, 3, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 11:14:21'),
+(4, 1, 4, 1, 1, 1, '2015-07-21 00:39:09', '2015-07-21 11:14:21');
 
 -- --------------------------------------------------------
 
@@ -211,20 +211,20 @@ CREATE TABLE IF NOT EXISTS `pacientes_sintomas` (
   `estado` int(1) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `pacientes_sintomas`
 --
 
 INSERT INTO `pacientes_sintomas` (`id`, `numero`, `paciente_id`, `sintoma_id`, `estado`, `created`, `modified`) VALUES
-(8, 1, 1, 1, 1, '2015-07-18 10:47:16', '2015-07-19 23:26:10'),
-(9, 1, 1, 2, 0, '2015-07-18 10:47:16', '2015-07-19 23:26:11'),
-(10, 1, 1, 3, 1, '2015-07-18 10:47:16', '2015-07-19 23:26:11'),
-(11, 1, 1, 4, 1, '2015-07-18 10:47:16', '2015-07-19 23:26:11'),
-(12, 1, 1, 5, 0, '2015-07-18 10:47:16', '2015-07-19 23:26:11'),
-(13, 1, 1, 6, 0, '2015-07-18 10:47:16', '2015-07-19 23:26:11'),
-(14, 1, 1, 7, 1, '2015-07-18 10:47:16', '2015-07-19 23:26:11');
+(15, 1, 1, 1, 1, '2015-07-23 15:55:43', '2015-07-25 10:25:07'),
+(16, 1, 1, 2, 1, '2015-07-23 15:55:43', '2015-07-25 10:25:07'),
+(17, 1, 1, 3, 1, '2015-07-23 15:55:43', '2015-07-25 10:25:07'),
+(18, 1, 1, 4, 0, '2015-07-23 15:55:43', '2015-07-25 10:25:07'),
+(19, 1, 1, 5, 0, '2015-07-23 15:55:43', '2015-07-25 10:25:07'),
+(20, 1, 1, 6, 1, '2015-07-23 15:55:44', '2015-07-25 10:25:07'),
+(21, 1, 1, 7, 1, '2015-07-23 15:55:44', '2015-07-25 10:25:07');
 
 -- --------------------------------------------------------
 
@@ -246,18 +246,104 @@ CREATE TABLE IF NOT EXISTS `pacientes_tipoampollas` (
 --
 
 INSERT INTO `pacientes_tipoampollas` (`id`, `areaampolla_id`, `tipoampolla_id`, `estado`, `created`, `modified`) VALUES
-(1, 1, 1, 0, '2015-07-19 22:45:51', '2015-07-20 00:43:12'),
-(2, 1, 2, 1, '2015-07-19 22:45:51', '2015-07-20 00:43:12'),
-(3, 1, 3, 0, '2015-07-19 22:45:51', '2015-07-20 00:43:12'),
-(4, 1, 4, 1, '2015-07-19 22:45:51', '2015-07-20 00:43:12'),
-(5, 2, 1, 1, '2015-07-19 22:45:51', '2015-07-20 00:43:13'),
-(6, 2, 2, 0, '2015-07-19 22:45:51', '2015-07-20 00:43:13'),
-(7, 2, 3, 1, '2015-07-19 22:45:51', '2015-07-20 00:43:13'),
-(8, 2, 4, 1, '2015-07-19 22:45:51', '2015-07-20 00:43:13'),
-(9, 3, 5, 0, '2015-07-20 00:43:26', '2015-07-20 00:43:32'),
-(10, 3, 6, 1, '2015-07-20 00:43:26', '2015-07-20 00:43:32'),
-(11, 4, 5, 1, '2015-07-20 00:43:26', '2015-07-20 00:43:32'),
-(12, 4, 6, 0, '2015-07-20 00:43:26', '2015-07-20 00:43:32');
+(1, 1, 1, 0, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(2, 1, 2, 1, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(3, 1, 3, 0, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(4, 1, 4, 1, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(5, 2, 1, 0, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(6, 2, 2, 1, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(7, 2, 3, 0, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(8, 2, 4, 1, '2015-07-19 22:45:51', '2015-07-27 16:04:25'),
+(9, 3, 5, 0, '2015-07-20 00:43:26', '2015-07-21 11:17:38'),
+(10, 3, 6, 1, '2015-07-20 00:43:26', '2015-07-21 11:17:38'),
+(11, 4, 5, 1, '2015-07-20 00:43:26', '2015-07-21 11:17:38'),
+(12, 4, 6, 0, '2015-07-20 00:43:26', '2015-07-21 11:17:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pacientes_tipoerociones`
+--
+
+CREATE TABLE IF NOT EXISTS `pacientes_tipoerociones` (
+`id` int(11) NOT NULL,
+  `tipoerocione_id` int(11) NOT NULL,
+  `areaampolla_id` int(11) NOT NULL,
+  `estado` int(1) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `pacientes_tipoerociones`
+--
+
+INSERT INTO `pacientes_tipoerociones` (`id`, `tipoerocione_id`, `areaampolla_id`, `estado`, `created`, `modified`) VALUES
+(1, 1, 1, 1, '2015-07-26 21:30:06', '2015-07-27 16:04:33'),
+(2, 2, 1, 1, '2015-07-26 21:30:06', '2015-07-27 16:04:33'),
+(3, 1, 2, 1, '2015-07-26 21:30:06', '2015-07-27 16:04:33'),
+(4, 2, 2, 1, '2015-07-26 21:30:06', '2015-07-27 16:04:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penfigoampollas`
+--
+
+CREATE TABLE IF NOT EXISTS `penfigoampollas` (
+`id` int(11) NOT NULL,
+  `penfigo_id` int(11) NOT NULL,
+  `area_id` int(11) NOT NULL,
+  `tipoampolla_id` int(11) NOT NULL,
+  `importancia` int(1) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penfigoerociones`
+--
+
+CREATE TABLE IF NOT EXISTS `penfigoerociones` (
+`id` int(11) NOT NULL,
+  `penfigo_id` int(11) NOT NULL,
+  `area_id` int(11) NOT NULL,
+  `tipoerocione_id` int(11) NOT NULL,
+  `importancia` int(1) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penfigos`
+--
+
+CREATE TABLE IF NOT EXISTS `penfigos` (
+`id` int(11) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `descripcion` text,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penfigosintomas`
+--
+
+CREATE TABLE IF NOT EXISTS `penfigosintomas` (
+`id` int(11) NOT NULL,
+  `pielsintomas_id` int(11) NOT NULL,
+  `penfigo_id` int(11) NOT NULL,
+  `importancia` int(1) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -345,16 +431,17 @@ CREATE TABLE IF NOT EXISTS `tipoerociones` (
 `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `descripcion` text,
-  `imagen` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `imagen` varchar(200) DEFAULT NULL,
+  `tipo` varchar(25) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tipoerociones`
 --
 
-INSERT INTO `tipoerociones` (`id`, `nombre`, `descripcion`, `imagen`) VALUES
-(1, 'Erocion tipo 1', NULL, NULL),
-(2, 'Erocion tipo 2', NULL, NULL);
+INSERT INTO `tipoerociones` (`id`, `nombre`, `descripcion`, `imagen`, `tipo`) VALUES
+(1, 'Erocion tipo 1', NULL, NULL, 'Mucosas'),
+(3, 'Erocion 9', NULL, NULL, 'Piel');
 
 -- --------------------------------------------------------
 
@@ -369,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` varchar(30) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `users`
@@ -377,7 +464,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `created`, `modified`) VALUES
 (1, '6847560', '677149a4bb8a48006c8aaad4096f890a786b0a06', 'Medico General', '2015-07-13 00:47:57', '2015-07-13 00:47:57'),
-(3, '555888', '677149a4bb8a48006c8aaad4096f890a786b0a06', 'Medico General', '2015-07-17 23:31:18', '2015-07-17 23:31:18');
+(3, '555888', '677149a4bb8a48006c8aaad4096f890a786b0a06', 'Medico General', '2015-07-17 23:31:18', '2015-07-17 23:31:18'),
+(7, 'admin', 'f964ad03a2564b2dd19b2bed04c3307c5503b8f9', 'Administrador', '2015-07-29 07:38:51', '2015-07-29 07:38:51');
 
 --
 -- Indexes for dumped tables
@@ -435,6 +523,36 @@ ALTER TABLE `pacientes_sintomas`
 -- Indexes for table `pacientes_tipoampollas`
 --
 ALTER TABLE `pacientes_tipoampollas`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pacientes_tipoerociones`
+--
+ALTER TABLE `pacientes_tipoerociones`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `penfigoampollas`
+--
+ALTER TABLE `penfigoampollas`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `penfigoerociones`
+--
+ALTER TABLE `penfigoerociones`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `penfigos`
+--
+ALTER TABLE `penfigos`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `penfigosintomas`
+--
+ALTER TABLE `penfigosintomas`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -510,12 +628,37 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `pacientes_sintomas`
 --
 ALTER TABLE `pacientes_sintomas`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `pacientes_tipoampollas`
 --
 ALTER TABLE `pacientes_tipoampollas`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `pacientes_tipoerociones`
+--
+ALTER TABLE `pacientes_tipoerociones`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `penfigoampollas`
+--
+ALTER TABLE `penfigoampollas`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `penfigoerociones`
+--
+ALTER TABLE `penfigoerociones`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `penfigos`
+--
+ALTER TABLE `penfigos`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `penfigosintomas`
+--
+ALTER TABLE `penfigosintomas`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pielsintomas`
 --
@@ -535,12 +678,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `tipoerociones`
 --
 ALTER TABLE `tipoerociones`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -8,18 +8,34 @@
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Title</h3>
-            <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-            </div>
+            <h3 class="box-title">Usuarios</h3>
         </div>
         <div class="box-body">
-            Start creating your amazing application!
+            <table class="table table-bordered table-striped tabla-date">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Usuario</th>
+                        <th>Role</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($usuarios as $us): ?>
+                      <tr>
+                          <td><?php echo $us['User']['id'] ?></td>
+                          <td><?php echo $us['User']['username'] ?></td>
+                          <td><?php echo $us['User']['role'] ?></td>
+                          <td>
+                              <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'user',$us['User']['id'])) ?>');">Editar</a>
+                              <?php echo $this->Html->link('Eliminar',array('action' => 'delete',$us['User']['id']),array('confirm' => 'Esta seguro de eliminar al usuario '.$us['User']['username']))?>
+                          </td>
+                      </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div><!-- /.box-body -->
-        <div class="box-footer">
-            Footer
-        </div><!-- /.box-footer-->
+
     </div><!-- /.box -->
 
 </section><!-- /.content -->

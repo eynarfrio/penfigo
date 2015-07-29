@@ -64,7 +64,11 @@
 
             <!-- Left side column. contains the sidebar -->
             <aside class="main-sidebar">
-                <?php echo $this->element('sidebar/general') ?>
+                <?php if ($this->Session->read('Auth.User.role') == 'Administrador'): ?>
+                  <?php echo $this->element('sidebar/administrador') ?>
+                <?php elseif ($this->Session->read('Auth.User.role') == 'Medico General'): ?>
+                  <?php echo $this->element('sidebar/general') ?>
+                <?php endif; ?>
             </aside>
 
             <!-- =============================================== -->
@@ -72,10 +76,10 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <br>
-                
-                    <?php echo $this->Session->flash(); ?>
-                    <?php echo $this->fetch('content') ?>
-                
+
+                <?php echo $this->Session->flash(); ?>
+                <?php echo $this->fetch('content') ?>
+
 
             </div><!-- /.content-wrapper -->
 

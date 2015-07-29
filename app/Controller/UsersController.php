@@ -12,7 +12,7 @@ class UsersController extends AppController {
   }
 
   public function index() {
-    $usuarios = $this->User->find('all');
+    $usuarios = $this->User->find('all',array('conditions' => array('User.role' => 'Administrador')));
     $this->set(compact('usuarios'));
   }
 
@@ -106,5 +106,26 @@ class UsersController extends AppController {
     $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);
     $this->set(compact('lugares'));
   }
+  
+  public function user($idUser = null){
+    $this->layout = 'ajax';
+    $this->User->id = $idUser;
+    $this->request->data = $this->User->read();
+  }
+
+  public function registra_usuario() {
+    $duser = $this->request->data['User'];
+    if (!empty($duser['password_2'])) {
+      $duser['password'] = $duser['password_2'];
+    }
+    $this->User->create();
+    if ($this->User->save($duser)) {
+      $this->Session->setFlash("Se registro correctamente el usuario!!", 'msgbueno');
+    } else {
+      $this->Session->setFlash("No se pudo registrar al usuario", 'msgerror');
+    }
+    $this->redirect(array('action' => 'index'));
+  }
+  
 
 }
