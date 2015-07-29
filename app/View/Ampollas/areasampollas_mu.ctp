@@ -52,7 +52,8 @@
         </div><!-- /.box-body -->
 
         <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Siguiente</button>
+            <button type="submit" class="btn btn-primary">Siguiente</button> 
+            <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url(array('controller' => 'Pacientes','action' => 'datos',$idPaciente))?>';">Cancelar</button>
         </div>
         <?php echo $this->Form->end(); ?>
     </div><!-- /.box -->

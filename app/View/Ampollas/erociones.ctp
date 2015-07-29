@@ -1,13 +1,13 @@
 <link href="<?= $this->webroot; ?>plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
 <section class="content">
 
-    <?php echo $this->Form->create('Ampolla', ['action' => "regis_tipo_amp_m/$idPaciente/$numero/$tipo"]) ?>
+    <?php echo $this->Form->create('Ampolla', ['action' => "regis_tipo_ero/$idPaciente/$numero/$tipo"]) ?>
     <?php $i = 0; ?>
-    <?php foreach ($areasamp as $am): ?>
+    <?php foreach ($pasTipAmps as $am): ?>
       <div class="box box-primary">
 
           <div class="box-header">
-              <h3 class="box-title">Ampollas en <?php echo $am['Area']['nombre'] ?></h3>
+              <h3 class="box-title">Erociones en <?php echo $am['PacientesTipoampolla']['area'] ?></h3>
           </div><!-- /.box-header -->
           <!-- form start -->
           <div class="box-body">
@@ -15,7 +15,7 @@
                   <thead>
                       <tr>
                           <th>Nro</th>
-                          <th>Tipo ampolla</th>
+                          <th>Tipo Erocion</th>
                           <th>Descripcion</th>
                           <th class="hidden-xs">Imagen</th>
                           <th>Accion</th>
@@ -23,30 +23,30 @@
                   </thead>
                   <tbody>
                       <?php
-                      $tiposamp = $this->requestAction(['action' => 'get_tipoamp', $am['Areaampolla']['id'], $tipo]);
+                      $tiposero = $this->requestAction(['action' => 'get_tipoero', $am['PacientesTipoampolla']['areaampolla_id'], $tipo]);
                       //debug($tiposamp);exit;
                       ?>
-                      <?php foreach ($tiposamp as $key => $ta): ?>
+                      <?php foreach ($tiposero as $key => $ta): ?>
                         <tr>
                             <td><?php echo ($key + 1) ?></td>
-                            <td><?php echo $ta['Tipoampolla']['nombre'] ?></td>
-                            <td class="hidden-xs"><?php echo $ta['Tipoampolla']['descripcion'] ?></td>
+                            <td><?php echo $ta['Tipoerocione']['nombre'] ?></td>
+                            <td class="hidden-xs"><?php echo $ta['Tipoerocione']['descripcion'] ?></td>
                             <td class="hidden-xs"><?php
-                                if (!empty($ar['Tipoampolla']['imagen'])) {
-                                  echo $ar['Tipoampolla']['imagen'];
+                                if (!empty($ar['Tipoerocione']['imagen'])) {
+                                  echo $ar['Tipoerocione']['imagen'];
                                 }
                                 ?></td>
                             <td class="visible-xs hidden-md">
                                 Lupa
                             </td>
                             <td class="text-center">
-                                <?php if (!empty($ta['PacientesTipoampolla'])): ?>
-                                  <?php $this->request->data['PacientesTipoampolla'][$i] = $ta['PacientesTipoampolla']; ?>
+                                <?php if (!empty($ta['PacientesTipoerocione'])): ?>
+                                  <?php $this->request->data['PacientesTipoerocione'][$i] = $ta['PacientesTipoerocione']; ?>
                                 <?php endif; ?>
-                                <?= $this->Form->hidden("PacientesTipoampolla.$i.id") ?>
-                                <?= $this->Form->hidden("PacientesTipoampolla.$i.areaampolla_id", ['value' => $am['Areaampolla']['id']]) ?>
-                                <?= $this->Form->hidden("PacientesTipoampolla.$i.tipoampolla_id", ['value' => $ta['Tipoampolla']['id']]) ?>
-                                <?= $this->Form->checkbox("PacientesTipoampolla.$i.estado", ['class' => 'flat-red']) ?>
+                                <?= $this->Form->hidden("PacientesTipoerocione.$i.id") ?>
+                                <?= $this->Form->hidden("PacientesTipoerocione.$i.areaampolla_id", ['value' => $am['PacientesTipoampolla']['areaampolla_id']]) ?>
+                                <?= $this->Form->hidden("PacientesTipoerocione.$i.tipoerocione_id", ['value' => $ta['Tipoerocione']['id']]) ?>
+                                <?= $this->Form->checkbox("PacientesTipoerocione.$i.estado", ['class' => 'flat-red']) ?>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -61,8 +61,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box-footer">
+                <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url(array('controller' => 'Pacientes', 'action' => 'datos', $idPaciente)) ?>';">Cancelar</button> 
                 <button type="submit" class="btn btn-primary">Siguiente</button> 
-                <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url(array('controller' => 'Pacientes', 'action' => 'datos', $idPaciente)) ?>';">Cancelar</button>
+                
             </div>
         </div>
     </div>
