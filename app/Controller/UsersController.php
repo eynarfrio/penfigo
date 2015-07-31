@@ -12,7 +12,7 @@ class UsersController extends AppController {
   }
 
   public function index() {
-    $usuarios = $this->User->find('all',array('conditions' => array('User.role' => 'Administrador')));
+    $usuarios = $this->User->find('all', array('conditions' => array('User.role' => 'Administrador')));
     $this->set(compact('usuarios'));
   }
 
@@ -60,6 +60,8 @@ class UsersController extends AppController {
             $this->redirect(array('controller' => 'Medicos', 'action' => 'informacion'));
           case 'Dermatologo':
             $this->redirect(array('controller' => 'Medicos', 'action' => 'informacion'));
+          case 'Administrador':
+            $this->redirect(array('controller' => 'User', 'action' => 'index'));
           default:
             break;
         }
@@ -106,8 +108,8 @@ class UsersController extends AppController {
     $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);
     $this->set(compact('lugares'));
   }
-  
-  public function user($idUser = null){
+
+  public function user($idUser = null) {
     $this->layout = 'ajax';
     $this->User->id = $idUser;
     $this->request->data = $this->User->read();
@@ -126,6 +128,5 @@ class UsersController extends AppController {
     }
     $this->redirect(array('action' => 'index'));
   }
-  
 
 }
