@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 29, 2015 at 09:51 AM
+-- Generation Time: Jul 31, 2015 at 10:20 AM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -192,10 +192,10 @@ CREATE TABLE IF NOT EXISTS `pacientes_pielsintomas` (
 --
 
 INSERT INTO `pacientes_pielsintomas` (`id`, `paciente_id`, `pielsintoma_id`, `estado`, `medico_id`, `numero`, `created`, `modified`) VALUES
-(1, 1, 1, 1, 1, 1, '2015-07-21 00:39:08', '2015-07-21 11:14:21'),
-(2, 1, 2, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 11:14:21'),
-(3, 1, 3, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-21 11:14:21'),
-(4, 1, 4, 1, 1, 1, '2015-07-21 00:39:09', '2015-07-21 11:14:21');
+(1, 1, 1, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-30 01:16:14'),
+(2, 1, 2, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-30 01:16:14'),
+(3, 1, 3, 0, 1, 1, '2015-07-21 00:39:08', '2015-07-30 01:16:14'),
+(4, 1, 4, 1, 1, 1, '2015-07-21 00:39:09', '2015-07-30 01:16:14');
 
 -- --------------------------------------------------------
 
@@ -328,7 +328,14 @@ CREATE TABLE IF NOT EXISTS `penfigos` (
   `descripcion` text,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `penfigos`
+--
+
+INSERT INTO `penfigos` (`id`, `nombre`, `descripcion`, `created`, `modified`) VALUES
+(1, 'Vulgar', 'dsaduhnjksa', '2015-07-29 23:59:04', '2015-07-29 23:59:04');
 
 -- --------------------------------------------------------
 
@@ -338,12 +345,22 @@ CREATE TABLE IF NOT EXISTS `penfigos` (
 
 CREATE TABLE IF NOT EXISTS `penfigosintomas` (
 `id` int(11) NOT NULL,
-  `pielsintomas_id` int(11) NOT NULL,
+  `pielsintoma_id` int(11) NOT NULL,
   `penfigo_id` int(11) NOT NULL,
   `importancia` int(1) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `penfigosintomas`
+--
+
+INSERT INTO `penfigosintomas` (`id`, `pielsintoma_id`, `penfigo_id`, `importancia`, `created`, `modified`) VALUES
+(1, 2, 1, NULL, '2015-07-30 00:53:59', '2015-07-30 00:53:59'),
+(2, 3, 1, NULL, '2015-07-30 00:54:31', '2015-07-30 00:58:54'),
+(3, 1, 1, NULL, '2015-07-30 00:58:27', '2015-07-30 00:58:46'),
+(4, 4, 1, 1, '2015-07-30 00:59:01', '2015-07-30 00:59:01');
 
 -- --------------------------------------------------------
 
@@ -653,12 +670,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `penfigos`
 --
 ALTER TABLE `penfigos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `penfigosintomas`
 --
 ALTER TABLE `penfigosintomas`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `pielsintomas`
 --

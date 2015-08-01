@@ -60,8 +60,8 @@
                         <?php if (!empty($num_sin)): ?>
                           <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'ajax_sintomas', $idPaciente, $num_sin]) ?>');"><i class="fa fa-edit"></i></button> 
                           <button class="btn btn-box-tool" title="Editar" onclick="if (confirm('Esta seguro de eliminar los sintomas??')) {
-                                      window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
-                                  }"><i class="fa fa-remove"></i></button> 
+                                    window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
+                                }"><i class="fa fa-remove"></i></button> 
                                 <?php endif; ?>
 
                     </div>
@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-    <?php foreach ($array_samp as $amp): ?>
+    <?php foreach ($array_samp as $key1 => $amp): ?>
       <?php if ($amp['estado']): ?>
         <div class="row">
             <div class="col-md-12">
@@ -210,6 +210,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header text-center">
+                        <h3 class="box-title">Diagnostico del paciente</h3>
+                    </div>
+                    <div class="box-body" id="diagnostico<?= $key1 ?>">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        $('#diagnostico<?= $key1 ?>').load('<?php echo $this->Html->url(array('controller' => 'Penfigos','action' => 'pre_diagnostico', $idPaciente, $amp['numero']));?>');
+        </script>
       <?php else: ?>
         <?php echo "El paciente no presenta Presenta Penfigo!!!"; ?>
       <?php endif; ?>

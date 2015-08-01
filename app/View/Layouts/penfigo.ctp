@@ -57,7 +57,14 @@
                     <span class="logo-lg"><b>Penfigo</b>SE</span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
-                <?php echo $this->element('menu/general') ?>
+                <?php
+                if ($this->Session->read('Auth.User.role') == "Administrador") {
+                  echo $this->element('menu/administrador');
+                }else{
+                  echo $this->element('menu/general');
+                }
+                ?>
+                <?php  ?>
             </header>
 
             <!-- =============================================== -->

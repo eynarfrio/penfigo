@@ -17,9 +17,9 @@ class Penfigosintoma extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Pielsintomas' => array(
-			'className' => 'Pielsintomas',
-			'foreignKey' => 'pielsintomas_id',
+		'Pielsintoma' => array(
+			'className' => 'Pielsintoma',
+			'foreignKey' => 'pielsintoma_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
