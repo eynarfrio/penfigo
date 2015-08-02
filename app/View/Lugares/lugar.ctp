@@ -1,41 +1,32 @@
-
-<section class="content">
-
-    <div class="box box-primary">
-        <div class="box-header">
-            <h3 class="box-title">Formulario de Lugares</h3>
-        </div><!-- /.box-header -->
-        <!-- form start -->
-        <?php echo $this->Form->create('Lugare')?>
-        <?php echo $this->Form->hidden('id');?>
-            <div class="box-body">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Formulario de Lugares</h4>
+</div>
+<div class="modal-body">
+    <?php echo $this->Form->create('Lugare') ?>
+    <?php echo $this->Form->hidden('id'); ?>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <?php echo $this->Form->text('nombre', ['class' => 'form-control', 'placeholder' => 'Nombre']); ?>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
+                    <?php echo $this->Form->text('nombre', ['class' => 'form-control', 'placeholder' => 'Ingrese el Nombre del lugar', 'required']); ?>
                 </div>
-                
-            </div><!-- /.box-body -->
-
-            <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
-        <?php echo $this->Form->end();?>
-    </div><!-- /.box -->
+            <div class="col-md-4">
 
-</section><!-- /.content -->
+            </div>
+            <div class="col-md-4">
 
-<?php
-echo $this->Html->script([
-  '../plugins/input-mask/jquery.inputmask',
-  '../plugins/input-mask/jquery.inputmask.date.extensions',
-  '../plugins/input-mask/jquery.inputmask.extensions',
-  'inimask'
-  ], ['block' => 'addscript']);
-?>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline col-md-12">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php echo $this->Form->end() ?>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+</div>

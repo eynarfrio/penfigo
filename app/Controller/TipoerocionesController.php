@@ -10,6 +10,7 @@ class TipoerocionesController extends AppController {
     }
 
     public function tipoerocion($idErocion = null) {
+        $this->layout = 'ajax';
         if (!empty($this->request->data)) {
             // debug($this->request->data);
             //exit;
