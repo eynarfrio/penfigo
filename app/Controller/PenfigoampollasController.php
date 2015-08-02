@@ -7,12 +7,13 @@ class PenfigoampollasController extends AppController {
   public function penfigoampolla($idPenfigo = null) {
     $this->layout = 'ajax';
     $arampollas = $this->Area->find('list', array('fields' => 'Area.nombre'));
+    $tampolla=  $this->Tipoampolla->find('list',array('fields'=>'Tipoampolla.nombre'));
     $pampolla = $this->Penfigoampolla->find('all', array(
       'recursive' => 0,
       'conditions' => array('Penfigoampolla.penfigo_id' => $idPenfigo)
     ));
     $penfigo = $this->Penfigo->findByid($idPenfigo, null, null, -1);
-    $this->set(compact('pampolla', 'arampollas', 'penfigo', 'idPenfigo'));
+    $this->set(compact('pampolla', 'arampollas', 'penfigo', 'idPenfigo', 'tampolla'));
   }
   
     public function registra($idPenfigo = null) {

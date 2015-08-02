@@ -29,6 +29,7 @@
                           <td>
                               <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'penfigo',$pe['Penfigo']['id'])) ?>');">Editar</a>
                               <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Penfigosintomas','action' => 'penfigosintoma',$pe['Penfigo']['id'])) ?>');">Sintomas</a>
+                              <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller'=>'Penfigoampollas','action'=>'penfigoampolla',$pe['Penfigo']['id']))?>');">Ampollas</a>
                               <?php echo $this->Html->link('Eliminar',array('action' => 'delete',$pe['Penfigo']['id']),array('confirm' => 'Esta seguro de eliminar al usuario '.$pe['Penfigo']['nombre']))?>
                           </td>
                       </tr>

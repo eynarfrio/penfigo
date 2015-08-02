@@ -10,7 +10,12 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <?php echo $this->Form->select('pielsintoma_id', $lpsintomas, array('class' => 'form-control', 'empty' => 'Seleccione sintoma', 'required')); ?>
+                    <?php echo $this->Form->select('area_id', $arampollas, array('class' => 'form-control', 'empty' => 'Seleccione area', 'required')); ?>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <?php echo $this->Form->select('tipoampolla_id', $tampolla, array('class' => 'form-control', 'empty' => 'Seleccione tipo', 'required')); ?>
                 </div>
             </div>
             <div class="col-md-4 text-center">
@@ -18,7 +23,13 @@
                     <?php echo $this->Form->select('importancia', array(1 => 'Importante'), array('class' => 'form-control')); ?>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right">
+            </div>
+            <div class="col-md-4 text-right">
+            </div>
+            <div class="col-md-4 text-right">
                 <div class="form-group">
                     <button type="submit" class="btn btn-outline col-md-12">Registrar</button>
                 </div>
@@ -30,20 +41,21 @@
         <div class="col-md-12">
             <table class="table table-bordered">
                 <tbody>
-                    <?php foreach ($psintomas as $psi): ?>
-                      <tr>
-                          <th><?php echo $psi['Pielsintoma']['nombre'] ?></th>
-                          <th>
-                              <?php
-                              if ($psi['Penfigosintoma']['importancia']) {
-                                echo 'Importante';
-                              }
-                              ?>
-                          </th>
-                          <th>
-                              eliminar
-                          </th>
-                      </tr>
+                    <?php foreach ($pampolla as $pam): ?>
+                        <tr>
+                            <th><?php echo $pam['Area']['nombre'] ?></th>
+                            <th><?php echo $pam['Tipoampolla']['nombre']?></th>
+                            <th>
+                                <?php
+                                if ($pam['Penfigoampolla']['importancia']) {
+                                    echo 'Importante';
+                                }
+                                ?>
+                            </th>
+                            <th>
+                                eliminar
+                            </th>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -54,33 +66,33 @@
     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
 </div>
 <script>
-  $("#ajaxform").submit(function (e)
-  {
-      var postData = $(this).serializeArray();
-      var formURL = $(this).attr("action");
-      $.ajax(
-              {
-                  url: formURL,
-                  type: "POST",
-                  data: postData,
-                  /*beforeSend:function (XMLHttpRequest) {
-                   alert("antes de enviar");
-                   },
-                   complete:function (XMLHttpRequest, textStatus) {
-                   alert('despues de enviar');
-                   },*/
-                  success: function (data, textStatus, jqXHR)
-                  {
-                      //data: return data from server
-                      //$("#parte").html(data);
-                      cargarmodal('<?php echo $this->Html->url(array('action' => 'penfigosintoma', $idPenfigo)); ?>');
-                  },
-                  error: function (jqXHR, textStatus, errorThrown)
-                  {
-                      //if fails   
-                      alert("error");
-                  }
-              });
-      e.preventDefault(); //STOP default action
-  });
+    $("#ajaxform").submit(function(e)
+    {
+        var postData = $(this).serializeArray();
+        var formURL = $(this).attr("action");
+        $.ajax(
+                {
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    /*beforeSend:function (XMLHttpRequest) {
+                     alert("antes de enviar");
+                     },
+                     complete:function (XMLHttpRequest, textStatus) {
+                     alert('despues de enviar');
+                     },*/
+                    success: function(data, textStatus, jqXHR)
+                    {
+                        //data: return data from server
+                        //$("#parte").html(data);
+                        cargarmodal('<?php echo $this->Html->url(array('action' => 'penfigoampolla', $idPenfigo)); ?>');
+                    },
+                    error: function(jqXHR, textStatus, errorThrown)
+                    {
+                        //if fails   
+                        alert("error");
+                    }
+                });
+        e.preventDefault(); //STOP default action
+    });
 </script>
