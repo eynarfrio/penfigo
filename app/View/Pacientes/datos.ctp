@@ -218,7 +218,7 @@
                         <h3 class="box-title">Diagnostico del paciente</h3>
                     </div>
                     <div class="box-body" id="diagnostico<?= $key1 ?>">
-
+                        
                     </div>
                 </div>
             </div>
