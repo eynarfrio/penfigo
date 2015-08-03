@@ -10,9 +10,9 @@ class PielsintomasController extends AppController {
     }
 
     public function pielsintoma($idPiel = null) {
-
+        $this->layout = 'ajax';
         if (!empty($this->request->data)) {
-           // debug($this->request->data);
+            // debug($this->request->data);
             //exit;
             $this->Pielsintoma->create();
             $this->Pielsintoma->save($this->request->data['Pielsintoma']);
@@ -30,18 +30,18 @@ class PielsintomasController extends AppController {
         $psintomas = $this->Pielsintoma->find('list', ['fields' => ['nombre', 'nombre']]);
         $this->set(compact('psintomas'));
     }
-    
-    public function delete ($id=null){
-        $this->Pielsintoma->id=$id;
-        if($this->Pielsintoma->exists()){
-            $this->Session->setFlash('NO EXISTE','msgerror');
+
+    public function delete($id = null) {
+        $this->Pielsintoma->id = $id;
+        if ($this->Pielsintoma->exists()) {
+            $this->Session->setFlash('NO EXISTE', 'msgerror');
         }
-        if($this->Pielsintoma->delete()){
-            $this->Session->setFlash('Se elimino correctamente','msgbueno');
-        }else{
-            $this->Session->setFlash('No se pudo eliminar','msgerror');
+        if ($this->Pielsintoma->delete()) {
+            $this->Session->setFlash('Se elimino correctamente', 'msgbueno');
+        } else {
+            $this->Session->setFlash('No se pudo eliminar', 'msgerror');
         }
-        $this->redirect(array('action'=>'index'));
+        $this->redirect(array('action' => 'index'));
     }
 
 }

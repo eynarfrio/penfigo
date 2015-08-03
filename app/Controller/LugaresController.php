@@ -10,6 +10,7 @@ class LugaresController extends AppController {
     }
 
     public function lugar($idLugar = null) {
+        $this->layout = 'ajax';
         if (!empty($this->request->data)) {
             //debug($this->request->data);
             //exit;

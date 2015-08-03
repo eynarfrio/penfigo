@@ -10,6 +10,7 @@ class TipoampollasController extends AppController {
     }
 
     public function tipoampolla($idAmpolla = null) {
+         $this->layout = 'ajax';
         if (!empty($this->request->data)) {
             // debug($this->request->data);
             //exit;
