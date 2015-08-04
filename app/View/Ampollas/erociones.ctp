@@ -31,13 +31,19 @@
                             <td><?php echo ($key + 1) ?></td>
                             <td><?php echo $ta['Tipoerocione']['nombre'] ?></td>
                             <td class="hidden-xs"><?php echo $ta['Tipoerocione']['descripcion'] ?></td>
-                            <td class="hidden-xs"><?php
-                                if (!empty($ar['Tipoerocione']['imagen'])) {
-                                  echo $ar['Tipoerocione']['imagen'];
-                                }
-                                ?></td>
+                            <td class="hidden-xs text-center">
+                                <?php if (!empty($ta['Tipoerocione']['imagen'])): ?>
+                                  <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_tipero', $ta['Tipoerocione']['id'])); ?>');">
+                                      <img src="<?php echo $this->webroot; ?>imagenes/<?php echo $ar['Tipoerocione']['imagen']; ?>" height="75px" width="75px">
+                                  </a>
+                                <?php else: ?>
+                                  <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_tipero', $ta['Tipoerocione']['id'])); ?>');">
+                                      <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="75px" width="75px">
+                                  </a>
+                                <?php endif; ?> 
+                            </td>
                             <td class="visible-xs hidden-md">
-                                Lupa
+                                <a class="btn btn-social-icon btn-bitbucket" href="javascript:" title="Informacion" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_inf_tipero', $ta['Tipoerocione']['id'])); ?>');"><i class="fa fa-eye"></i></a>
                             </td>
                             <td class="text-center">
                                 <?php if (!empty($ta['PacientesTipoerocione'])): ?>
@@ -63,7 +69,7 @@
             <div class="box-footer">
                 <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url(array('controller' => 'Pacientes', 'action' => 'datos', $idPaciente)) ?>';">Cancelar</button> 
                 <button type="submit" class="btn btn-primary">Siguiente</button> 
-                
+
             </div>
         </div>
     </div>

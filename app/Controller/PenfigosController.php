@@ -169,7 +169,7 @@ class PenfigosController extends AppController {
       $n_ampolla = 0;
     }
 
-
+    //debug($ampollas_i);
     if (count($ampollas_i) <= count($ampollas)) {
       if (count($ampollas_i) > 0) {
         $total_i = $n_ampolla_i / count($ampollas_i) * 51;
@@ -185,7 +185,7 @@ class PenfigosController extends AppController {
     } else {
       $sintomas_t = count($ampollas_i) + count($ampollas);
       if ($sintomas_t > 0) {
-        $total = (($ampollas_i + $n_ampolla) / $sintomas_t) * 100;
+        $total = ((count($ampollas_i) + $n_ampolla) / $sintomas_t) * 100;
       } else {
         $total = 100;
       }
@@ -267,7 +267,7 @@ class PenfigosController extends AppController {
     } else {
       $sintomas_t = count($erociones_i) + count($erociones);
       if ($sintomas_t > 0) {
-        $total = (($erociones_i + $n_erocion) / $sintomas_t) * 100;
+        $total = ((count($erociones_i) + $n_erocion) / $sintomas_t) * 100;
       } else {
         $total = 100;
       }

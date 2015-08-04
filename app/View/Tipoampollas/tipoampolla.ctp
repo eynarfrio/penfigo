@@ -2,9 +2,10 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title">Formulario de Tipos de Ampollas</h4>
 </div>
-<div class="modal-body">
-        <?php echo $this->Form->create('Tipoampolla')?>
+<?php echo $this->Form->create('Tipoampolla',array('enctype' => 'multipart/form-data'))?>
         <?php echo $this->Form->hidden('id');?>
+<div class="modal-body">
+        
     <div class="form-group">
         <div class="row">
             <div class="col-md-12">
@@ -28,7 +29,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                     <?php echo $this->Form->text('imagen',['class'=>'form-control','placeholder'=>'Elegir una imagen']);?>
+                     <?php echo $this->Form->file('dimagen',['class'=>'form-control','placeholder'=>'Elegir una imagen']);?>
                 </div>
             </div>
         </div>
@@ -42,23 +43,10 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-4">
-                
-            </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-outline col-md-12">Registrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php echo $this->Form->end() ?>
+    
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+    <button type="submit" class="btn btn-outline pull-right">Registrar</button>
 </div>
+<?php echo $this->Form->end() ?>

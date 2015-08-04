@@ -135,7 +135,33 @@ class AmpollasController extends AppController {
     $this->redirect(['controller' => 'Pacientes', 'action' => 'datos', $idPaciente]);
   }
   
-  
-
+  public function ajax_img_area($idArea = null){
+    $this->layout = 'ajax';
+    $area = $this->Area->findByid($idArea,null,null,-1);
+    $this->set(compact('area'));
+  }
+  public function ajax_inf_area($idArea = null){
+    $this->layout = 'ajax';
+    $area = $this->Area->findByid($idArea,null,null,-1);
+    $this->set(compact('area'));
+  }
+  public function ajax_img_tipamp($idTipAmp = null){
+    $this->layout = 'ajax';
+    $tipoa = $this->Tipoampolla->findByid($idTipAmp,null,null,-1);
+    $this->set(compact('tipoa'));
+  }
+  public function ajax_inf_tipamp($idTipAmp = null){
+    $this->layout = 'ajax';
+    $tipoa = $this->Tipoampolla->findByid($idTipAmp,null,null,-1);
+    $this->set(compact('tipoa'));
+  }
+  public function ajax_img_tipero($idTipEro = null){
+    $this->layout = 'ajax';
+    $tipoe = $this->Tipoerocione->findByid($idTipEro,null,null,-1);
+    debug($idTipEro);
+    debug($tipoe);
+    exit;
+    $this->set(compact('tipoe'));
+  }
   
 }
