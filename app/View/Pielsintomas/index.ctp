@@ -25,15 +25,22 @@
                                 <tr>
                                     <td class="hidden-xs"><?php echo $psin['Pielsintoma']['id']; ?></td>
                                     <td><?php echo $psin['Pielsintoma']['nombre']; ?></td>
-                                    <td><?php echo $psin['Pielsintoma']['descripcion'];?></td>
-                                    <td><?php echo $psin['Pielsintoma']['imagen'];?></td>
+                                    <td><?php echo $psin['Pielsintoma']['descripcion']; ?></td>
+                                    <td class=" text-center">
+                                        <?php if (!empty($psin['Pielsintoma']['imagen'])): ?>
+                                            <img src="<?php echo $this->webroot; ?>imagenes/<?php echo $psin['Pielsintoma']['imagen']; ?>" height="75px" width="75px">
+                                        <?php else: ?>
+                                            <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="75px" width="75px">
+                                        <?php endif; ?> 
+                                    </td>     
                                     <td>
-                                        <a href="<?php echo $this->Html->url(array('action' => 'pielsintoma', $psin['Pielsintoma']['id'])); ?> " class="btn btn-info" ><i class="glyphicon glyphicon-edit icon-white"></i>Editar</a>
+                                        <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'pielsintoma', $psin['Pielsintoma']['id'])); ?>');" class="btn btn-info" ><i class="glyphicon glyphicon-edit icon-white"></i>Editar</a>
                                         <a href="javascript:" class="btn btn-danger" onclick="if (confirm('Esta seguro de eliminar <?php echo $psin['Pielsintoma']['nombre'] ?>??')) {
-                                                    window.location = '<?php echo $this->Html->url(array('action' => 'delete', $psin['Pielsintoma']['id'])); ?>';}"><i class="glyphicon glyphicon-trash icon-white"></i>Eliminar</a>
+                                                    window.location = '<?php echo $this->Html->url(array('action' => 'delete', $psin['Pielsintoma']['id'])); ?>';
+                                                }"><i class="glyphicon glyphicon-trash icon-white"></i>Eliminar</a>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+<?php endforeach; ?>
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->

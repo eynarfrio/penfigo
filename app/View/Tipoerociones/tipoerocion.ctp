@@ -2,9 +2,9 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title">Formulario de Tipos de Erosiones</h4>
 </div>
+<?php echo $this->Form->create('Tipoerocione', array('enctype' => 'multipart/form-data')) ?>
+<?php echo $this->Form->hidden('id'); ?>
 <div class="modal-body">
-    <?php echo $this->Form->create('Tipoerocione') ?>
-    <?php echo $this->Form->hidden('id'); ?>
     <div class="form-group">
         <div class="row">
             <div class="col-md-12">
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                     <?php echo $this->Form->textarea('descripcion', ['class' => 'form-control', 'placeholder' => 'Descripcion']); ?>
+                    <?php echo $this->Form->textarea('descripcion', ['class' => 'form-control', 'placeholder' => 'Descripcion']); ?>
                 </div>
             </div>
         </div>
@@ -28,29 +28,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <?php echo $this->Form->text('imagen', ['class' => 'form-control', 'placeholder' => 'Elegir una imagen']); ?>
+                     <?php echo $this->Form->file('dimagen',['class'=>'form-control','placeholder'=>'Elegir una imagen']);?>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-outline col-md-12">Registrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php echo $this->Form->end() ?>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+    <button type="submit" class="btn btn-outline pull-right">Registrar</button>
 </div>
+<?php echo $this->Form->end() ?>
