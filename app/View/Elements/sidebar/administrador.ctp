@@ -13,7 +13,26 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
         <li class="header">MENU NAVEGACION</li>
-        <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'user']); ?>')"><i class="fa fa-book"></i> <span>Usuario</span></a></li>
+        <li class="treeview">
+            <a href="#">
+                <i class="glyphicon glyphicon-user"></i> <span>Usuarios</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i> Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'user']); ?>')"><i class="fa fa-circle-o"></i>Nuevo Usuario</a></li>         
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="glyphicon glyphicon-user"></i> <span>Medicos</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado de Medicos</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'user']); ?>')"><i class="fa fa-circle-o"></i>Nuevo Medico</a></li>         
+            </ul>
+        </li>
         <li class="treeview">
             <a href="#">
                 <i class="glyphicon glyphicon-globe"></i> <span>Lugares</span>

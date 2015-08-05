@@ -3,10 +3,10 @@
         <div class="col-md-4">
             <div class="box box-primary">
                 <div class="box-header text-center">
-                    <h3 class="box-title">Informacion del Paciente</h3>
+                    <h3 class="box-title">Paciente</h3>
                 </div>
-                <div class="box-body">
-
+                <div class="box-body" align="center">
+                    <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="112px" width="40%">
                 </div>
             </div>
         </div>
