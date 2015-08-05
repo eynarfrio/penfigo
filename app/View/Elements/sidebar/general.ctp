@@ -1,20 +1,24 @@
+<?php $medico = $this->requestAction(['controller' => 'Medicos', 'action' => 'get_medico']); ?>
 <!-- sidebar: style can be found in sidebar.less -->
 <section class="sidebar">
     <!-- Sidebar user panel -->
     <div class="user-panel">
         <div class="pull-left image">
-            <img src="<?php echo $this->webroot; ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+            <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
+            <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+            <?php else:?>
+            <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+            <?php endif;?>
         </div>
         <div class="pull-left info">
-            <?php $medico = $this->requestAction(['controller' => 'Medicos', 'action' => 'get_medico']); ?>
             <p><?php echo $medico['Medico']['nombres']; ?></p>
-            <a href="#"><i class="fa fa-circle text-success"></i> En linea</a>
+            <a href="#"><i class="fa fa-circle text-success"></i> Activo</a>
         </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
         <li class="header">MENU NAVEGACION</li>
-        <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']); ?>"><i class="fa fa-user"></i> <span>Perfil</span></a></li>
+        <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'ver',$this->Session->read('Auth.User.id')]); ?>"><i class="fa fa-user"></i> <span>Perfil</span></a></li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-wheelchair"></i> <span>Pacientes</span>
@@ -28,7 +32,7 @@
         </li>
         <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'index']); ?>"><i class="fa fa-stethoscope"></i> <span>Medicos</span></a></li>
         <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']); ?>"><i class="fa fa-bar-chart"></i> <span>Reportes</span></a></li>
-        <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']); ?>"><i class="fa fa-book"></i> <span>Informacion</span></a></li>
+        <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'informacion']); ?>"><i class="fa fa-book"></i> <span>Informacion</span></a></li>
 
     </ul>
 </section>

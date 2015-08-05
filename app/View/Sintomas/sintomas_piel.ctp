@@ -25,13 +25,24 @@
                           <td class="hidden-xs"><?php echo ($key + 1) ?></td>
                           <td><?php echo $si['Pielsintoma']['nombre'] ?></td>
                           <td class="hidden-xs"><?php echo $si['Pielsintoma']['descripcion'] ?></td>
-                          <td class="hidden-xs"><?php
+                          <td class="hidden-xs">
+                              <?php
                               if (!empty($si['Pielsintoma']['imagen'])) {
                                 echo $si['Pielsintoma']['imagen'];
                               }
-                              ?></td>
+                              ?>
+                              <?php if (!empty($si['Pielsintoma']['imagen'])): ?>
+                                <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_pisin', $si['Pielsintoma']['id'])); ?>');">
+                                    <img src="<?php echo $this->webroot; ?>imagenes/<?php echo $si['Pielsintoma']['imagen']; ?>" height="75px" width="75px">
+                                </a>
+                              <?php else: ?>
+                                <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_pisin', $si['Pielsintoma']['id'])); ?>');">
+                                    <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="75px" width="75px">
+                                </a>
+                              <?php endif; ?> 
+                          </td>
                           <td class="visible-xs hidden-md">
-                              Lupa
+                              <a class="btn btn-social-icon btn-bitbucket" href="javascript:" title="Informacion" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_pisin', $si['Pielsintoma']['id'])); ?>');"><i class="fa fa-eye"></i></a>
                           </td>
                           <td class="text-center">
                               <?php if (!empty($si['PacientesPielsintoma'])): ?>
@@ -51,6 +62,7 @@
         </div><!-- /.box-body -->
 
         <div class="box-footer">
+            <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url(array('controller' => 'Pacientes', 'action' => 'datos', $idPaciente)) ?>';">Cancelar</button>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
         <?php echo $this->Form->end(); ?>

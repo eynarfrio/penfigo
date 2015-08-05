@@ -1,3 +1,4 @@
+<?php $medico = $this->requestAction(['controller' => 'Medicos', 'action' => 'get_medico']); ?>
 <nav class="navbar navbar-static-top" role="navigation">
     <!-- Sidebar toggle button-->
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -8,59 +9,10 @@
     </a>
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-            <!-- Messages: style can be found in dropdown.less-->
-            <li class="dropdown messages-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="label label-success">4</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header">You have 4 messages</li>
-                    <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                            <li><!-- start message -->
-                                <a href="#">
-                                    <div class="pull-left">
-                                        <img src="<?php echo $this->webroot; ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                                    </div>
-                                    <h4>
-                                        Support Team
-                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                    </h4>
-                                    <p>Why not buy a new awesome theme?</p>
-                                </a>
-                            </li><!-- end message -->
-                        </ul>
-                    </li>
-                    <li class="footer"><a href="#">See All Messages</a></li>
-                </ul>
-            </li>
-            <!-- Notifications: style can be found in dropdown.less -->
-            <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="label label-warning">10</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header">You have 10 notifications</li>
-                    <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="footer"><a href="#">View all</a></li>
-                </ul>
-            </li>
-            <!-- Tasks: style can be found in dropdown.less -->
+
             <li class="dropdown tasks-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-flag-o"></i>
+                    <i class="fa fa-wheelchair"></i>
                     <span class="label label-danger">9</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -91,25 +43,33 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?php echo $this->webroot; ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                    <?php $medico =  $this->requestAction(['controller' => 'Medicos','action' => 'get_medico']);?>
-                    <span class="hidden-xs"><?php echo $medico['Medico']['nombres']?></span>
+                    <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
+                    <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="user-image" alt="User Image">
+                    <?php else:?>
+                    <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="user-image" alt="User Image">
+                    <?php endif;?>
+                      
+                    <span class="hidden-xs"><?php echo $medico['Medico']['nombres'] ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                        <img src="<?php echo $this->webroot; ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                        <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
+                          <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+                        <?php else: ?>
+                          <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+                        <?php endif; ?>
                         <p>
-                            <?php echo $medico['Medico']['nombres']?> - <?php echo $medico['Medico']['tipo_medico']?>
+                            <?php echo $medico['Medico']['nombres'] ?> - <?php echo $medico['Medico']['tipo_medico'] ?>
                         </p>
                     </li>
-                    
+
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                            <a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']); ?>" class="btn btn-default btn-flat">Perfil</a>
                         </div>
                         <div class="pull-right">
-                            <a href="<?php echo $this->Html->url(['controller' => 'Users','action' => 'salir'])?>" class="btn btn-default btn-flat">Salir</a>
+                            <a href="<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'salir']) ?>" class="btn btn-default btn-flat">Salir</a>
                         </div>
                     </li>
                 </ul>

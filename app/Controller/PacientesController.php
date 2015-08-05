@@ -25,6 +25,14 @@ class PacientesController extends AppController {
       exit; */
     $this->set(compact('pacientes'));
   }
+  
+  public function pacientes() {
+    $pacientes = $this->PacientesMedico->find('all', [
+      'recursive' => 0,
+      'order' => ['Paciente.modified DESC']
+    ]);
+    $this->set(compact('pacientes'));
+  }
 
   public function paciente($idPaciente = null) {
     if (!empty($this->request->data)) {

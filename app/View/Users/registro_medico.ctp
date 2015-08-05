@@ -50,7 +50,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Registrarme</button>
         </div><!-- /.col -->
     </div>
     <?php echo $this->Form->end(); ?>

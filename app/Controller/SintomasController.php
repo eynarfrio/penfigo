@@ -108,5 +108,17 @@ class SintomasController extends AppController {
     $medico = $this->get_medico();
     return $medico['Medico']['id'];
   }
+  
+  public function ajax_img_pisin($idPielsintoma = null){
+    $this->layout = 'ajax';
+    $pielsintoma = $this->Pielsintoma->findByid($idPielsintoma,null,null,-1);
+    $this->set(compact('pielsintoma'));
+  }
+  
+  public function ajax_inf_pisin($idPielsintoma = null){
+    $this->layout = 'ajax';
+    $pielsintoma = $this->Pielsintoma->findByid($idPielsintoma,null,null,-1);
+    $this->set(compact('pielsintoma'));
+  }
 
 }

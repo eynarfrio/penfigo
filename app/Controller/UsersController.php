@@ -61,7 +61,7 @@ class UsersController extends AppController {
           case 'Dermatologo':
             $this->redirect(array('controller' => 'Medicos', 'action' => 'informacion'));
           case 'Administrador':
-            $this->redirect(array('controller' => 'User', 'action' => 'index'));
+            $this->redirect(array('controller' => 'Users', 'action' => 'index'));
           default:
             break;
         }
