@@ -218,16 +218,21 @@
                         <h3 class="box-title">Diagnostico del paciente</h3>
                     </div>
                     <div class="box-body" id="diagnostico<?= $key1 ?>">
-                        
+
                     </div>
                 </div>
             </div>
         </div>
         <script>
-        $('#diagnostico<?= $key1 ?>').load('<?php echo $this->Html->url(array('controller' => 'Penfigos','action' => 'pre_diagnostico', $idPaciente, $amp['numero']));?>');
+          $('#diagnostico<?= $key1 ?>').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'pre_diagnostico', $idPaciente, $amp['numero'])); ?>');
         </script>
       <?php else: ?>
-        <?php echo "El paciente no presenta Presenta Penfigo!!!"; ?>
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-info"></i> Informacion!</h4>
+            <?php echo "El paciente no presenta Presenta Penfigo!!!"; ?>
+        </div>
+
       <?php endif; ?>
     <?php endforeach; ?>
 </section>
