@@ -7,7 +7,7 @@
         </div>
         <div class="pull-left info">
             <p><?php echo $this->Session->read('Auth.User.username'); ?></p>
-            <a href="#"><i class="fa fa-circle text-success"></i> En linea</a>
+            <a href="javascript:"> <?php echo $this->Session->read('Auth.User.role'); ?></a>
         </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -29,8 +29,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado de Medicos</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'user']); ?>')"><i class="fa fa-circle-o"></i>Nuevo Medico</a></li>         
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado de Medicos</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'user']); ?>')"><i class="fa fa-circle-o"></i>Nuevo Medico</a></li>         
             </ul>
         </li>
         <li class="treeview">
