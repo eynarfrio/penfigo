@@ -40,7 +40,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Lugares', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i> Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Lugares','action' => 'lugar')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>         
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Lugares', 'action' => 'lugar')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>         
             </ul>
         </li>
         <li class="treeview">
@@ -50,7 +50,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Sintomas', 'action' => 'lista']); ?>"><i class="fa fa-circle-o"></i> Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Sintomas','action' => 'sintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>         
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Sintomas', 'action' => 'sintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>         
             </ul>
         </li>
         <li class="treeview">
@@ -60,7 +60,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Pielsintomas', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Pielsintomas','action' => 'pielsintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Sintoma en la Piel</a></li>  
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Pielsintomas', 'action' => 'pielsintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Sintoma en la Piel</a></li>  
             </ul>
         </li>
         <li class="treeview">
@@ -70,7 +70,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Tipoampollas', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                 <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoampollas','action' => 'tipoampolla')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Ampolla</a></li>  
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoampollas', 'action' => 'tipoampolla')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Ampolla</a></li>  
             </ul>
         </li>
         <li class="treeview">
@@ -80,7 +80,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Tipoerociones', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoerociones','action' => 'tipoerocion')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Erosion</a></li>  
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoerociones', 'action' => 'tipoerocion')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Erosion</a></li>  
             </ul>
         </li>
         <li class="treeview">
@@ -91,6 +91,16 @@
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Penfigos', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
                 <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Penfigos', 'action' => 'penfigo']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-street-view"></i><span>Areas</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Areas', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Areas', 'action' => 'area']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
             </ul>
         </li>
     </ul>
