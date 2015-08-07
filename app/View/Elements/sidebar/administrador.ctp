@@ -29,8 +29,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado de Medicos</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'user']); ?>')"><i class="fa fa-circle-o"></i>Nuevo Medico</a></li>         
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'lista']); ?>"><i class="fa fa-circle-o"></i>Listado de Medicos</a></li>
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'medico']); ?>" ><i class="fa fa-circle-o"></i>Nuevo Medico</a></li>         
             </ul>
         </li>
         <li class="treeview">
@@ -41,6 +41,16 @@
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Lugares', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i> Listado</a></li>
                 <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Lugares','action' => 'lugar')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>         
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="glyphicon glyphicon-globe"></i> <span>Sintomas</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Sintomas', 'action' => 'lista']); ?>"><i class="fa fa-circle-o"></i> Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Sintomas','action' => 'sintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>         
             </ul>
         </li>
         <li class="treeview">

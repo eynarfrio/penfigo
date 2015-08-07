@@ -120,5 +120,20 @@ class SintomasController extends AppController {
     $pielsintoma = $this->Pielsintoma->findByid($idPielsintoma,null,null,-1);
     $this->set(compact('pielsintoma'));
   }
+  
+  public function sintoma($idSintoma = null){
+    $this->Sintoma->id = $idSintoma;
+    $this->request->data = $this->Sintoma->read();
+    
+  }
+  
+  public function registra_sintoma(){
+    $this->Sintoma->create();
+    $this->Sintoma->save($this->request->data['Sintoma']);
+    $this->Session->setFlash("Se registro correctamente!!",'msgbueno');
+    $this->redirect(array('action' => 'lista'));
+  }
+  
+  
 
 }
