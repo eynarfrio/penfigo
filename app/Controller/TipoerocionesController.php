@@ -14,16 +14,47 @@ class TipoerocionesController extends AppController {
         if (!empty($this->request->data)) {
             // debug($this->request->data);
             //exit;
-            $this->Tipoerocione->create();
-            $this->Tipoerocione->save($this->request->data['Tipoerocione']);
-            if (!empty($this->request->data['Tipoerocione']['id'])) {
-                $idErocion = $this->request->data['Tipoerocione']['id'];
+            App::uses('String', 'Utility');
+            $archivo = $this->request->data['Tipoerocione']['dimagen'];
+            if (!empty($this->request->data['Tipoerocione']['dimagen']['name'])) {
+                if ($archivo['error'] === UPLOAD_ERR_OK) {
+                    if ($archivo['type'] == 'image/jpeg') {
+                        $nombre = String::uuid();
+                        if (move_uploaded_file($archivo['tmp_name'], WWW_ROOT . 'imagenes' . DS . $nombre . '.jpg')) {
+                            $nombre_imagen = $nombre . '.jpg';
+
+                            $this->Tipoerocione->create();
+                            $this->request->data['Tipoerocione']['imagen'] = $nombre_imagen;
+                            $this->Tipoerocione->save($this->request->data['Tipoerocione']);
+                            if (!empty($this->request->data['Tipoerocione']['id'])) {
+                                $idErocion = $this->request->data['Tipoerocione']['id'];
+                            } else {
+                                $idErocion = $this->Tipoerocione->getLastInsertID();
+                            }
+                            $this->Session->setFlash('Se registro correctamente', 'msgbueno');
+                            $this->redirect(array('action' => 'index'));
+                        }
+                    } else {
+                        $this->Session->setFlash("La imagen debe de ser formato jpeg o jpg", 'msgerror');
+                        $this->redirect($this->referer());
+                    }
+                } else {
+                    $this->Session->setFlash("Ocurrio un error intente nuevamente", 'msgerror');
+                    $this->redirect($this->referer());
+                }
             } else {
-                $idErocion = $this->Tipoerocione->getLastInsertID();
+                $this->Tipoerocione->create();
+                $this->Tipoerocione->save($this->request->data['Tipoerocione']);
+                if (!empty($this->request->data['Tipoerocione']['id'])) {
+                    $idErocion = $this->request->data['Tipoerocione']['id'];
+                } else {
+                    $idErocion = $this->Tipoerocione->getLastInsertID();
+                    $this->Session->setFlash(' Registro realizado correctamente','msgbueno');
+                    $this->redirect(array('action' => 'index'));
+                }
+                $this->Session->setFlash('Se registro correctamente', 'msgbueno');
                 $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash('Se registro correctamente', 'msgbueno');
-            $this->redirect(array('action' => 'index'));
         }
         $this->Tipoerocione->id = $idErocion;
         $this->request->data = $this->Tipoerocione->read();

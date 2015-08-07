@@ -14,16 +14,45 @@ class PielsintomasController extends AppController {
         if (!empty($this->request->data)) {
             // debug($this->request->data);
             //exit;
-            $this->Pielsintoma->create();
-            $this->Pielsintoma->save($this->request->data['Pielsintoma']);
-            if (!empty($this->request->data['Pielsintoma']['id'])) {
-                $idPiel = $this->request->data['Pielsintoma']['id'];
+            App::uses('String', 'Utility');
+            $archivo = $this->request->data['Pielsintoma']['dimagen'];
+            if (!empty($this->request->data['Pielsintoma']['dimagen']['name'])) {
+                if ($archivo['error'] === UPLOAD_ERR_OK) {
+                    if ($archivo['type'] == 'image/jpeg') {
+                        $nombre = String::uuid();
+                        if (move_uploaded_file($archivo['tmp_name'], WWW_ROOT . 'imagenes' . DS . $nombre . '.jpg')) {
+                            $nombre_imagen = $nombre . '.jpg';
+
+                            $this->Pielsintoma->create();
+                            $this->request->data['Pielsintoma']['imagen'] = $nombre_imagen;
+                            $this->Pielsintoma->save($this->request->data['Pielsintoma']);
+                            if (!empty($this->request->data['Pielsintoma']['id'])) {
+                                $idErocion = $this->request->data['Pielsintoma']['id'];
+                            } else {
+                                $idErocion = $this->Pielsintoma->getLastInsertID();
+                            }
+                            $this->Session->setFlash('Se registro correctamente', 'msgbueno');
+                            $this->redirect(array('action' => 'index'));
+                        }
+                    } else {
+                        $this->Session->setFlash("La imagen debe de ser formato jpeg o jpg", 'msgerror');
+                        $this->redirect($this->referer());
+                    }
+                } else {
+                    $this->Session->setFlash("Ocurrio un error intente nuevamente", 'msgerror');
+                    $this->redirect($this->referer());
+                }
             } else {
-                $idPiel = $this->Pielsintoma->getLastInsertID();
+                $this->Pielsintoma->create();
+                $this->Pielsintoma->save($this->request->data['Pielsintoma']);
+                if (!empty($this->request->data['Pielsintoma']['id'])) {
+                    $idPiel = $this->request->data['Pielsintoma']['id'];
+                } else {
+                    $idPiel = $this->Pielsintoma->getLastInsertID();
+                }
+                $this->Session->setFlash('Se registro correctamente', 'msgbueno');
                 $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash('Se registro correctamente', 'msgbueno');
-            $this->redirect(array('action' => 'index'));
         }
         $this->Pielsintoma->id = $idPiel;
         $this->request->data = $this->Pielsintoma->read();
