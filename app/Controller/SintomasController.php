@@ -122,6 +122,7 @@ class SintomasController extends AppController {
   }
   
   public function sintoma($idSintoma = null){
+    $this->layout = 'ajax';
     $this->Sintoma->id = $idSintoma;
     $this->request->data = $this->Sintoma->read();
     
@@ -134,6 +135,16 @@ class SintomasController extends AppController {
     $this->redirect(array('action' => 'lista'));
   }
   
+  public function lista(){
+    $sintomas = $this->Sintoma->find('all',array(
+      'recursive' => -1
+    ));
+    $this->set(compact('sintomas'));
+  }
   
-
+  public function eliminar($idSintoma = null){
+    $this->Sintoma->delete($idSintoma);
+    $this->Session->setFlash("Se elimino correctamente el sintoma!!",'msgbueno');
+    $this->redirect(array('action' => 'lista'));
+  }
 }
