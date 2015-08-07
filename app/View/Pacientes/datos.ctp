@@ -223,6 +223,12 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <?php echo $this->Html->link('TRANSFERIR PASIENTE',array('controller' => 'Medicos','action' => 'dermatologos',$paciente['Paciente']['id']),array('class' => 'btn btn-block btn-primary btn-lg col-md-12'));?>
+            </div>
+        </div>
         <script>
           $('#diagnostico<?= $key1 ?>').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'pre_diagnostico', $idPaciente, $amp['numero'])); ?>');
         </script>

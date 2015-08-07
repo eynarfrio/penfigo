@@ -87,4 +87,11 @@ class MedicosController extends AppController {
     $this->redirect($this->referer());
   }
 
+  public function dermatologos($idPaciente = null){
+    $medicos = $this->Medico->find('all', array(
+      'recursive' => -1,
+      'conditions' => array('estado' => 'Activo','tipo_medico' => 'Dermatologo')
+    ));
+    $this->set(compact('medicos','idPaciente'));
+  }
 }
