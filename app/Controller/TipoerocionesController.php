@@ -2,6 +2,7 @@
 
 class TipoerocionesController extends AppController {
 
+    public $layout = 'penfigo';
     public $uses = array('Tipoerocione');
 
     public function index() {

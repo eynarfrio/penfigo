@@ -4,6 +4,7 @@ App::uses('AppController', 'Controller');
 
 class PenfigosController extends AppController {
 
+  public $layout = 'penfigo';
   public $uses = array(
     'Penfigo',
     'Penfigoampolla',

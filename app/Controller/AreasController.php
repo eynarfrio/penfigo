@@ -2,6 +2,7 @@
 
 class AreasController extends AppController {
 
+    public $layout = 'penfigo';
     public $uses = array('Area');
 
     public function index() {

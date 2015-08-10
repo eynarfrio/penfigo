@@ -4,6 +4,7 @@ App::uses('AppController', 'Controller');
 
 class PenfigosintomasController extends AppController {
 
+  public $layout = 'penfigo';
   public $uses = array('Penfigosintoma', 'Pielsintoma', 'Penfigo');
 
   public function penfigosintoma($idPenfigo = null) {

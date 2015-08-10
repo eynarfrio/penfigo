@@ -26,11 +26,6 @@
                           <td><?php echo $si['Pielsintoma']['nombre'] ?></td>
                           <td class="hidden-xs"><?php echo $si['Pielsintoma']['descripcion'] ?></td>
                           <td class="hidden-xs">
-                              <?php
-                              if (!empty($si['Pielsintoma']['imagen'])) {
-                                echo $si['Pielsintoma']['imagen'];
-                              }
-                              ?>
                               <?php if (!empty($si['Pielsintoma']['imagen'])): ?>
                                 <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_pisin', $si['Pielsintoma']['id'])); ?>');">
                                     <img src="<?php echo $this->webroot; ?>imagenes/<?php echo $si['Pielsintoma']['imagen']; ?>" height="75px" width="75px">
@@ -42,7 +37,7 @@
                               <?php endif; ?> 
                           </td>
                           <td class="visible-xs hidden-md">
-                              <a class="btn btn-social-icon btn-bitbucket" href="javascript:" title="Informacion" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_pisin', $si['Pielsintoma']['id'])); ?>');"><i class="fa fa-eye"></i></a>
+                              <a class="btn btn-social-icon btn-bitbucket" href="javascript:" title="Informacion" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_inf_pisin', $si['Pielsintoma']['id'])); ?>');"><i class="fa fa-eye"></i></a>
                           </td>
                           <td class="text-center">
                               <?php if (!empty($si['PacientesPielsintoma'])): ?>

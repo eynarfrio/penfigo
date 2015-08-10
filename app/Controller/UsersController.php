@@ -4,6 +4,7 @@ App::uses('AppController', 'Controller');
 
 class UsersController extends AppController {
 
+  public $layout = 'penfigo';
   public $uses = array('User', 'Medico', 'Lugare');
 
   public function beforeFilter() {

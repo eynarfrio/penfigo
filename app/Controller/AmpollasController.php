@@ -3,7 +3,7 @@
 App::uses('AppController', 'Controller');
 
 class AmpollasController extends AppController {
-
+  public $layout = 'penfigo';
   public $uses = ['Area', 'Areaampolla', 'Medico', 'Tipoampolla', 'PacientesTipoampolla', 'PacientesTipoerocione', 'Tipoerocione'];
 
   public function areasampollas_mu($idPaciente = null, $numero = null, $tipo) {

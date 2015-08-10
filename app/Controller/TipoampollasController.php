@@ -2,6 +2,7 @@
 
 class TipoampollasController extends AppController {
 
+  public $layout = 'penfigo';
   public $uses = array('Tipoampolla');
 
   public function index() {
