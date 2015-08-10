@@ -2,6 +2,7 @@
 
 class PielsintomasController extends AppController {
 
+    public $layout = 'penfigo';
     public $uses = array('Pielsintoma');
 
     public function index() {

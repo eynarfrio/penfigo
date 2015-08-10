@@ -2,6 +2,7 @@
 
 class LugaresController extends AppController {
 
+    public $layout = 'penfigo';
     public $uses = array('Lugare');
 
     public function index() {

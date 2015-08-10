@@ -2,6 +2,7 @@
 
 class PenfigoampollasController extends AppController {
 
+  public $layout = 'penfigo';
     public $uses = array('Penfigo', 'Area', 'Tipoampolla', 'Penfigoampolla');
 
   public function penfigoampolla($idPenfigo = null) {

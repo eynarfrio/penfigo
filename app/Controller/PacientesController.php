@@ -4,6 +4,7 @@ App::uses('AppController', 'Controller');
 
 class PacientesController extends AppController {
 
+  public $layout = 'penfigo';
   public $uses = [
     'Paciente',
     'PacientesMedico',

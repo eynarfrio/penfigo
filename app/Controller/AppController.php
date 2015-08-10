@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller
 {
-    public $layout = 'penfigo';
+    
     public $components = array('DebugKit.Toolbar','Session','Auth');
     
     public function validar($modelo) {

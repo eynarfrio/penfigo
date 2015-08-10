@@ -2,6 +2,7 @@
 
 class PenfigoerocionesController extends AppController {
 
+  public $layout = 'penfigo';
     public $uses = array('Penfigo', 'Area', 'Tipoerocione', 'Penfigoerocione');
 
   public function penfigoerocion($idPenfigo = null) {
