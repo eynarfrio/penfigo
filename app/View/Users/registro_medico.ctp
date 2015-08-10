@@ -38,9 +38,6 @@
         <span class="glyphicon glyphicon-star form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
-        <?php echo $this->Form->text();?>
-    </div>
-    <div class="form-group has-feedback">
         <?php echo $this->Form->text('Medico.telefonos', ['class' => 'form-control', 'placeholder' => 'Telefonos']); ?>
         <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
     </div>
