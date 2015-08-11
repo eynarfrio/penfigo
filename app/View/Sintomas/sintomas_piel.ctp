@@ -64,7 +64,17 @@
     </div><!-- /.box -->
 
 </section><!-- /.content -->
-
+<script>
+    $(document).ready(function () {
+        $("#validation-select1").change(function () {
+            if (this.value == 2) {
+                $('#mostraantper').show();
+            } else {
+                $('#mostrarantper').hide();
+            }
+        });
+    });
+</script>
 <?php
 echo $this->Html->script([
   '../plugins/iCheck/icheck.min',
