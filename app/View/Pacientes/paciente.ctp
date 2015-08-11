@@ -65,7 +65,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="check1">Antecedentes Personales</label>
+                            <label>Antecedentes Personales</label>
                             <input id="check" type="checkbox" class="flat-red">
                         </div>
                     </div>
@@ -112,6 +112,7 @@
 
 </section><!-- /.content -->
 
+
 <?php
 echo $this->Html->script([
     '../plugins/input-mask/jquery.inputmask',
@@ -126,14 +127,15 @@ echo $this->Html->script([
     'inicheckbox'
 ]);
 ?>
+
+
 <script>
-    $(document).ready(function () {
-        $("#check").change(function () {
-            if (check.checked) {
-                $('#mostrarantper').show();
-            } else {
-                $('#mostrarantper').hide();
-            }
-        });
-    });
+$(document).ready(function() {
+  $("#check").click(function() {
+    if ($(this).attr("checked"))
+      $("#mostrarantper").show();
+    else
+      $("#mostrarantper").hide();
+  });
+});
 </script>
