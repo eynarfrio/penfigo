@@ -66,37 +66,18 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Antecedentes Personales</label>
-                            <input id="check" type="checkbox" class="flat-red">
+                             <?php echo $this->Form->textarea('antecedentes_personales', ['class' => 'form-control', 'placeholder' => 'Enfermedades previas, Cirugias y Alergias']); ?>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Medicaciones</label>
-                            <input id="chack1" type="checkbox" class="flat-red">
+                            <?php echo $this->Form->textarea('medicacion', ['class' => 'form-control', 'placeholder' => 'Medicacion en el ultimo mes.']); ?>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Antecedentes Familiares</label>
-                            <input id="check2" type="checkbox" class="flat-red">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-4" id="mostrarantper" style="display: none;">
-                        <div class="form-group" >
-                            <?php echo $this->Form->textarea('antecedentes_personales', ['class' => 'form-control', 'placeholder' => 'Enfermedades previas, Cirugias y Alergias']); ?>
-                        </div>
-                    </div>
-                    <div class="col-md-4" id="mostrarmed" style="display: none;">
-                        <div class="form-group" >
-                            <?php echo $this->Form->textarea('medicacion', ['class' => 'form-control', 'placeholder' => 'Medicacion en el ultimo mes.']); ?>
-                        </div>
-                    </div>
-                    <div class="col-md-4" id="mostrarantfam" style="display: none;">
-                        <div class="form-group">
                             <?php echo $this->Form->textarea('antecedentes_familiares', ['class' => 'form-control', 'placeholder' => 'Ingresar si algun familiar tiene o ha tenido la enfermedad']); ?>
                         </div>
                     </div>
