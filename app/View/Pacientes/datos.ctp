@@ -99,6 +99,50 @@
     </div>
     <?php foreach ($array_samp as $key1 => $amp): ?>
       <?php if ($amp['estado']): ?>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header text-center">
+                        <h3 class="box-title">Sintomas en la Piel</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'sintomas_piel', $idPaciente, $amp['numero']]) ?>'"><i class="fa fa-edit"></i></button>
+                        </div>
+                    </div>
+                    <?php $sintomaspiel = $this->requestAction(['controller' => 'Pacientes', 'action' => 'get_sintomaspiel', $idPaciente, $amp['numero']]) ?>
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="hidden-xs">Nro</th>
+                                    <th>Sintoma</th>
+                                    <th>Presenta</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($sintomaspiel as $key => $sin): ?>
+                                  <tr>
+                                      <td><?= $key + 1 ?></td>
+                                      <td><?= $sin['Pielsintoma']['nombre'] ?></td>
+                                      <td>
+                                          <?php
+                                          if ($sin['PacientesPielsintoma']['estado']) {
+                                            echo '<span class="label label-primary">Si</span>';
+                                          } else {
+                                            echo 'No';
+                                          }
+                                          ?>
+                                      </td>
+                                      <td><?= $sin['PacientesPielsintoma']['modified'] ?></td>
+                                  </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
@@ -167,76 +211,41 @@
                 </div>
             </div>
         </div>
+        <?php if (!$this->requestAction(array('controller' => 'Penfigos', 'action' => 'get_nikolsky', $idPaciente, $amp['numero']))): ?>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="box box-primary">
+                      <div class="box-header text-center">
+                          <h3 class="box-title">Diagnostico del paciente</h3>
+                      </div>
+                      <div class="box-body" id="diagnostico<?= $key1 ?>">
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <script>
+            $('#diagnostico<?= $key1 ?>').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'pre_diagnostico', $idPaciente, $amp['numero'])); ?>');
+          </script>
+        <?php else: ?>
+          <div class="alert alert-info alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-info"></i> Diagnostico</h4>
+              NO SE PUEDE DEFINIR UN DIAGNOSTICO DEBIDO A QUE EL PACIENTE NO PRESENTA EL SIGNO DE NIKOLSKY SE RECOMIENDA TRANSFERIR AL PACIENTE A UN ESPECIALISTA!!
+          </div>
+        <?php endif; ?>
         <div class="row">
             <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header text-center">
-                        <h3 class="box-title">Sintomas en la Piel</h3>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'sintomas_piel', $idPaciente, $amp['numero']]) ?>'"><i class="fa fa-edit"></i></button>
-                        </div>
-                    </div>
-                    <?php $sintomaspiel = $this->requestAction(['controller' => 'Pacientes', 'action' => 'get_sintomaspiel', $idPaciente, $amp['numero']]) ?>
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="hidden-xs">Nro</th>
-                                    <th>Sintoma</th>
-                                    <th>Presenta</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($sintomaspiel as $key => $sin): ?>
-                                  <tr>
-                                      <td><?= $key + 1 ?></td>
-                                      <td><?= $sin['Pielsintoma']['nombre'] ?></td>
-                                      <td>
-                                          <?php
-                                          if ($sin['PacientesPielsintoma']['estado']) {
-                                            echo '<span class="label label-primary">Si</span>';
-                                          } else {
-                                            echo 'No';
-                                          }
-                                          ?>
-                                      </td>
-                                      <td><?= $sin['PacientesPielsintoma']['modified'] ?></td>
-                                  </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <?php echo $this->Html->link('TRANSFERIR PASIENTE', array('controller' => 'Medicos', 'action' => 'dermatologos', $paciente['Paciente']['id']), array('class' => 'btn btn-block btn-primary btn-lg col-md-12')); ?>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header text-center">
-                        <h3 class="box-title">Diagnostico del paciente</h3>
-                    </div>
-                    <div class="box-body" id="diagnostico<?= $key1 ?>">
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <?php echo $this->Html->link('TRANSFERIR PASIENTE',array('controller' => 'Medicos','action' => 'dermatologos',$paciente['Paciente']['id']),array('class' => 'btn btn-block btn-primary btn-lg col-md-12'));?>
-            </div>
-        </div>
-        <script>
-          $('#diagnostico<?= $key1 ?>').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'pre_diagnostico', $idPaciente, $amp['numero'])); ?>');
-        </script>
       <?php else: ?>
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-info"></i> Informacion!</h4>
-            <?php echo "El paciente no presenta Presenta Penfigo!!!"; ?>
+            <h4><i class="icon fa fa-info"></i> Diagnostico</h4>
+            SE DIAGNOSTICO QUE EL PACIENTE NO PRESENTA PENFIGO, ESTO DEBIDO A QUE EL PACIENTE NO PRESENTA AMPOLLAS.
         </div>
 
       <?php endif; ?>

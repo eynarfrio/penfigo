@@ -49,9 +49,34 @@ class PenfigosController extends AppController {
       $penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
 
       $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'] + $penfigos[$key]['resultado_num_erociones_m'] + $penfigos[$key]['resultado_num_erociones_p'];
-      $penfigos[$key]['diagnostico'] = round($diagnostico_t/5,2);
+      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 5, 2);
     }
     $this->set(compact('penfigos'));
+  }
+
+  public function get_nikolsky($idPaciente = null, $numero = null) {
+    $nikolsky = $this->PacientesPielsintoma->find('first', array(
+      'recursive' => 0,
+      'conditions' => array(
+        'Pielsintoma.nombre' => 'Signo de Nikolsky',
+        'PacientesPielsintoma.estado' => 1,
+        'PacientesPielsintoma.paciente_id' => $idPaciente,
+        'PacientesPielsintoma.numero' => $numero
+      ),
+      'fields' => array('PacientesPielsintoma.id')
+    ));
+    $nro_sint_p = $this->PacientesPielsintoma->find('count', array(
+      'recursive' => -1,
+      'conditions' => array(
+        'PacientesPielsintoma.paciente_id' => $idPaciente,
+        'PacientesPielsintoma.numero' => $numero
+      )
+    ));
+    $veri_nikolsky = FALSE;
+    if (empty($nikolsky) && $nro_sint_p > 0) {
+      $veri_nikolsky = TRUE;
+    }
+    return $veri_nikolsky;
   }
 
   public function get_num_sintomas($idPaciente = null, $numero = null, $idPenfigo = null) {

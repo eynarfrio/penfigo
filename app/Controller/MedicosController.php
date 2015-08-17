@@ -70,11 +70,12 @@ class MedicosController extends AppController {
   }
 
   public function registra_medico2() {
+    //debug($this->request->data);exit;
     if (!empty($this->request->data['User']['password2'])) {
       $this->request->data['User']['password'];
     }
     $this->request->data['User']['username'] = $this->request->data['Medico']['ci'];
-    $this->User->id = $this->Session->read('Auth.User.id');
+    $this->User->id = $this->request->data['User']['id'];
     $this->User->save($this->request->data['User']);
     $this->Medico->create();
     $this->Medico->save($this->request->data['Medico']);

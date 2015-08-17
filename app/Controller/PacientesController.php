@@ -12,6 +12,7 @@ class PacientesController extends AppController {
     'PacientesSintoma',
     'Areaampolla',
     'PacientesTipoampolla',
+    'PacientesTipoerocione',
     'PacientesPielsintoma'
   ];
 
@@ -26,7 +27,7 @@ class PacientesController extends AppController {
       exit; */
     $this->set(compact('pacientes'));
   }
-  
+
   public function pacientes() {
     $pacientes = $this->PacientesMedico->find('all', [
       'recursive' => 0,
@@ -141,11 +142,35 @@ class PacientesController extends AppController {
     ]);
     $cadena = "";
     foreach ($tipos as $ti) {
-      if (!empty($cadena)) {
-        $cadena = $cadena . ", " . $ti['Tipoampolla']['nombre'];
-      } else {
-        $cadena = $ti['Tipoampolla']['nombre'];
+      $nombre = $ti['Tipoampolla']['nombre'];
+      if ($ti['Tipoampolla']['nombre'] == 'Erociones') {
+        $nombre = $ti['Tipoampolla']['nombre'].' '.$this->get_pac_tipos_er($idAreaampolla);
       }
+      if (!empty($cadena)) {
+        $cadena = $cadena . ", " . $nombre;
+      } else {
+        $cadena = $nombre;
+      }
+    }
+    return $cadena;
+  }
+
+  public function get_pac_tipos_er($idAreaampolla) {
+    $tipos = $this->PacientesTipoerocione->find('all', [
+      'recursive' => 0,
+      'conditions' => ['PacientesTipoerocione.areaampolla_id' => $idAreaampolla, 'PacientesTipoerocione.estado' => 1],
+      'fields' => ['Tipoerocione.nombre']
+    ]);
+    $cadena = "";
+    foreach ($tipos as $ti) {
+      if (!empty($cadena)) {
+        $cadena = $cadena . ", " . $ti['Tipoerocione']['nombre'];
+      } else {
+        $cadena = '('.$ti['Tipoerocione']['nombre'];
+      }
+    }
+    if(!empty($cadena)){
+      $cadena = $cadena.')';
     }
     return $cadena;
   }
@@ -167,7 +192,7 @@ class PacientesController extends AppController {
         'PacientesPielsintoma.paciente_id' => $idPaciente,
         'PacientesPielsintoma.numero' => $numero
       ],
-      'fields' => ['PacientesPielsintoma.*','Pielsintoma.*']
+      'fields' => ['PacientesPielsintoma.*', 'Pielsintoma.*']
     ]);
     return $sintomas;
   }

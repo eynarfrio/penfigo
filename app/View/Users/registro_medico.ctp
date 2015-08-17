@@ -5,16 +5,17 @@
 <div class="register-box-body">
     <p class="login-box-msg">Formulario de registro de medico</p>
     <?php echo $this->Form->create('User'); ?>
+    <?php echo $this->Form->hidden('Medico.estado', array('value' => 'En espera')); ?>
     <div class="form-group has-feedback">
         <?php echo $this->Form->text('Medico.nombres', ['class' => 'form-control', 'placeholder' => 'Nombres', 'required']); ?>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
-        <?php echo $this->Form->text('Medico.ap_paterno', ['class' => 'form-control', 'placeholder' => 'Apellido Paterno']); ?>
+        <?php echo $this->Form->text('Medico.ap_paterno', ['class' => 'form-control', 'placeholder' => 'Apellido Paterno', 'id' => 'ap-paterno']); ?>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
-        <?php echo $this->Form->text('Medico.ap_materno', ['class' => 'form-control', 'placeholder' => 'Apellido Materno']); ?>
+        <?php echo $this->Form->text('Medico.ap_materno', ['class' => 'form-control', 'placeholder' => 'Apellido Materno', 'id' => 'ap-paterno']); ?>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
@@ -36,6 +37,14 @@
     <div class="form-group has-feedback">
         <?php echo $this->Form->select('Medico.tipo_medico', ['Medico General' => 'Medico General', 'Dermatologo' => 'Dermatologo'], ['class' => 'form-control', 'empty' => 'Seleccione Tipo Medico', 'required']); ?>
         <span class="glyphicon glyphicon-star form-control-feedback"></span>
+    </div>
+    <div class="form-group has-feedback">
+        <?php echo $this->Form->text('Medico.mat_colegio', ['class' => 'form-control', 'placeholder' => 'Matricula Colegio de medicos', 'required', 'data-inputmask' => '"mask": "#-9999"', 'data-mask']); ?>
+        <span class="glyphicon glyphicon-qrcode form-control-feedback"></span>
+    </div>
+    <div class="form-group has-feedback">
+        <?php echo $this->Form->text('Medico.mat_ministerio', ['class' => 'form-control', 'placeholder' => 'Matricula de Ministerio de Salud', 'required', 'data-inputmask' => '"mask": "#-9999"', 'data-mask']); ?>
+        <span class="glyphicon glyphicon-qrcode form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
         <?php echo $this->Form->text('Medico.telefonos', ['class' => 'form-control', 'placeholder' => 'Telefonos']); ?>

@@ -103,14 +103,13 @@ class AmpollasController extends AppController {
       $this->Session->setFlash("Se registro los datos correctamente!!", 'msgbueno');
       $this->redirect(['controller' => 'Pacientes', 'action' => 'datos', $idPaciente]);
     }
-
     $this->set(compact('pasTipAmps', 'idPaciente', 'numero', 'tipo'));
   }
 
   public function get_tipoero($id_areaampolla, $tipo) {
     $tipos = $this->PacientesTipoerocione->find('all', [
       'recursive' => 0,
-      'conditions' => ['PacientesTipoerocione.areaampolla_id' => $id_areaampolla],
+      'conditions' => ['PacientesTipoerocione.areaampolla_id' => $id_areaampolla,'Tipoerocione.id !=' => NULL],
       'fields' => ['Tipoerocione.*', 'PacientesTipoerocione.*']
     ]);
     if (empty($tipos)) {
@@ -119,6 +118,8 @@ class AmpollasController extends AppController {
         'conditions' => ['Tipoerocione.tipo' => $tipo]
       ]);
     }
+    /*debug($tipos);
+    exit;*/
     return $tipos;
   }
 
@@ -158,9 +159,9 @@ class AmpollasController extends AppController {
   public function ajax_img_tipero($idTipEro = null){
     $this->layout = 'ajax';
     $tipoe = $this->Tipoerocione->findByid($idTipEro,null,null,-1);
-    debug($idTipEro);
+    /*debug($idTipEro);
     debug($tipoe);
-    exit;
+    exit;*/
     $this->set(compact('tipoe'));
   }
   

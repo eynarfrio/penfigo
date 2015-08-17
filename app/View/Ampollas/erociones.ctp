@@ -34,7 +34,7 @@
                             <td class="hidden-xs text-center">
                                 <?php if (!empty($ta['Tipoerocione']['imagen'])): ?>
                                   <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_tipero', $ta['Tipoerocione']['id'])); ?>');">
-                                      <img src="<?php echo $this->webroot; ?>imagenes/<?php echo $ar['Tipoerocione']['imagen']; ?>" height="75px" width="75px">
+                                      <img src="<?php echo $this->webroot; ?>imagenes/<?php echo $ta['Tipoerocione']['imagen']; ?>" height="75px" width="75px">
                                   </a>
                                 <?php else: ?>
                                   <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'ajax_img_tipero', $ta['Tipoerocione']['id'])); ?>');">

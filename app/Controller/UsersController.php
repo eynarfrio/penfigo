@@ -89,21 +89,46 @@ class UsersController extends AppController {
   public function registro_medico() {
     $this->layout = 'registro';
     if (!empty($this->request->data)) {
-      $datos = $this->request->data;
-      $datos['User']['username'] = $datos['Medico']['ci'];
-      $datos['User']['password'] = $datos['User']['password2'];
-      $datos['User']['role'] = $datos['Medico']['tipo_medico'];
-      $this->User->create();
-      $this->User->save($datos['User']);
-      $idUser = $this->User->getLastInsertID();
-      $datos['Medico']['user_id'] = $idUser;
-      $this->Medico->create();
-      $this->Medico->save($datos['Medico']);
+      $error = FALSE;
+      if (!empty($this->request->data['Medico']['ap_paterno'])) {
+        $inicial = substr($this->request->data['Medico']['ap_paterno'], 0, 1);
+        if ($inicial != substr($this->request->data['Medico']['mat_colegio'], 0, 1)) {
+          $error = TRUE;
+          $this->Session->setFlash("El codigo de Matricula de colegio no es valido", 'msgerror');
+        } elseif ($inicial != substr($this->request->data['Medico']['mat_ministerio'], 0, 1)) {
+          $error = TRUE;
+          $this->Session->setFlash("El codigo de Matricula de Ministerio de salud no es valido", 'msgerror');
+        }
+      } elseif (!empty($this->request->data['Medico']['ap_materno'])) {
+        $inicial = substr($this->request->data['Medico']['ap_materno'], 0, 1);
+        if ($inicial != substr($this->request->data['Medico']['mat_colegio'], 0, 1)) {
+          $error = TRUE;
+          $this->Session->setFlash("El codigo de Matricula de colegio no es valido", 'msgerror');
+        } elseif ($inicial != substr($this->request->data['Medico']['mat_ministerio'], 0, 1)) {
+          $error = TRUE;
+          $this->Session->setFlash("El codigo de Matricula de Ministerio de salud no es valido", 'msgerror');
+        }
+      } else {
+        $error = TRUE;
+        $this->Session->setFlash("Es necesario ingresar un apellido al menos", 'msgerror');
+      }
+      if (!$error) {
+        $datos = $this->request->data;
+        $datos['User']['username'] = $datos['Medico']['ci'];
+        $datos['User']['password'] = $datos['User']['password2'];
+        $datos['User']['role'] = $datos['Medico']['tipo_medico'];
+        $this->User->create();
+        $this->User->save($datos['User']);
+        $idUser = $this->User->getLastInsertID();
+        $datos['Medico']['user_id'] = $idUser;
+        $this->Medico->create();
+        $this->Medico->save($datos['Medico']);
 
-      $this->request->data = $datos;
-      if ($this->Auth->login()) {
-        $this->Session->setFlash("El registro se realizo correctamente!!", 'msgbueno');
-        $this->redirect(['controller' => 'Medicos', 'action' => 'informacion']);
+        $this->request->data = $datos;
+        if ($this->Auth->login()) {
+          $this->Session->setFlash("El registro se realizo correctamente!!", 'msgbueno');
+          $this->redirect(['controller' => 'Medicos', 'action' => 'informacion']);
+        }
       }
     }
     $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);

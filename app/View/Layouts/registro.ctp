@@ -44,6 +44,7 @@
                   increaseArea: '20%' // optional
               });
               $(".fecha-mask").inputmask("yyyy-mm-dd");
+              $("[data-mask]").inputmask();
           });
         </script>
     </body>
