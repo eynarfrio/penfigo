@@ -53,13 +53,52 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header text-center">
+                    <h3 class="box-title">Signos Vitales</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" title="Registrar Sintomas" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Signos', 'action' => 'ajax_signos', $idPaciente]) ?>');"><i class="fa fa-plus-square"></i></button>
+                        <?php $num_signo = $this->requestAction(['controller' => 'Signos', 'action' => 'get_ult_num', $idPaciente]); ?>
+                        <?php if (!empty($num_signo)): ?>
+                          <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Signos', 'action' => 'ajax_signos', $idPaciente,$num_signo]) ?>');"><i class="fa fa-edit"></i></button> 
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="hidden-xs">Nro</th>
+                                <th>Signo</th>
+                                <th>Valor</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($p_signos as $key => $sin): ?>
+                              <tr>
+                                  <td class="hidden-xs"><?= ($key + 1) ?></td>
+                                  <td><?= $sin['Signo']['nombre'] ?></td>
+                                  <td><?= $sin['PacientesSigno']['valor'] ?></td>
+                                  <td><?= $sin['PacientesSigno']['modified'] ?></td>
+                              </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header text-center">
                     <h3 class="box-title">Sintomas Sistemicos</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" title="Registrar Sintomas" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'ajax_sintomas', $idPaciente]) ?>');"><i class="fa fa-plus-square"></i></button>
                         <?php $num_sin = $this->requestAction(['controller' => 'Sintomas', 'action' => 'get_ult_num', $idPaciente]); ?>
                         <?php if (!empty($num_sin)): ?>
                           <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'ajax_sintomas', $idPaciente, $num_sin]) ?>');"><i class="fa fa-edit"></i></button> 
-                          <button class="btn btn-box-tool" title="Editar" onclick="if (confirm('Esta seguro de eliminar los sintomas??')) {
+                          <button class="btn btn-box-tool" title="Eliminar" onclick="if (confirm('Esta seguro de eliminar los sintomas??')) {
                                     window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
                                 }"><i class="fa fa-remove"></i></button> 
                                 <?php endif; ?>
@@ -239,8 +278,6 @@
                 <?php echo $this->Html->link('TRANSFERIR PASIENTE', array('controller' => 'Medicos', 'action' => 'dermatologos', $paciente['Paciente']['id']), array('class' => 'btn btn-block btn-primary btn-lg col-md-12')); ?>
             </div>
         </div>
-
-
       <?php else: ?>
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

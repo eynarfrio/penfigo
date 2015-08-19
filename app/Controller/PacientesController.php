@@ -13,7 +13,8 @@ class PacientesController extends AppController {
     'Areaampolla',
     'PacientesTipoampolla',
     'PacientesTipoerocione',
-    'PacientesPielsintoma'
+    'PacientesPielsintoma',
+    'PacientesSigno'
   ];
 
   public function mispacientes() {
@@ -36,24 +37,18 @@ class PacientesController extends AppController {
     $this->set(compact('pacientes'));
   }
 
-  public function paciente($idPaciente = null) {
+  public function paciente() {
     if (!empty($this->request->data)) {
       /* debug($this->request->data);
         exit; */
       $dato = $this->request->data;
       $this->Paciente->create();
       $this->Paciente->save($dato['Paciente']);
-      if (!empty($dato['Paciente']['id'])) {
-        $idPaciente = $dato['Paciente']['id'];
-      } else {
-        $idPaciente = $this->Paciente->getLastInsertID();
-        $this->genera_med_pac($idPaciente);
-      }
+      $idPaciente = $this->Paciente->getLastInsertID();
+      $this->genera_med_pac($idPaciente);
       $this->Session->setFlash('Se registro correctamente el paciente!!!', 'msgbueno');
-      $this->redirect(['action' => 'mispacientes']);
+      $this->redirect(['action' => 'datos',$idPaciente]);
     }
-    $this->Paciente->id = $idPaciente;
-    $this->request->data = $this->Paciente->read();
     $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);
     $this->set(compact('lugares'));
   }
@@ -117,7 +112,17 @@ class PacientesController extends AppController {
     }
     /* debug($array_samp);
       exit; */
-    $this->set(compact('paciente', 'sintomas', 'idPaciente', 'array_samp'));
+    $p_signos = $this->PacientesSigno->find('all',array(
+      'recursive' => 0,
+      'conditions' => array('PacientesSigno.paciente_id' => $idPaciente),
+      'fields' => array('Signo.nombre','PacientesSigno.valor','PacientesSigno.id','PacientesSigno.modified','PacientesSigno.numero'),
+      'order' => array('PacientesSigno.numero')
+    ));
+    $num_signo = NULL;
+    if(!empty($p_signos)){
+      $num_signo = end($p_signos)['PacientesSigno']['numero'];
+    }
+    $this->set(compact('paciente', 'sintomas', 'idPaciente', 'array_samp','num_signo','p_signos'));
   }
 
   function get_pac_areas($idPaciente, $numero, $tipo) {
@@ -144,7 +149,7 @@ class PacientesController extends AppController {
     foreach ($tipos as $ti) {
       $nombre = $ti['Tipoampolla']['nombre'];
       if ($ti['Tipoampolla']['nombre'] == 'Erociones') {
-        $nombre = $ti['Tipoampolla']['nombre'].' '.$this->get_pac_tipos_er($idAreaampolla);
+        $nombre = $ti['Tipoampolla']['nombre'] . ' ' . $this->get_pac_tipos_er($idAreaampolla);
       }
       if (!empty($cadena)) {
         $cadena = $cadena . ", " . $nombre;
@@ -166,11 +171,11 @@ class PacientesController extends AppController {
       if (!empty($cadena)) {
         $cadena = $cadena . ", " . $ti['Tipoerocione']['nombre'];
       } else {
-        $cadena = '('.$ti['Tipoerocione']['nombre'];
+        $cadena = '(' . $ti['Tipoerocione']['nombre'];
       }
     }
-    if(!empty($cadena)){
-      $cadena = $cadena.')';
+    if (!empty($cadena)) {
+      $cadena = $cadena . ')';
     }
     return $cadena;
   }
