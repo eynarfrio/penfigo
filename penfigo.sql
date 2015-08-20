@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 19, 2015 at 01:12 PM
+-- Generation Time: Aug 20, 2015 at 02:46 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -71,6 +71,28 @@ INSERT INTO `areas` (`id`, `tipo`, `nombre`, `descripcion`, `imagen`) VALUES
 (2, 'Mucosas', 'Genitales', '', '55c4e2c6-c358-44bc-b3bb-065dc0a8006a.jpg'),
 (3, 'Piel', 'Brazos', '', '55c4e2f8-ffc0-4f6a-a401-23bfc0a8006a.jpg'),
 (4, 'Piel', 'Piernas', '', '55c4e40d-2a70-4f27-9d63-2141c0a8006a.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laboratorios`
+--
+
+CREATE TABLE IF NOT EXISTS `laboratorios` (
+`id` int(11) NOT NULL,
+  `nombre` varchar(70) NOT NULL,
+  `descripcion` text,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `laboratorios`
+--
+
+INSERT INTO `laboratorios` (`id`, `nombre`, `descripcion`, `created`, `modified`) VALUES
+(1, 'Hemograma', NULL, NULL, NULL),
+(2, 'Glicemia', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -153,6 +175,31 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
 INSERT INTO `pacientes` (`id`, `nombres`, `ap_paterno`, `ap_materno`, `ci`, `lugar`, `fecha_nacimiento`, `sexo`, `telefonos`, `antecedentes_personales`, `medicacion`, `antecedentes_familiares`, `created`, `modified`) VALUES
 (1, 'Marcelo', 'Mayta', 'Salas', '456210655', 'La Paz', '1990-05-21', 'Masculino', '789456', NULL, NULL, NULL, '2015-07-14 00:16:25', '2015-07-16 12:55:47'),
 (2, 'Estefani', 'Valdivieso', 'Camargo', '775533', 'La Paz', '1985-06-03', 'Femenino', '70436985', 'mis antecedentes personales', 'mis medicaciones', 'mis antecedentes familiares', '2015-08-17 23:35:43', '2015-08-17 23:35:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pacientes_laboratorios`
+--
+
+CREATE TABLE IF NOT EXISTS `pacientes_laboratorios` (
+`id` int(11) NOT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `paciente_id` int(11) NOT NULL,
+  `laboratorio_id` int(11) NOT NULL,
+  `hacer` int(1) DEFAULT NULL,
+  `hecho` int(1) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `pacientes_laboratorios`
+--
+
+INSERT INTO `pacientes_laboratorios` (`id`, `numero`, `paciente_id`, `laboratorio_id`, `hacer`, `hecho`, `created`, `modified`) VALUES
+(1, 1, 1, 1, 1, 0, '2015-08-20 08:57:32', '2015-08-20 09:03:06'),
+(2, 1, 1, 2, 1, 1, '2015-08-20 08:57:32', '2015-08-20 09:03:06');
 
 -- --------------------------------------------------------
 
@@ -564,6 +611,12 @@ ALTER TABLE `areas`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `laboratorios`
+--
+ALTER TABLE `laboratorios`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `lugares`
 --
 ALTER TABLE `lugares`
@@ -579,6 +632,12 @@ ALTER TABLE `medicos`
 -- Indexes for table `pacientes`
 --
 ALTER TABLE `pacientes`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pacientes_laboratorios`
+--
+ALTER TABLE `pacientes_laboratorios`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -692,6 +751,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 ALTER TABLE `areas`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `laboratorios`
+--
+ALTER TABLE `laboratorios`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `lugares`
 --
 ALTER TABLE `lugares`
@@ -705,6 +769,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `pacientes`
 --
 ALTER TABLE `pacientes`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `pacientes_laboratorios`
+--
+ALTER TABLE `pacientes_laboratorios`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pacientes_medicos`
