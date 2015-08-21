@@ -1,3 +1,4 @@
+<?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'action' => 'get_examenes')); ?>
 <section class="content">
     <div class="row">
         <div class="col-md-4">
@@ -274,7 +275,7 @@
                             <tbody>
                                 <?php $laboratorios = $this->requestAction(array('controller' => 'Laboratorios', 'action' => 'get_laboratorios', $idPaciente, $amp['numero'])) ?>
                                 <?php //debug($laboratorios);exit;?>
-                                  <?php foreach ($laboratorios as $key => $lab): ?>
+                                <?php foreach ($laboratorios as $key => $lab): ?>
                                   <tr>
                                       <td class="hidden-xs"><?= ($key + 1) ?></td>
                                       <td><?= $lab['Laboratorio']['nombre'] ?></td>
@@ -306,6 +307,8 @@
             </div>
         </div>
 
+
+
         <?php if (!$this->requestAction(array('controller' => 'Penfigos', 'action' => 'get_nikolsky', $idPaciente, $amp['numero']))): ?>
           <div class="row">
               <div class="col-md-12">
@@ -329,6 +332,66 @@
               NO SE PUEDE DEFINIR UN DIAGNOSTICO DEBIDO A QUE EL PACIENTE NO PRESENTA EL SIGNO DE NIKOLSKY SE RECOMIENDA TRANSFERIR AL PACIENTE A UN ESPECIALISTA!!
           </div>
         <?php endif; ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-danger">
+                    <div class="box-header text-center">
+                        <h3 class="box-title">Examenes</h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="hidden-xs">Nro</th>
+                                    <th>Examen</th>
+                                    <th>Resultado</th>
+                                    <th class="hidden-xs">Observacion</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($examenes as $key => $ex): ?>
+                                  <?php $resultado = $this->requestAction(array('controller' => 'Resultados', 'action' => 'get_res_pac', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>
+                                  <tr>
+                                      <td class="hidden-xs"><?php echo $key + 1; ?></td>
+                                      <td><?php echo $ex['Examene']['nombre'] ?></td>
+                                      <?php if (!empty($resultado)): ?>
+                                        <td>
+                                            <?php echo $resultado['Resultado']['descripcion']; ?>
+                                        </td>
+                                        <td class="hidden-xs"><?php echo $resultado['PacientesResultado']['observacion']; ?></td>
+                                        <td>
+                                            <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'], $resultado['PacientesResultado']['id'])) ?>')" class="btn btn-info btn-flat"><i class="fa fa-edit"></i></a>
+                                        </td>
+                                      <?php else: ?>
+                                        <td></td>
+                                        <td class="hidden-xs"></td>
+                                        <td>
+                                            <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>')" class="btn btn-success btn-flat"><i class="fa fa-plus"></i></a>
+                                        </td>
+                                      <?php endif; ?>
+                                  </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-danger">
+                    <div class="box-header text-center">
+                        <h3 class="box-title">TRATAMIENTO</h3>
+                    </div>
+                    <div class="box-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <?php echo $this->Html->link('TRANSFERIR PASIENTE', array('controller' => 'Medicos', 'action' => 'dermatologos', $paciente['Paciente']['id']), array('class' => 'btn btn-block btn-primary btn-lg col-md-12')); ?>
