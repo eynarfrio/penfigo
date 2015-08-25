@@ -19,6 +19,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    <?php echo $this->Form->select('tipo', array('Mucosas' => 'Mucosas', 'Piel' => 'Piel'), array('class' => 'form-control', 'required')); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
                     <?php echo $this->Form->textarea('descripcion', ['class' => 'form-control', 'placeholder' => 'Descripcion']); ?>
                 </div>
             </div>
