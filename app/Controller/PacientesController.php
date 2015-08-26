@@ -101,11 +101,11 @@ class PacientesController extends AppController {
         ]
       ]);
       $iamp++;
-      if (!empty($preg_amp) && $num_amp >= 2) {
+      if (!empty($preg_amp)) {
         $array_samp[$iamp]['estado'] = TRUE;
         $array_samp[$iamp]['areas_mu'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'], 'Mucosas');
         $array_samp[$iamp]['areas_pi'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'], 'Piel');
-      } else {
+      }else {
         $array_samp[$iamp]['estado'] = FALSE;
       }
       $array_samp[$iamp]['numero'] = $sp['PacientesSintoma']['numero'];
@@ -148,7 +148,7 @@ class PacientesController extends AppController {
     $cadena = "";
     foreach ($tipos as $ti) {
       $nombre = $ti['Tipoampolla']['nombre'];
-      if ($ti['Tipoampolla']['nombre'] == 'Erociones') {
+      if ($ti['Tipoampolla']['nombre'] == 'Erosiones') {
         $nombre = $ti['Tipoampolla']['nombre'] . ' ' . $this->get_pac_tipos_er($idAreaampolla);
       }
       if (!empty($cadena)) {

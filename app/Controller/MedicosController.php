@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class MedicosController extends AppController {
 
   public $layout = 'penfigo';
-  public $uses = array('Medico', 'Lugare', 'User');
+  public $uses = array('Medico', 'Lugare', 'User','PacientesMedico','Paciente');
 
   public function informacion() {
     
@@ -90,10 +90,20 @@ class MedicosController extends AppController {
   }
 
   public function dermatologos($idPaciente = null){
+    $paciente = $this->Paciente->findByid($idPaciente,NULL,NULL,-1);
     $medicos = $this->Medico->find('all', array(
       'recursive' => -1,
       'conditions' => array('estado' => 'Activo','tipo_medico' => 'Dermatologo')
     ));
-    $this->set(compact('medicos','idPaciente'));
+    $this->set(compact('medicos','idPaciente','paciente'));
+  }
+  
+  public function transferencia($idMedico = null,$idPaciente = null){
+    $datos['paciente_id'] = $idPaciente;
+    $datos['medico_id'] = $idMedico;
+    $this->PacientesMedico->create();
+    $this->PacientesMedico->save($datos);
+    $this->Session->setFlash("Se realizo la transferencia con exito!!",'msgbueno');
+    $this->redirect(array('controller' => 'Pacientes','action' => 'mispacientes'));
   }
 }

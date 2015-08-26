@@ -5,7 +5,7 @@
     <!-- Default box -->
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Dermatologos</h3>
+            <h3 class="box-title">Transferencia a dermatologos (<?= $paciente['Paciente']['nombres'].' '.$paciente['Paciente']['ap_paterno'].' '.$paciente['Paciente']['ap_materno']?>)</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
             <table class="table table-bordered table-striped tabla-date">
@@ -37,6 +37,7 @@
                           <td class="hidden-xs"><?php echo $me['Medico']['tipo_medico']; ?></td>
                           <td>
                               <?= $this->Html->link('<i class="fa fa-eye"></i>', ['action' => 'ver', $me['Medico']['id']], array('class' => 'btn btn-primary btn-flat', 'escape' => false, 'title' => 'Datos del Medico')) ?>
+                              <?= $this->Html->link('<i class="fa fa-mail-reply"></i>', ['action' => 'transferencia', $me['Medico']['id'],$paciente['Paciente']['id']], array('class' => 'btn btn-warning btn-flat', 'escape' => false, 'title' => 'Transferir Paciente','confirm' => 'Esta seguro de transferir al paciente?')) ?>
                           </td>
                       </tr>
                     <?php endforeach; ?>

@@ -75,6 +75,8 @@
                   <?php echo $this->element('sidebar/administrador') ?>
                 <?php elseif ($this->Session->read('Auth.User.role') == 'Medico General'): ?>
                   <?php echo $this->element('sidebar/general') ?>
+                <?php elseif ($this->Session->read('Auth.User.role') == 'Dermatologo'): ?>
+                  <?php echo $this->element('sidebar/dermatologo') ?>
                 <?php endif; ?>
             </aside>
 

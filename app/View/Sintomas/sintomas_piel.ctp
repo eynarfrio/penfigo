@@ -21,7 +21,13 @@
                 </thead>
                 <tbody>
                     <?php foreach ($sintomas as $key => $si): ?>
-                      <tr>
+                    <?php 
+                    $background = '';
+                    if($si['Pielsintoma']['nombre'] == 'Signo de Nikolsky'){
+                      $background = 'style="background-color: yellow;"';
+                    }
+                      ?>
+                    <tr <?= $background?>>
                           <td class="hidden-xs"><?php echo ($key + 1) ?></td>
                           <td><?php echo $si['Pielsintoma']['nombre'] ?></td>
                           <td class="hidden-xs"><?php echo $si['Pielsintoma']['descripcion'] ?></td>

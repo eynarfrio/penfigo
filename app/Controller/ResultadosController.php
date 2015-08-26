@@ -34,5 +34,14 @@ class ResultadosController extends AppController {
     $this->Session->setFlash("Se registro correctamente!!",'msgbueno');
     $this->redirect($this->referer());
   }
+  
+  public function get_res_pen($idResultado = null){
+    $resultado = $this->Resultado->find('first',array(
+      'recursive' => 0,
+      'conditions' => array('Resultado.id' => $idResultado),
+      'fields' => array('Penfigo.nombre')
+    ));
+    return $resultado['Penfigo']['nombre'];
+  }
 
 }

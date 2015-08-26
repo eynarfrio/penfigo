@@ -22,6 +22,13 @@ class Resultado extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+    'Penfigo' => array(
+			'className' => 'Penfigo',
+			'foreignKey' => 'penfigo_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 }

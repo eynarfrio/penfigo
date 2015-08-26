@@ -89,7 +89,7 @@ class AmpollasController extends AppController {
     $pasTipAmps = $this->PacientesTipoampolla->find('all', array(
       'recursive' => 0,
       'conditions' => array(
-        'Tipoampolla.nombre' => 'Erociones',
+        'Tipoampolla.nombre' => 'Erosiones',
         'Areaampolla.tipo' => $tipo,
         'Areaampolla.paciente_id' => $idPaciente,
         'Areaampolla.numero' => $numero,

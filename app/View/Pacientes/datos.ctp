@@ -1,4 +1,4 @@
-<?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'action' => 'get_examenes')); ?>
+S<?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'action' => 'get_examenes')); ?>
 <section class="content">
     <div class="row">
         <div class="col-md-4">
@@ -54,7 +54,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header text-center">
-                    <h3 class="box-title">Signos Vitales</h3>
+                    <h3 class="box-title">Datos y Signos Vitales</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" title="Registrar Sintomas" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Signos', 'action' => 'ajax_signos', $idPaciente]) ?>');"><i class="fa fa-plus-square"></i></button>
                         <?php $num_signo = $this->requestAction(['controller' => 'Signos', 'action' => 'get_ult_num', $idPaciente]); ?>
@@ -344,7 +344,8 @@
                                 <tr>
                                     <th class="hidden-xs">Nro</th>
                                     <th>Examen</th>
-                                    <th>Resultado</th>
+                                    <th class="hidden-xs">Resultado</th>
+                                    <td>Penfigo</td>
                                     <th class="hidden-xs">Observacion</th>
                                     <th>Accion</th>
                                 </tr>
@@ -356,10 +357,15 @@
                                       <td class="hidden-xs"><?php echo $key + 1; ?></td>
                                       <td><?php echo $ex['Examene']['nombre'] ?></td>
                                       <?php if (!empty($resultado)): ?>
-                                        <td>
+                                        <td class="hidden-xs">
                                             <?php echo $resultado['Resultado']['descripcion']; ?>
                                         </td>
+                                        <td class="success">
+                                            <h3><?= $r_pen = $this->requestAction(array('controller' => 'Resultados','action' => 'get_res_pen',$resultado['Resultado']['id']))?></h3>
+                                            
+                                        </td>
                                         <td class="hidden-xs"><?php echo $resultado['PacientesResultado']['observacion']; ?></td>
+                                        
                                         <td>
                                             <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'], $resultado['PacientesResultado']['id'])) ?>')" class="btn btn-info btn-flat"><i class="fa fa-edit"></i></a>
                                         </td>
@@ -379,19 +385,33 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-danger">
-                    <div class="box-header text-center">
-                        <h3 class="box-title">TRATAMIENTO</h3>
-                    </div>
-                    <div class="box-body">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <?php $tratamiento = $this->requestAction(array('controller' => 'Tratamientos', 'action' => 'get_trat_pac', $idPaciente, $amp['numero'])) ?>
+        <?php if (!empty($tratamiento)): ?>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="box box-danger">
+                      <div class="box-header text-center">
+                          <h3 class="box-title">TRATAMIENTO</h3>
+                          <div class="box-tools pull-right">
+                              <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Tratamientos', 'action' => 'pac_tratamiento', $idPaciente, $amp['numero'], $tratamiento['Tratamiento']['id']]) ?>')"><i class="fa fa-edit"></i></button>
+                          </div>
+                      </div>
+                      <div class="box-body">
+                          <p>
+                              <?php echo $tratamiento['Tratamiento']['descripcion']; ?>
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        <?php else: ?>
+          <div class="row">
+              <div class="col-md-12">
+                  <a class="btn btn-block btn-info btn-lg col-md-12" href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tratamientos', 'action' => 'pac_tratamiento', $idPaciente, $amp['numero'])) ?>');">REGISTRAR TRATAMIENTO</a>
+              </div>
+          </div>
+        <?php endif; ?>
+        <br>
         <div class="row">
             <div class="col-md-12">
                 <?php echo $this->Html->link('TRANSFERIR PASIENTE', array('controller' => 'Medicos', 'action' => 'dermatologos', $paciente['Paciente']['id']), array('class' => 'btn btn-block btn-primary btn-lg col-md-12')); ?>
