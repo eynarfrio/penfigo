@@ -103,6 +103,26 @@
                 <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Areas', 'action' => 'area']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
             </ul>
         </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-street-view"></i><span>Signos</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Signos', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Signos', 'action' => 'signo']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-street-view"></i><span>Laboratorios</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Laboratorios', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Laboratorios', 'action' => 'laboratorio']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+            </ul>
+        </li>
     </ul>
 </section>
 <!-- /.sidebar -->

@@ -12,21 +12,12 @@
                     <?php echo $this->Form->text('nombre', ['class' => 'form-control', 'placeholder' => 'Ingrese el Nombre del lugar', 'required']); ?>
                 </div>
             </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-outline col-md-12">Registrar</button>
-                </div>
-            </div>
+           
         </div>
     </div>
     <?php echo $this->Form->end() ?>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+    <button type="submit" class="btn btn-outline pull-right">Registrar</button>
 </div>
