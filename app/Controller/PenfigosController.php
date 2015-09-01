@@ -12,7 +12,8 @@ class PenfigosController extends AppController {
     'Penfigosintoma',
     'PacientesPielsintoma',
     'PacientesTipoampolla',
-    'PacientesTipoerocione'
+    'PacientesTipoerocione',
+    'PacientesResultado'
   );
 
   public function index() {
@@ -51,7 +52,38 @@ class PenfigosController extends AppController {
       $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'] + $penfigos[$key]['resultado_num_erociones_m'] + $penfigos[$key]['resultado_num_erociones_p'];
       $penfigos[$key]['diagnostico'] = round($diagnostico_t / 5, 2);
     }
+    //debug($penfigos);exit;
     $this->set(compact('penfigos'));
+  }
+  public function diagnostico($idPaciente = null, $numero = null) {
+    $this->layout = 'ajax';
+    $penfigos = $this->Penfigo->find('all');
+    foreach ($penfigos as $key => $pen) {
+      $penfigos[$key]['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $pen['Penfigo']['id']);
+      $penfigos[$key]['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
+      $penfigos[$key]['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
+      $penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
+      $penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
+
+      $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'] + $penfigos[$key]['resultado_num_erociones_m'] + $penfigos[$key]['resultado_num_erociones_p'];
+      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 5, 2);
+      $penfigos[$key]['resultado'] = $this->get_resultado_ex($idPaciente, $numero, $pen['Penfigo']['id']);
+    }
+    //debug($penfigos);exit;
+    $this->set(compact('penfigos'));
+  }
+  
+  public function get_resultado_ex($idPaciente = null, $numero = null,$idPenfigo = null){
+    $resultado = $this->PacientesResultado->find('first',array(
+      'recursive' => 0,
+      'conditions' => array('Resultado.penfigo_id' => $idPenfigo,'PacientesResultado.numero' => $numero,'PacientesResultado.paciente_id' => $idPaciente),
+      'fields' => array('PacientesResultado.id')
+    ));
+    if(!empty($resultado)){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
   }
 
   public function get_nikolsky($idPaciente = null, $numero = null) {
@@ -114,6 +146,7 @@ class PenfigosController extends AppController {
         'PacientesPielsintoma.numero' => $numero
       )
     ));
+    
     if (count($sintomas_i) <= count($sintomas)) {
       if (count($sintomas_i) > 0) {
         $total_i = $n_sintomas_i / count($sintomas_i) * 51;
@@ -195,7 +228,9 @@ class PenfigosController extends AppController {
       $n_ampolla = 0;
     }
 
-    //debug($ampollas_i);
+    /*debug($n_ampolla);
+    debug($n_ampolla_i);
+    exit;*/
     if (count($ampollas_i) <= count($ampollas)) {
       if (count($ampollas_i) > 0) {
         $total_i = $n_ampolla_i / count($ampollas_i) * 51;
@@ -211,7 +246,7 @@ class PenfigosController extends AppController {
     } else {
       $sintomas_t = count($ampollas_i) + count($ampollas);
       if ($sintomas_t > 0) {
-        $total = ((count($ampollas_i) + $n_ampolla) / $sintomas_t) * 100;
+        $total = (($n_ampolla_i + $n_ampolla) / $sintomas_t) * 100;
       } else {
         $total = 100;
       }
@@ -277,7 +312,6 @@ class PenfigosController extends AppController {
       $n_erocion = 0;
     }
 
-
     if (count($erociones_i) <= count($erociones)) {
       if (count($erociones_i) > 0) {
         $total_i = $n_erocion_i / count($erociones_i) * 51;
@@ -293,7 +327,7 @@ class PenfigosController extends AppController {
     } else {
       $sintomas_t = count($erociones_i) + count($erociones);
       if ($sintomas_t > 0) {
-        $total = ((count($erociones_i) + $n_erocion) / $sintomas_t) * 100;
+        $total = (($n_erocion_i+ $n_erocion) / $sintomas_t) * 100;
       } else {
         $total = 100;
       }

@@ -18,14 +18,16 @@ class PacientesController extends AppController {
   ];
 
   public function mispacientes() {
-    $pacientes = $this->PacientesMedico->find('all', [
-      'recursive' => 0,
-      'conditions' => ['PacientesMedico.medico_id' => $this->get_id_medico()],
-      'group' => ['PacientesMedico.paciente_id'],
-      'order' => ['Paciente.modified DESC']
-    ]);
-    /* debug($pacientes);
-      exit; */
+    $idMedico = $this->get_id_medico();
+    $list_pac = $this->PacientesMedico->find('list', array(
+      'fields' => array('PacientesMedico.paciente_id', 'PacientesMedico.paciente_id'),
+      'conditions' => array('PacientesMedico.medico_id' => $idMedico),
+      'group' => 'paciente_id'
+    ));
+    $pacientes = $this->Paciente->find('all', array(
+      'recursive' => -1,
+      'conditions' => array('id' => $list_pac)
+    ));
     $this->set(compact('pacientes'));
   }
 
@@ -47,7 +49,7 @@ class PacientesController extends AppController {
       $idPaciente = $this->Paciente->getLastInsertID();
       $this->genera_med_pac($idPaciente);
       $this->Session->setFlash('Se registro correctamente el paciente!!!', 'msgbueno');
-      $this->redirect(['action' => 'datos',$idPaciente]);
+      $this->redirect(['action' => 'datos', $idPaciente]);
     }
     $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);
     $this->set(compact('lugares'));
@@ -78,7 +80,8 @@ class PacientesController extends AppController {
     $sintomas_amp = $this->PacientesSintoma->find('all', [
       'recursive' => -1,
       'conditions' => ['PacientesSintoma.paciente_id' => $idPaciente],
-      'group' => 'PacientesSintoma.numero'
+      'group' => 'PacientesSintoma.numero',
+      'fields' => array('PacientesSintoma.numero')
     ]);
     $array_samp = [];
     $iamp = 0;
@@ -105,24 +108,24 @@ class PacientesController extends AppController {
         $array_samp[$iamp]['estado'] = TRUE;
         $array_samp[$iamp]['areas_mu'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'], 'Mucosas');
         $array_samp[$iamp]['areas_pi'] = $this->get_pac_areas($idPaciente, $sp['PacientesSintoma']['numero'], 'Piel');
-      }else {
+      } else {
         $array_samp[$iamp]['estado'] = FALSE;
       }
       $array_samp[$iamp]['numero'] = $sp['PacientesSintoma']['numero'];
     }
     /* debug($array_samp);
       exit; */
-    $p_signos = $this->PacientesSigno->find('all',array(
+    $p_signos = $this->PacientesSigno->find('all', array(
       'recursive' => 0,
       'conditions' => array('PacientesSigno.paciente_id' => $idPaciente),
-      'fields' => array('Signo.nombre','PacientesSigno.valor','PacientesSigno.id','PacientesSigno.modified','PacientesSigno.numero'),
+      'fields' => array('Signo.nombre', 'PacientesSigno.valor', 'PacientesSigno.id', 'PacientesSigno.modified', 'PacientesSigno.numero'),
       'order' => array('PacientesSigno.numero')
     ));
     $num_signo = NULL;
-    if(!empty($p_signos)){
+    if (!empty($p_signos)) {
       $num_signo = end($p_signos)['PacientesSigno']['numero'];
     }
-    $this->set(compact('paciente', 'sintomas', 'idPaciente', 'array_samp','num_signo','p_signos'));
+    $this->set(compact('paciente', 'sintomas', 'idPaciente', 'array_samp', 'num_signo', 'p_signos'));
   }
 
   function get_pac_areas($idPaciente, $numero, $tipo) {

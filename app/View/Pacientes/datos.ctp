@@ -1,4 +1,4 @@
-S<?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'action' => 'get_examenes')); ?>
+<?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'action' => 'get_examenes')); ?>
 <section class="content">
     <div class="row">
         <div class="col-md-4">
@@ -45,11 +45,57 @@ S<?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'actio
                             </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
-
+    <?php if (!empty($paciente['Paciente']['antecedentes_personales']) || !empty($paciente['Paciente']['medicacion']) || !empty($paciente['Paciente']['antecedentes_familiares'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <?php if (!empty($paciente['Paciente']['antecedentes_personales'])): ?>
+                      <table class="table table-bordered">
+                          <tbody>
+                              <tr>
+                                  <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecentes personales</td>
+                              </tr>
+                              <tr>
+                                  <td><?= $paciente['Paciente']['antecedentes_personales'] ?></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    <?php endif; ?>
+                    <?php if (!empty($paciente['Paciente']['medicacion'])): ?>
+                      <table class="table table-bordered">
+                          <tbody>
+                              <tr>
+                                  <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Medicacion</td>
+                              </tr>
+                              <tr>
+                                  <td><?= $paciente['Paciente']['medicacion'] ?></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    <?php endif; ?>
+                    <?php if (!empty($paciente['Paciente']['antecedentes_familiares'])): ?>
+                      <table class="table table-bordered">
+                          <tbody>
+                              <tr>
+                                  <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecedentes Familiares</td>
+                              </tr>
+                              <tr>
+                                  <td><?= $paciente['Paciente']['antecedentes_familiares'] ?></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
@@ -361,11 +407,11 @@ S<?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'actio
                                             <?php echo $resultado['Resultado']['descripcion']; ?>
                                         </td>
                                         <td class="success">
-                                            <h3><?= $r_pen = $this->requestAction(array('controller' => 'Resultados','action' => 'get_res_pen',$resultado['Resultado']['id']))?></h3>
-                                            
+                                            <h3><?= $r_pen = $this->requestAction(array('controller' => 'Resultados', 'action' => 'get_res_pen', $resultado['Resultado']['id'])) ?></h3>
+
                                         </td>
                                         <td class="hidden-xs"><?php echo $resultado['PacientesResultado']['observacion']; ?></td>
-                                        
+
                                         <td>
                                             <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'], $resultado['PacientesResultado']['id'])) ?>')" class="btn btn-info btn-flat"><i class="fa fa-edit"></i></a>
                                         </td>
