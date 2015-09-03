@@ -68,7 +68,7 @@
  */
 class DATABASE_CONFIG {
 
-	public $default = array(
+	/*public $default = array(
 		'datasource' => 'Database/Postgres',
 		'persistent' => false,
 		'host' => 'localhost',
@@ -88,5 +88,6 @@ class DATABASE_CONFIG {
 		'database' => 'test_database_name',
 		'prefix' => '',
 		//'encoding' => 'utf8',
-	);
+	);*/
+	
 }
