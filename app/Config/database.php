@@ -89,26 +89,29 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);*/
-    public $test = array(
-        'datasource' => 'Database/Mysql',
-        'persistent' => false,
-        'host' => 'localhost',
-        'login' => 'user',
-        'password' => 'password',
-        'database' => 'test_database_name',
-        'prefix' => '',
-        //'encoding' => 'utf8',
-    );
 
-  public $DATABASE_URL = parse_url($_ENV['DATABASE_URL']);
-  public $default = array(
+
+public $default;
+  public $test = array(
+    'persistent' => false,
+    'host' => '',
+    'login' => '',
+    'password' => '',
+    'database' => 'cakephp_test',
+    'prefix' => ''
+  );
+  public function __construct() {
+    $DATABASE_URL = parse_url(getenv('DATABASE_URL'));
+    $this->default = array(
       'datasource' => 'Database/Postgres',
       'persistent' => false,
-      'host'       => $this->DATABASE_URL['host'],
-      'login'      => $this->DATABASE_URL['user'],
-      'password'   => $this->DATABASE_URL['pass'],
-      'database'   => substr($this->DATABASE_URL['path'], 1),
+      'host'       => $DATABASE_URL['host'],
+      'login'      => $DATABASE_URL['user'],
+      'password'   => $DATABASE_URL['pass'],
+      'database'   => substr($DATABASE_URL['path'], 1),
       'prefix'     => '',
       'encoding'   => 'utf8',
     );
+  }
+
 }
