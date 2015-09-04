@@ -484,7 +484,7 @@ class Inflector {
 	public static function underscore($camelCasedWord) {
 		if (!($result = self::_cache(__FUNCTION__, $camelCasedWord))) {
 			$underscoredWord = preg_replace('/(?<=\\w)([A-Z])/', '_\\1', $camelCasedWord);
-			$result = mb_strtolower($underscoredWord);
+			$result = strtolower($underscoredWord);
 			self::_cache(__FUNCTION__, $camelCasedWord, $result);
 		}
 		return $result;
