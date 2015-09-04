@@ -69,12 +69,12 @@
 class DATABASE_CONFIG {
 
 	public $default = array(
-		'datasource' => 'Database/Postgres',
+		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'ec2-54-197-245-93.compute-1.amazonaws.com',
-		'login' => 'yhoqcuvqhmbclw',
-		'password' => 'RG-83MjUQg2QYoGpZZHMYPWzg0',
-		'database' => 'dda5o34o13he5g',
+		'host' => 'localhost',
+		'login' => 'root',
+		'password' => 'root',
+		'database' => 'penfigo',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
