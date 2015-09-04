@@ -16,6 +16,8 @@ class PenfigosController extends AppController {
     'PacientesResultado'
   );
 
+  
+
   public function index() {
     $penfigos = $this->Penfigo->find('all');
     $this->set(compact('penfigos'));
