@@ -51,51 +51,51 @@
         </div>
     </div>
     <?php if (!empty($paciente['Paciente']['antecedentes_personales']) || !empty($paciente['Paciente']['medicacion']) || !empty($paciente['Paciente']['antecedentes_familiares'])): ?>
-      <div class="row">
-          <div class="col-md-12">
-              <div class="box box-primary">
-                  <div class="box-body">
-                      <?php if (!empty($paciente['Paciente']['antecedentes_personales'])): ?>
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecentes personales</td>
-                                </tr>
-                                <tr>
-                                    <td><?= $paciente['Paciente']['antecedentes_personales'] ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                      <?php endif; ?>
-                      <?php if (!empty($paciente['Paciente']['medicacion'])): ?>
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Medicacion</td>
-                                </tr>
-                                <tr>
-                                    <td><?= $paciente['Paciente']['medicacion'] ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                      <?php endif; ?>
-                      <?php if (!empty($paciente['Paciente']['antecedentes_familiares'])): ?>
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecedentes Familiares</td>
-                                </tr>
-                                <tr>
-                                    <td><?= $paciente['Paciente']['antecedentes_familiares'] ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                      <?php endif; ?>
-                  </div>
-              </div>
-          </div>
-      </div>
-    <?php endif; ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <?php if (!empty($paciente['Paciente']['antecedentes_personales'])): ?>
+                      <table class="table table-bordered">
+                          <tbody>
+                              <tr>
+                                  <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecentes personales</td>
+                              </tr>
+                              <tr>
+                                  <td><?= $paciente['Paciente']['antecedentes_personales'] ?></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    <?php endif; ?>
+                    <?php if (!empty($paciente['Paciente']['medicacion'])): ?>
+                      <table class="table table-bordered">
+                          <tbody>
+                              <tr>
+                                  <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Medicacion</td>
+                              </tr>
+                              <tr>
+                                  <td><?= $paciente['Paciente']['medicacion'] ?></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    <?php endif; ?>
+                    <?php if (!empty($paciente['Paciente']['antecedentes_familiares'])): ?>
+                      <table class="table table-bordered">
+                          <tbody>
+                              <tr>
+                                  <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecedentes Familiares</td>
+                              </tr>
+                              <tr>
+                                  <td><?= $paciente['Paciente']['antecedentes_familiares'] ?></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
@@ -430,14 +430,6 @@
                 </div>
             </div>
         </div>
-
-        <div id="diagnostico-f">
-
-        </div>
-
-        <script>
-          $('#diagnostico-f').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'diagnostico', $idPaciente, $amp['numero'])) ?>');
-        </script>
 
         <?php $tratamiento = $this->requestAction(array('controller' => 'Tratamientos', 'action' => 'get_trat_pac', $idPaciente, $amp['numero'])) ?>
         <?php if (!empty($tratamiento)): ?>
