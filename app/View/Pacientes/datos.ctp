@@ -436,7 +436,7 @@
         </div>
 
         <script>
-          $('#diagnostico-f').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'diagnostico', $idPaciente, $amp['numero'])) ?>');
+          /*$('#diagnostico-f').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'diagnostico', $idPaciente, $amp['numero'])) ?>');*/
         </script>
 
         <?php $tratamiento = $this->requestAction(array('controller' => 'Tratamientos', 'action' => 'get_trat_pac', $idPaciente, $amp['numero'])) ?>
