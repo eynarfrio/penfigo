@@ -1,4 +1,5 @@
 <?php $examenes = $this->requestAction(array('controller' => 'Examenes', 'action' => 'get_examenes')); ?>
+<link href="<?= $this->webroot; ?>plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
 <section class="content">
     <div class="row">
         <div class="col-md-4">
@@ -134,7 +135,38 @@
             </div>
         </div>
     </div>
-
+    <?php 
+    $est_ampollas = $this->requestAction(array('controller' => 'Sintomas','action' => 'get_ult_ampollas',$idPaciente))
+    ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label style="font-size: 16px;">
+                            <?php 
+                            $check_amp = '';
+                            if($est_ampollas){
+                              $check_amp = 'checked';
+                            }
+                            ?>
+                            <?= $this->Form->checkbox("PacientesSintoma.estado", ['class' => '','id' => 'check-c-ampollas',$check_amp]) ?>
+                            &nbsp;&nbsp;&nbsp;El Paciente presenta actualmente ampollas en areas o alguna region en el cuerpo
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $('#check-c-ampollas').click(function(){
+      if($('#check-c-ampollas').prop('checked')){
+        window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas','action' => 'guarda_ult_ampollas',$idPaciente,1));?>';
+      }else{
+        window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas','action' => 'guarda_ult_ampollas',$idPaciente,0));?>';
+      }
+    });
+    </script>
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
@@ -146,8 +178,8 @@
                         <?php if (!empty($num_sin)): ?>
                           <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'ajax_sintomas', $idPaciente, $num_sin]) ?>');"><i class="fa fa-edit"></i></button> 
                           <button class="btn btn-box-tool" title="Eliminar" onclick="if (confirm('Esta seguro de eliminar los sintomas??')) {
-                                      window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
-                                  }"><i class="fa fa-remove"></i></button> 
+                                    window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
+                                }"><i class="fa fa-remove"></i></button> 
                                 <?php endif; ?>
 
                     </div>
@@ -164,18 +196,20 @@
                         </thead>
                         <tbody>
                             <?php foreach ($sintomas as $key => $sin): ?>
-                              <tr>
-                                  <td class="hidden-xs"><?= ($key + 1) ?></td>
-                                  <td><?= $sin['Sintoma']['nombre'] ?></td>
-                                  <td><?php
-                                      if ($sin['PacientesSintoma']['estado']) {
-                                        echo '<span class="label label-primary">Si</span>';
-                                      } else {
-                                        echo 'No';
-                                      }
-                                      ?></td>
-                                  <td><?= $sin['PacientesSintoma']['modified'] ?></td>
-                              </tr>
+                              <?php if ($sin['Sintoma']['nombre'] != 'Ampollas'): ?>
+                                <tr>
+                                    <td class="hidden-xs"><?= ($key + 1) ?></td>
+                                    <td><?= $sin['Sintoma']['nombre'] ?></td>
+                                    <td><?php
+                                        if ($sin['PacientesSintoma']['estado']) {
+                                          echo '<span class="label label-primary">Si</span>';
+                                        } else {
+                                          echo 'No';
+                                        }
+                                        ?></td>
+                                    <td><?= $sin['PacientesSintoma']['modified'] ?></td>
+                                </tr>
+                              <?php endif; ?>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -481,3 +515,10 @@
       <?php endif; ?>
     <?php endforeach; ?>
 </section>
+
+<?php
+echo $this->Html->script([
+  '../plugins/iCheck/icheck.min',
+  'inicheckbox'
+]);
+?>

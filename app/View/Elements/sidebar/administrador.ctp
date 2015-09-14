@@ -73,16 +73,16 @@
                 <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoampollas', 'action' => 'tipoampolla')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Ampolla</a></li>  
             </ul>
         </li>
-        <li class="treeview">
+        <!--<li class="treeview">
             <a href="#">
                 <i class="glyphicon glyphicon-fullscreen"></i><span>Tipo de Erosiones</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo $this->Html->url(['controller' => 'Tipoerociones', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoerociones', 'action' => 'tipoerocion')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Erosion</a></li>  
+                <li><a href="<?php //echo $this->Html->url(['controller' => 'Tipoerociones', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php //echo $this->Html->url(array('controller' => 'Tipoerociones', 'action' => 'tipoerocion')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Erosion</a></li>  
             </ul>
-        </li>
+        </li>-->
         <li class="treeview">
             <a href="#">
                 <i class="glyphicon glyphicon-fullscreen"></i><span>Penfigo</span>
