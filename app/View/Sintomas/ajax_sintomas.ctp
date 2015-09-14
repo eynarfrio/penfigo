@@ -1,5 +1,5 @@
 <link href="<?= $this->webroot; ?>plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
-<?= $this->Form->create('Sintoma', ['action' => 'regis_sin_pac/'.$idPaciente.'/'.$numero]); ?>
+<?= $this->Form->create('Sintoma', ['action' => 'regis_sin_pac/' . $idPaciente . '/' . $numero]); ?>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title">Sintomas Sistemicos</h4>
@@ -14,15 +14,17 @@
                         <th>Estado</th>
                     </tr>
                     <?php foreach ($sintomas as $key => $sin): ?>
-                      <tr>
-                          <td><?= $sin['Sintoma']['nombre'] ?></td>
-                          <td class="text-center">
-                              <?= $this->Form->hidden("PacientesSintoma.$key.id") ?>
-                              <?= $this->Form->hidden("PacientesSintoma.$key.paciente_id", ['value' => $idPaciente]) ?>
-                              <?= $this->Form->hidden("PacientesSintoma.$key.sintoma_id", ['value' => $sin['Sintoma']['id']]) ?>
-                              <?= $this->Form->checkbox("PacientesSintoma.$key.estado", ['class' => 'flat-red']) ?>
-                          </td>
-                      </tr>
+                      <?php if ($sin['Sintoma']['nombre'] != 'Ampollas'): ?>
+                        <tr>
+                            <td><?= $sin['Sintoma']['nombre'] ?></td>
+                            <td class="text-center">
+                                <?= $this->Form->hidden("PacientesSintoma.$key.id") ?>
+                                <?= $this->Form->hidden("PacientesSintoma.$key.paciente_id", ['value' => $idPaciente]) ?>
+                                <?= $this->Form->hidden("PacientesSintoma.$key.sintoma_id", ['value' => $sin['Sintoma']['id']]) ?>
+                                <?= $this->Form->checkbox("PacientesSintoma.$key.estado", ['class' => 'flat-red']) ?>
+                            </td>
+                        </tr>
+                      <?php endif; ?>
                     <?php endforeach; ?>
                 </thead>
             </table>

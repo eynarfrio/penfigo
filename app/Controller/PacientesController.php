@@ -151,9 +151,9 @@ class PacientesController extends AppController {
     $cadena = "";
     foreach ($tipos as $ti) {
       $nombre = $ti['Tipoampolla']['nombre'];
-      if ($ti['Tipoampolla']['nombre'] == 'Erosiones') {
+      /*if ($ti['Tipoampolla']['nombre'] == 'Erosiones') {
         $nombre = $ti['Tipoampolla']['nombre'] . ' ' . $this->get_pac_tipos_er($idAreaampolla);
-      }
+      }*/
       if (!empty($cadena)) {
         $cadena = $cadena . ", " . $nombre;
       } else {
