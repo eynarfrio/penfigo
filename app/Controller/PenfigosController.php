@@ -48,11 +48,11 @@ class PenfigosController extends AppController {
       $penfigos[$key]['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $pen['Penfigo']['id']);
       $penfigos[$key]['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
       $penfigos[$key]['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
-      $penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
-      $penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
+      //$penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
+      //$penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
 
-      $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'] + $penfigos[$key]['resultado_num_erociones_m'] + $penfigos[$key]['resultado_num_erociones_p'];
-      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 5, 2);
+      $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'];
+      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 3, 2);
     }
     //debug($penfigos);exit;
     $this->set(compact('penfigos'));
@@ -65,11 +65,11 @@ class PenfigosController extends AppController {
       $penfigos[$key]['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $idPenfigo);
       $penfigos[$key]['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Mucosas');
       $penfigos[$key]['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Piel');
-      $penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Mucosas');
-      $penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Piel');
+      //$penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Mucosas');
+      //$penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Piel');
 
-      $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'] + $penfigos[$key]['resultado_num_erociones_m'] + $penfigos[$key]['resultado_num_erociones_p'];
-      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 5, 2);
+      $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'];
+      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 3, 2);
     }
 
     debug($penfigos);
