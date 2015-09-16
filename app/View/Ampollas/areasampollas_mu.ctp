@@ -3,7 +3,7 @@
 
     <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Ampollas en la mucosa</h3>
+            <h3 class="box-title">Ampollas en la piel</h3>
         </div><!-- /.box-header -->
         <!-- form start -->
         <?php echo $this->Form->create('Ampolla', ['action' => "regis_are_amp_m/$idPaciente/$numero/$tipo"]) ?>
