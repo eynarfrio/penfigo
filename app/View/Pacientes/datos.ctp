@@ -141,6 +141,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
+                
+                <h4 class="box-title text-center">Signo Cardinal y/o Prefecto</h4>
                 <div class="box-body">
                     <div class="form-group">
                         <label style="font-size: 16px;">
@@ -155,6 +157,7 @@
                         </label>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
