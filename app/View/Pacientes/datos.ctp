@@ -16,6 +16,9 @@
             <div class="box box-primary">
                 <div class="box-header text-center">
                     <h3 class="box-title">Informacion del Paciente</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" title="Editar" onclick="window.location.href = '<?= $this->Html->url(['action' => 'paciente', $idPaciente]) ?>';"><i class="fa fa-edit"></i></button> 
+                    </div>
                 </div>
                 <div class="box-body">
                     <table class="table table-bordered">
@@ -135,8 +138,8 @@
             </div>
         </div>
     </div>
-    <?php 
-    $est_ampollas = $this->requestAction(array('controller' => 'Sintomas','action' => 'get_ult_ampollas',$idPaciente))
+    <?php
+    $est_ampollas = $this->requestAction(array('controller' => 'Sintomas', 'action' => 'get_ult_ampollas', $idPaciente))
     ?>
     <div class="row">
         <div class="col-md-12">
@@ -144,13 +147,13 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label style="font-size: 16px;">
-                            <?php 
+                            <?php
                             $check_amp = '';
-                            if($est_ampollas){
+                            if ($est_ampollas) {
                               $check_amp = 'checked';
                             }
                             ?>
-                            <?= $this->Form->checkbox("PacientesSintoma.estado", ['class' => '','id' => 'check-c-ampollas',$check_amp]) ?>
+                            <?= $this->Form->checkbox("PacientesSintoma.estado", ['class' => '', 'id' => 'check-c-ampollas', $check_amp]) ?>
                             &nbsp;&nbsp;&nbsp;El Paciente presenta actualmente ampollas en areas o alguna region en el cuerpo
                         </label>
                     </div>
@@ -159,13 +162,13 @@
         </div>
     </div>
     <script>
-    $('#check-c-ampollas').click(function(){
-      if($('#check-c-ampollas').prop('checked')){
-        window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas','action' => 'guarda_ult_ampollas',$idPaciente,1));?>';
-      }else{
-        window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas','action' => 'guarda_ult_ampollas',$idPaciente,0));?>';
-      }
-    });
+      $('#check-c-ampollas').click(function () {
+          if ($('#check-c-ampollas').prop('checked')) {
+              window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas', 'action' => 'guarda_ult_ampollas', $idPaciente, 1)); ?>';
+          } else {
+              window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas', 'action' => 'guarda_ult_ampollas', $idPaciente, 0)); ?>';
+          }
+      });
     </script>
     <div class="row">
         <div class="col-md-12">
@@ -470,7 +473,7 @@
         </div>
 
         <script>
-          /*$('#diagnostico-f').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'diagnostico', $idPaciente, $amp['numero'])) ?>');*/
+          $('#diagnostico-f').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'diagnostico', $idPaciente, $amp['numero'])) ?>');
         </script>
 
         <?php $tratamiento = $this->requestAction(array('controller' => 'Tratamientos', 'action' => 'get_trat_pac', $idPaciente, $amp['numero'])) ?>

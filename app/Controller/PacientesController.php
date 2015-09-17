@@ -39,18 +39,27 @@ class PacientesController extends AppController {
     $this->set(compact('pacientes'));
   }
 
-  public function paciente() {
+  public function paciente($idPaciente = null) {
     if (!empty($this->request->data)) {
-      /* debug($this->request->data);
+       /*debug($this->request->data);
         exit; */
       $dato = $this->request->data;
       $this->Paciente->create();
       $this->Paciente->save($dato['Paciente']);
-      $idPaciente = $this->Paciente->getLastInsertID();
-      $this->genera_med_pac($idPaciente);
+      if (empty($dato['Paciente']['id'])) {
+        //debug($dato['Paciente']['id']);exit;
+        $idPaciente = $this->Paciente->getLastInsertID();
+        $this->genera_med_pac($idPaciente);
+      }else{
+        $idPaciente = $dato['Paciente']['id'];
+      }
       $this->Session->setFlash('Se registro correctamente el paciente!!!', 'msgbueno');
       $this->redirect(['action' => 'datos', $idPaciente]);
     }
+    $this->Paciente->id = $idPaciente;
+    $this->request->data = $this->Paciente->read();
+    /*debug($this->request->data);
+    exit;*/
     $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);
     $this->set(compact('lugares'));
   }
@@ -96,13 +105,6 @@ class PacientesController extends AppController {
         ],
         'fields' => 'PacientesSintoma.id'
       ]);
-      $num_amp = $this->PacientesSintoma->find('count', [
-        'conditions' => [
-          'PacientesSintoma.estado' => 1,
-          'PacientesSintoma.paciente_id' => $idPaciente,
-          'PacientesSintoma.numero' => $sp['PacientesSintoma']['numero']
-        ]
-      ]);
       $iamp++;
       if (!empty($preg_amp)) {
         $array_samp[$iamp]['estado'] = TRUE;
@@ -141,6 +143,8 @@ class PacientesController extends AppController {
     }
     return $array;
   }
+  
+  
 
   function get_pac_tipos_am($idAreaampolla) {
     $tipos = $this->PacientesTipoampolla->find('all', [
@@ -151,9 +155,9 @@ class PacientesController extends AppController {
     $cadena = "";
     foreach ($tipos as $ti) {
       $nombre = $ti['Tipoampolla']['nombre'];
-      /*if ($ti['Tipoampolla']['nombre'] == 'Erosiones') {
+      /* if ($ti['Tipoampolla']['nombre'] == 'Erosiones') {
         $nombre = $ti['Tipoampolla']['nombre'] . ' ' . $this->get_pac_tipos_er($idAreaampolla);
-      }*/
+        } */
       if (!empty($cadena)) {
         $cadena = $cadena . ", " . $nombre;
       } else {
