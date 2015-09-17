@@ -7,6 +7,7 @@
         </div><!-- /.box-header -->
         <!-- form start -->
         <?php echo $this->Form->create('Paciente') ?>
+        <?php echo $this->Form->hidden('id');?>
         <div class="box-body">
             <div class="form-group">
                 <div class="row">
