@@ -74,8 +74,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => 'root',
-		'database' => 'sepenfigo',
+		'password' => '',
+		'database' => 'penfigo',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

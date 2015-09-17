@@ -45,7 +45,7 @@
         </li>
         <li class="treeview">
             <a href="#">
-                <i class="glyphicon glyphicon-globe"></i> <span>Sintomas</span>
+                <i class="glyphicon glyphicon-eye-open"></i> <span>Sintomas</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
@@ -73,19 +73,9 @@
                 <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoampollas', 'action' => 'tipoampolla')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Ampolla</a></li>  
             </ul>
         </li>
-        <!--<li class="treeview">
-            <a href="#">
-                <i class="glyphicon glyphicon-fullscreen"></i><span>Tipo de Erosiones</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="<?php //echo $this->Html->url(['controller' => 'Tipoerociones', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php //echo $this->Html->url(array('controller' => 'Tipoerociones', 'action' => 'tipoerocion')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Erosion</a></li>  
-            </ul>
-        </li>-->
         <li class="treeview">
             <a href="#">
-                <i class="glyphicon glyphicon-fullscreen"></i><span>Penfigo</span>
+                <i class="glyphicon glyphicon-picture"></i><span>Penfigo</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
@@ -105,7 +95,7 @@
         </li>
         <li class="treeview">
             <a href="#">
-                <i class="fa fa-street-view"></i><span>Signos</span>
+                <i class="glyphicon glyphicon-heart"></i><span>Signos</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
@@ -115,12 +105,32 @@
         </li>
         <li class="treeview">
             <a href="#">
-                <i class="fa fa-street-view"></i><span>Laboratorios</span>
+                <i class="glyphicon glyphicon-tint"></i><span>Laboratorios</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Laboratorios', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
                 <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Laboratorios', 'action' => 'laboratorio']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="glyphicon glyphicon-folder-open"></i><span>Resultados</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Resultados', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Resultados', 'action' => 'resultado']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="glyphicon glyphicon-plus-sign"></i><span>Examenes</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Html->url(['controller' => 'Examenes', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
+                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Examenes', 'action' => 'examen']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
             </ul>
         </li>
     </ul>
