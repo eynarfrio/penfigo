@@ -12,7 +12,7 @@
         </section><!-- /#introduction -->
         <section id='components' data-spy="scroll" data-target="#scrollspy-components">    
             <div align="center">
-                <img src="/penfigo/imagenes/penfigo.png" height="420px" width="800px" class="img-responsive" alt="User Image">
+                <img src="<?php echo $this->webroot.'imagenes/penfigo.png';?>" height="420px" width="800px" class="img-responsive" alt="User Image">
             </div> 
         </section>
         <section id='download'>
