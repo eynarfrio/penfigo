@@ -13,10 +13,11 @@ class PenfigosController extends AppController {
     'PacientesPielsintoma',
     'PacientesTipoampolla',
     'PacientesTipoerocione',
-    'PacientesResultado'
+    'PacientesResultado',
+    'PacientesSintoma',
+    'Areaampolla',
+    'PacientesTipoampolla'
   );
-
-  
 
   public function index() {
     $penfigos = $this->Penfigo->find('all');
@@ -61,30 +62,138 @@ class PenfigosController extends AppController {
   public function diagnostico($idPaciente = null, $numero = null) {
     $this->layout = 'ajax';
     $idPenfigo = $this->get_resultado_ex($idPaciente, $numero);
+    $penfigo = $this->Penfigo->find('first', array(
+      'recursive' => -1,
+      'conditions' => array('id' => $idPenfigo),
+      'fields' => array('nombre')
+    ));
     if (!empty($idPenfigo)) {
-      $penfigos[$key]['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $idPenfigo);
-      $penfigos[$key]['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Mucosas');
-      $penfigos[$key]['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Piel');
+      $penfigos['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $idPenfigo);
+      $penfigos['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Mucosas');
+      $penfigos['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Piel');
       //$penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Mucosas');
       //$penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Piel');
 
-      $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'];
-      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 3, 2);
+      $diagnostico_t = $penfigos['resultado_sintomas'] + $penfigos['resultado_num_ampollas_m'] + $penfigos['resultado_num_ampollas_p'];
+      $penfigos['diagnostico'] = round($diagnostico_t / 3, 2);
     }
+    $diagnostico_sin_s = $this->get_sint_sis_p($idPaciente, $numero);
+    $diagnostico_amp_m = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
+    $diagnostico_amp_p = $this->get_pac_areas($idPaciente, $numero, 'Piel');
+    $diagnostico_sin_p = $this->get_sint_piel($idPaciente, $numero);
+    if (!empty($diagnostico_amp_m)) {
+      if (!empty($diagnostico_amp_p)) {
+        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m y $diagnostico_amp_p tambien $diagnostico_sin_p";
+      } else {
+        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m tambien $diagnostico_sin_p";
+      }
+    } else {
+      if (!empty($diagnostico_amp_p)) {
+        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_p tambien $diagnostico_sin_p";
+      } else {
+        $diagnostico = "$diagnostico_sin_s tambien $diagnostico_sin_p";
+      }
+    }
+    //$diagnostico = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
 
-    debug($penfigos);
+    debug($diagnostico);
     exit;
-    $this->set(compact('penfigos'));
+    $this->set(compact('penfigos', 'penfigo'));
+  }
+
+  function get_sint_piel($idPaciente, $numero) {
+    $diagnostico = '';
+    $sintomas = $this->PacientesPielsintoma->find('all', array(
+      'recursive' => 0,
+      'conditions' => array('PacientesPielsintoma.paciente_id' => $idPaciente, 'PacientesPielsintoma.numero' => $numero, 'PacientesPielsintoma.estado' => 1),
+      'fields' => array('Pielsintoma.nombre')
+    ));
+    foreach ($sintomas as $sin) {
+      if (!empty($diagnostico)) {
+        $diagnostico = "$diagnostico, " . $sin['Pielsintoma']['nombre'];
+      } else {
+        $diagnostico = $sin['Pielsintoma']['nombre'];
+      }
+    }
+    if (!empty($diagnostico)) {
+      return "El paciente presenta $diagnostico en la piel";
+    } else {
+      return "";
+    }
+  }
+
+  function get_sint_sis_p($idPaciente, $numero) {
+    $diagnostico = '';
+    $sintomas = $this->PacientesSintoma->find('all', array(
+      'recursive' => 0,
+      'conditions' => array('PacientesSintoma.paciente_id' => $idPaciente, 'PacientesSintoma.numero' => $numero, 'PacientesSintoma.estado' => 1),
+      'fields' => array('Sintoma.nombre')
+    ));
+    foreach ($sintomas as $sin) {
+      if (!empty($diagnostico)) {
+        $diagnostico = "$diagnostico, " . $sin['Sintoma']['nombre'];
+      } else {
+        $diagnostico = $sin['Sintoma']['nombre'];
+      }
+    }
+    if (!empty($diagnostico)) {
+      return "El paciente presenta sintomas de $diagnostico";
+    } else {
+      return "";
+    }
+  }
+
+  function get_pac_areas($idPaciente, $numero, $tipo) {
+    $diagnostico_a = "";
+    $array = $this->Areaampolla->find('all', [
+      'recursive' => 0,
+      'conditions' => ['Areaampolla.paciente_id' => $idPaciente, 'Areaampolla.numero' => $numero, 'Areaampolla.estado' => 1, 'Areaampolla.tipo' => $tipo],
+      'fields' => ['Area.nombre', 'Areaampolla.id', 'Areaampolla.modified']
+    ]);
+    if (!empty($array)) {
+      $diagnostico_a = "Se encontro ampollas de $tipo en el area o areas como: ";
+      $diagnostico_a_2 = "";
+      foreach ($array as $a) {
+        if (!empty($diagnostico_a_2)) {
+          $cadena = $this->get_pac_tipos_am($a['Areaampolla']['id']);
+          $diagnostico_a_2 = "$diagnostico_a_2, " . $a['Area']['nombre'] . " de tipo ($cadena)";
+        } else {
+          $cadena = $this->get_pac_tipos_am($a['Areaampolla']['id']);
+          $diagnostico_a_2 = $a['Area']['nombre'] . " de tipo ($cadena)";
+        }
+      }
+      $diagnostico_a = "$diagnostico_a $diagnostico_a_2";
+    }
+    return $diagnostico_a;
+  }
+
+  function get_pac_tipos_am($idAreaampolla) {
+    $tipos = $this->PacientesTipoampolla->find('all', [
+      'recursive' => 0,
+      'conditions' => ['PacientesTipoampolla.areaampolla_id' => $idAreaampolla, 'PacientesTipoampolla.estado' => 1],
+      'fields' => ['Tipoampolla.nombre']
+    ]);
+    $cadena = "";
+    foreach ($tipos as $ti) {
+      $nombre = $ti['Tipoampolla']['nombre'];
+      if (!empty($cadena)) {
+        $cadena = $cadena . ", " . $nombre;
+      } else {
+        $cadena = $nombre;
+      }
+    }
+    return $cadena;
   }
 
   public function get_resultado_ex($idPaciente = null, $numero = null) {
+    //debug($numero);exit;
     $resultado = $this->PacientesResultado->find('first', array(
       'recursive' => 0,
       'conditions' => array('PacientesResultado.numero' => $numero, 'PacientesResultado.paciente_id' => $idPaciente),
       'fields' => array('Resultado.penfigo_id')
     ));
     if (!empty($resultado)) {
-      return $resultado['PacientesResultado']['penfigo_id'];
+      return $resultado['Resultado']['penfigo_id'];
     } else {
       return NULL;
     }
