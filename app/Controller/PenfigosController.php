@@ -14,6 +14,7 @@ class PenfigosController extends AppController {
     'PacientesTipoampolla',
     'PacientesTipoerocione',
     'PacientesResultado',
+    'PacientesSintoma',
     'Areaampolla',
     'PacientesTipoampolla'
   );
@@ -76,10 +77,70 @@ class PenfigosController extends AppController {
       $diagnostico_t = $penfigos['resultado_sintomas'] + $penfigos['resultado_num_ampollas_m'] + $penfigos['resultado_num_ampollas_p'];
       $penfigos['diagnostico'] = round($diagnostico_t / 3, 2);
     }
-    $diagnostico = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
+    $diagnostico_sin_s = $this->get_sint_sis_p($idPaciente, $numero);
+    $diagnostico_amp_m = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
+    $diagnostico_amp_p = $this->get_pac_areas($idPaciente, $numero, 'Piel');
+    $diagnostico_sin_p = $this->get_sint_piel($idPaciente, $numero);
+    if (!empty($diagnostico_amp_m)) {
+      if (!empty($diagnostico_amp_p)) {
+        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m y $diagnostico_amp_p tambien $diagnostico_sin_p";
+      } else {
+        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m tambien $diagnostico_sin_p";
+      }
+    } else {
+      if (!empty($diagnostico_amp_p)) {
+        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_p tambien $diagnostico_sin_p";
+      } else {
+        $diagnostico = "$diagnostico_sin_s tambien $diagnostico_sin_p";
+      }
+    }
+    //$diagnostico = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
+
     debug($diagnostico);
     exit;
     $this->set(compact('penfigos', 'penfigo'));
+  }
+
+  function get_sint_piel($idPaciente, $numero) {
+    $diagnostico = '';
+    $sintomas = $this->PacientesPielsintoma->find('all', array(
+      'recursive' => 0,
+      'conditions' => array('PacientesPielsintoma.paciente_id' => $idPaciente, 'PacientesPielsintoma.numero' => $numero, 'PacientesPielsintoma.estado' => 1),
+      'fields' => array('Pielsintoma.nombre')
+    ));
+    foreach ($sintomas as $sin) {
+      if (!empty($diagnostico)) {
+        $diagnostico = "$diagnostico, " . $sin['Pielsintoma']['nombre'];
+      } else {
+        $diagnostico = $sin['Pielsintoma']['nombre'];
+      }
+    }
+    if (!empty($diagnostico)) {
+      return "El paciente presenta $diagnostico en la piel";
+    } else {
+      return "";
+    }
+  }
+
+  function get_sint_sis_p($idPaciente, $numero) {
+    $diagnostico = '';
+    $sintomas = $this->PacientesSintoma->find('all', array(
+      'recursive' => 0,
+      'conditions' => array('PacientesSintoma.paciente_id' => $idPaciente, 'PacientesSintoma.numero' => $numero, 'PacientesSintoma.estado' => 1),
+      'fields' => array('Sintoma.nombre')
+    ));
+    foreach ($sintomas as $sin) {
+      if (!empty($diagnostico)) {
+        $diagnostico = "$diagnostico, " . $sin['Sintoma']['nombre'];
+      } else {
+        $diagnostico = $sin['Sintoma']['nombre'];
+      }
+    }
+    if (!empty($diagnostico)) {
+      return "El paciente presenta sintomas de $diagnostico";
+    } else {
+      return "";
+    }
   }
 
   function get_pac_areas($idPaciente, $numero, $tipo) {
@@ -95,8 +156,8 @@ class PenfigosController extends AppController {
       foreach ($array as $a) {
         if (!empty($diagnostico_a_2)) {
           $cadena = $this->get_pac_tipos_am($a['Areaampolla']['id']);
-          $diagnostico_a_2 = "$diagnostico_a_2, ".$a['Area']['nombre'] . " de tipo ($cadena)";
-        }else{
+          $diagnostico_a_2 = "$diagnostico_a_2, " . $a['Area']['nombre'] . " de tipo ($cadena)";
+        } else {
           $cadena = $this->get_pac_tipos_am($a['Areaampolla']['id']);
           $diagnostico_a_2 = $a['Area']['nombre'] . " de tipo ($cadena)";
         }
