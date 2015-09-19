@@ -62,43 +62,45 @@ class PenfigosController extends AppController {
   public function diagnostico($idPaciente = null, $numero = null) {
     $this->layout = 'ajax';
     $idPenfigo = $this->get_resultado_ex($idPaciente, $numero);
-    $penfigo = $this->Penfigo->find('first', array(
-      'recursive' => -1,
-      'conditions' => array('id' => $idPenfigo),
-      'fields' => array('nombre')
-    ));
     if (!empty($idPenfigo)) {
-      $penfigos['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $idPenfigo);
-      $penfigos['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Mucosas');
-      $penfigos['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Piel');
-      //$penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Mucosas');
-      //$penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Piel');
+      $penfigo = $this->Penfigo->find('first', array(
+        'recursive' => -1,
+        'conditions' => array('id' => $idPenfigo),
+        'fields' => array('nombre')
+      ));
+      if (!empty($idPenfigo)) {
+        $penfigos['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $idPenfigo);
+        $penfigos['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Mucosas');
+        $penfigos['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $idPenfigo, 'Piel');
+        //$penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Mucosas');
+        //$penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $idPenfigo, 'Piel');
 
-      $diagnostico_t = $penfigos['resultado_sintomas'] + $penfigos['resultado_num_ampollas_m'] + $penfigos['resultado_num_ampollas_p'];
-      $penfigos['diagnostico'] = round($diagnostico_t / 3, 2);
-    }
-    $diagnostico_sin_s = $this->get_sint_sis_p($idPaciente, $numero);
-    $diagnostico_amp_m = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
-    $diagnostico_amp_p = $this->get_pac_areas($idPaciente, $numero, 'Piel');
-    $diagnostico_sin_p = $this->get_sint_piel($idPaciente, $numero);
-    if (!empty($diagnostico_amp_m)) {
-      if (!empty($diagnostico_amp_p)) {
-        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m y $diagnostico_amp_p tambien $diagnostico_sin_p";
-      } else {
-        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m tambien $diagnostico_sin_p";
+        $diagnostico_t = $penfigos['resultado_sintomas'] + $penfigos['resultado_num_ampollas_m'] + $penfigos['resultado_num_ampollas_p'];
+        $penfigos['diagnostico'] = round($diagnostico_t / 3, 2);
       }
-    } else {
-      if (!empty($diagnostico_amp_p)) {
-        $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_p tambien $diagnostico_sin_p";
+      $diagnostico_sin_s = $this->get_sint_sis_p($idPaciente, $numero);
+      $diagnostico_amp_m = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
+      $diagnostico_amp_p = $this->get_pac_areas($idPaciente, $numero, 'Piel');
+      $diagnostico_sin_p = $this->get_sint_piel($idPaciente, $numero);
+      if (!empty($diagnostico_amp_m)) {
+        if (!empty($diagnostico_amp_p)) {
+          $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m y $diagnostico_amp_p tambien $diagnostico_sin_p";
+        } else {
+          $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_m tambien $diagnostico_sin_p";
+        }
       } else {
-        $diagnostico = "$diagnostico_sin_s tambien $diagnostico_sin_p";
+        if (!empty($diagnostico_amp_p)) {
+          $diagnostico = "$diagnostico_sin_s ademas; $diagnostico_amp_p tambien $diagnostico_sin_p";
+        } else {
+          $diagnostico = "$diagnostico_sin_s tambien $diagnostico_sin_p";
+        }
       }
     }
     //$diagnostico = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
 
-    debug($diagnostico);
-    exit;
-    $this->set(compact('penfigos', 'penfigo'));
+    /*debug($penfigos);
+    exit;*/
+    $this->set(compact('penfigos', 'penfigo', 'diagnostico','idPenfigo'));
   }
 
   function get_sint_piel($idPaciente, $numero) {
