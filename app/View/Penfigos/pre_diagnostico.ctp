@@ -1,3 +1,4 @@
+<?php if ($verifica):?>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -22,3 +23,4 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php endif;?>

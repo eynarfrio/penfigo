@@ -16,7 +16,7 @@ class PenfigosController extends AppController {
     'PacientesResultado',
     'PacientesSintoma',
     'Areaampolla',
-    'PacientesTipoampolla'
+    'PacientesTipoampolla',
   );
 
   public function index() {
@@ -44,19 +44,46 @@ class PenfigosController extends AppController {
 
   public function pre_diagnostico($idPaciente = null, $numero = null) {
     $this->layout = 'ajax';
-    $penfigos = $this->Penfigo->find('all');
-    foreach ($penfigos as $key => $pen) {
-      $penfigos[$key]['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $pen['Penfigo']['id']);
-      $penfigos[$key]['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
-      $penfigos[$key]['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
-      //$penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
-      //$penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
+    $verifica = $this->verifica_datos_ll($idPaciente, $numero);
+    if ($verifica) {
+      $penfigos = $this->Penfigo->find('all');
+      foreach ($penfigos as $key => $pen) {
+        $penfigos[$key]['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $pen['Penfigo']['id']);
+        $penfigos[$key]['resultado_num_ampollas_m'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
+        $penfigos[$key]['resultado_num_ampollas_p'] = $this->get_num_ampollas($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
+        //$penfigos[$key]['resultado_num_erociones_m'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Mucosas');
+        //$penfigos[$key]['resultado_num_erociones_p'] = $this->get_num_erociones($idPaciente, $numero, $pen['Penfigo']['id'], 'Piel');
 
-      $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'];
-      $penfigos[$key]['diagnostico'] = round($diagnostico_t / 3, 2);
+        $diagnostico_t = $penfigos[$key]['resultado_sintomas'] + $penfigos[$key]['resultado_num_ampollas_m'] + $penfigos[$key]['resultado_num_ampollas_p'];
+        $penfigos[$key]['diagnostico'] = round($diagnostico_t / 3, 2);
+      }
     }
     //debug($penfigos);exit;
-    $this->set(compact('penfigos'));
+    $this->set(compact('penfigos','verifica'));
+  }
+
+  //verifica datos llenos
+  public function verifica_datos_ll($idPaciente = null, $numero = null) {
+    $n_sintomas_pac = $this->PacientesPielsintoma->find('count', array(
+      'recursive' => -1,
+      'conditions' => array(
+        'PacientesPielsintoma.paciente_id' => $idPaciente,
+        'PacientesPielsintoma.numero' => $numero,
+      ),
+    ));
+    $n_amp_muc_pac = $this->Areaampolla->find('count', array(
+      'recursive' => -1,
+      'conditions' => array('paciente_id' => $idPaciente, 'numero' => $numero, 'tipo' => 'Mucosas')
+    ));
+    $n_amp_pie_pac = $this->Areaampolla->find('count', array(
+      'recursive' => -1,
+      'conditions' => array('paciente_id' => $idPaciente, 'numero' => $numero, 'tipo' => 'Piel')
+    ));
+    if ($n_sintomas_pac > 0 && $n_amp_muc_pac > 0 && $n_amp_pie_pac > 0) {
+      return TRUE;
+    } else {
+      return FALSE;
+    }
   }
 
   public function diagnostico($idPaciente = null, $numero = null) {
@@ -66,7 +93,7 @@ class PenfigosController extends AppController {
       $penfigo = $this->Penfigo->find('first', array(
         'recursive' => -1,
         'conditions' => array('id' => $idPenfigo),
-        'fields' => array('nombre')
+        'fields' => array('nombre'),
       ));
       if (!empty($idPenfigo)) {
         $penfigos['resultado_sintomas'] = $this->get_num_sintomas($idPaciente, $numero, $idPenfigo);
@@ -98,9 +125,9 @@ class PenfigosController extends AppController {
     }
     //$diagnostico = $this->get_pac_areas($idPaciente, $numero, 'Mucosas');
 
-    /*debug($penfigos);
-    exit;*/
-    $this->set(compact('penfigos', 'penfigo', 'diagnostico','idPenfigo'));
+    /* debug($penfigos);
+      exit; */
+    $this->set(compact('penfigos', 'penfigo', 'diagnostico', 'idPenfigo'));
   }
 
   function get_sint_piel($idPaciente, $numero) {
@@ -108,7 +135,7 @@ class PenfigosController extends AppController {
     $sintomas = $this->PacientesPielsintoma->find('all', array(
       'recursive' => 0,
       'conditions' => array('PacientesPielsintoma.paciente_id' => $idPaciente, 'PacientesPielsintoma.numero' => $numero, 'PacientesPielsintoma.estado' => 1),
-      'fields' => array('Pielsintoma.nombre')
+      'fields' => array('Pielsintoma.nombre'),
     ));
     foreach ($sintomas as $sin) {
       if (!empty($diagnostico)) {
@@ -129,7 +156,7 @@ class PenfigosController extends AppController {
     $sintomas = $this->PacientesSintoma->find('all', array(
       'recursive' => 0,
       'conditions' => array('PacientesSintoma.paciente_id' => $idPaciente, 'PacientesSintoma.numero' => $numero, 'PacientesSintoma.estado' => 1),
-      'fields' => array('Sintoma.nombre')
+      'fields' => array('Sintoma.nombre'),
     ));
     foreach ($sintomas as $sin) {
       if (!empty($diagnostico)) {
@@ -150,7 +177,7 @@ class PenfigosController extends AppController {
     $array = $this->Areaampolla->find('all', [
       'recursive' => 0,
       'conditions' => ['Areaampolla.paciente_id' => $idPaciente, 'Areaampolla.numero' => $numero, 'Areaampolla.estado' => 1, 'Areaampolla.tipo' => $tipo],
-      'fields' => ['Area.nombre', 'Areaampolla.id', 'Areaampolla.modified']
+      'fields' => ['Area.nombre', 'Areaampolla.id', 'Areaampolla.modified'],
     ]);
     if (!empty($array)) {
       $diagnostico_a = "Se encontro ampollas de $tipo en el area o areas como: ";
@@ -173,7 +200,7 @@ class PenfigosController extends AppController {
     $tipos = $this->PacientesTipoampolla->find('all', [
       'recursive' => 0,
       'conditions' => ['PacientesTipoampolla.areaampolla_id' => $idAreaampolla, 'PacientesTipoampolla.estado' => 1],
-      'fields' => ['Tipoampolla.nombre']
+      'fields' => ['Tipoampolla.nombre'],
     ]);
     $cadena = "";
     foreach ($tipos as $ti) {
@@ -192,7 +219,7 @@ class PenfigosController extends AppController {
     $resultado = $this->PacientesResultado->find('first', array(
       'recursive' => 0,
       'conditions' => array('PacientesResultado.numero' => $numero, 'PacientesResultado.paciente_id' => $idPaciente),
-      'fields' => array('Resultado.penfigo_id')
+      'fields' => array('Resultado.penfigo_id'),
     ));
     if (!empty($resultado)) {
       return $resultado['Resultado']['penfigo_id'];
@@ -208,16 +235,16 @@ class PenfigosController extends AppController {
         'Pielsintoma.nombre' => 'Signo de Nikolsky',
         'PacientesPielsintoma.estado' => 1,
         'PacientesPielsintoma.paciente_id' => $idPaciente,
-        'PacientesPielsintoma.numero' => $numero
+        'PacientesPielsintoma.numero' => $numero,
       ),
-      'fields' => array('PacientesPielsintoma.id')
+      'fields' => array('PacientesPielsintoma.id'),
     ));
     $nro_sint_p = $this->PacientesPielsintoma->find('count', array(
       'recursive' => -1,
       'conditions' => array(
         'PacientesPielsintoma.paciente_id' => $idPaciente,
-        'PacientesPielsintoma.numero' => $numero
-      )
+        'PacientesPielsintoma.numero' => $numero,
+      ),
     ));
     $veri_nikolsky = FALSE;
     if (empty($nikolsky) && $nro_sint_p > 0) {
@@ -230,7 +257,7 @@ class PenfigosController extends AppController {
     $sintomas_i = $this->Penfigosintoma->find('list', array(
       'recursive' => 0,
       'conditions' => array('Penfigosintoma.penfigo_id' => $idPenfigo, 'Penfigosintoma.importancia' => 1),
-      'fields' => 'Penfigosintoma.pielsintoma_id'
+      'fields' => 'Penfigosintoma.pielsintoma_id',
     ));
     $sintomas = $this->Penfigosintoma->find('list', array(
       'recursive' => 0,
@@ -238,10 +265,10 @@ class PenfigosController extends AppController {
         'Penfigosintoma.penfigo_id' => $idPenfigo,
         'OR' => array(
           array('Penfigosintoma.importancia' => NULL),
-          array('Penfigosintoma.importancia' => 0)
-        )
+          array('Penfigosintoma.importancia' => 0),
+        ),
       ),
-      'fields' => 'Penfigosintoma.pielsintoma_id'
+      'fields' => 'Penfigosintoma.pielsintoma_id',
     ));
     $n_sintomas_i = $this->PacientesPielsintoma->find('count', array(
       'recursive' => -1,
@@ -249,8 +276,8 @@ class PenfigosController extends AppController {
         'PacientesPielsintoma.paciente_id' => $idPaciente,
         'PacientesPielsintoma.pielsintoma_id' => $sintomas_i,
         'PacientesPielsintoma.estado' => 1,
-        'PacientesPielsintoma.numero' => $numero
-      )
+        'PacientesPielsintoma.numero' => $numero,
+      ),
     ));
     $n_sintomas = $this->PacientesPielsintoma->find('count', array(
       'recursive' => -1,
@@ -258,8 +285,8 @@ class PenfigosController extends AppController {
         'PacientesPielsintoma.paciente_id' => $idPaciente,
         'PacientesPielsintoma.pielsintoma_id' => $sintomas,
         'PacientesPielsintoma.estado' => 1,
-        'PacientesPielsintoma.numero' => $numero
-      )
+        'PacientesPielsintoma.numero' => $numero,
+      ),
     ));
 
     if (count($sintomas_i) <= count($sintomas)) {
@@ -291,9 +318,9 @@ class PenfigosController extends AppController {
       'conditions' => array(
         'Penfigoampolla.penfigo_id' => $idPenfigo,
         'Penfigoampolla.importancia' => 1,
-        'Area.tipo' => $tipo
+        'Area.tipo' => $tipo,
       ),
-      'fields' => array('Penfigoampolla.area_id', 'Penfigoampolla.tipoampolla_id')
+      'fields' => array('Penfigoampolla.area_id', 'Penfigoampolla.tipoampolla_id'),
     ));
     $array_a_i = array();
     foreach ($ampollas_i as $am) {
@@ -311,10 +338,10 @@ class PenfigosController extends AppController {
         'Area.tipo' => $tipo,
         'OR' => array(
           array('Penfigoampolla.importancia' => NULL),
-          array('Penfigoampolla.importancia' => 0)
-        )
+          array('Penfigoampolla.importancia' => 0),
+        ),
       ),
-      'fields' => array('Penfigoampolla.area_id', 'Penfigoampolla.tipoampolla_id')
+      'fields' => array('Penfigoampolla.area_id', 'Penfigoampolla.tipoampolla_id'),
     ));
     $array_a = array();
     foreach ($ampollas as $am) {
@@ -328,7 +355,7 @@ class PenfigosController extends AppController {
     if (!empty($array_a_i)) {
       $n_ampolla_i = $this->PacientesTipoampolla->find('count', array(
         'recursive' => 0,
-        'conditions' => $array_a_i
+        'conditions' => $array_a_i,
       ));
     } else {
       $n_ampolla_i = 0;
@@ -337,13 +364,14 @@ class PenfigosController extends AppController {
     if (!empty($array_a)) {
       $n_ampolla = $this->PacientesTipoampolla->find('count', array(
         'recursive' => 0,
-        'conditions' => $array_a
+        'conditions' => $array_a,
       ));
     } else {
       $n_ampolla = 0;
     }
-
-    /* debug($n_ampolla);
+    /* debug(count($ampollas_i));
+      debug(count($ampollas));
+      debug($n_ampolla);
       debug($n_ampolla_i);
       exit; */
     if (count($ampollas_i) <= count($ampollas)) {
@@ -375,9 +403,9 @@ class PenfigosController extends AppController {
       'conditions' => array(
         'Penfigoerocione.penfigo_id' => $idPenfigo,
         'Penfigoerocione.importancia' => 1,
-        'Area.tipo' => $tipo
+        'Area.tipo' => $tipo,
       ),
-      'fields' => array('Penfigoerocione.area_id', 'Penfigoerocione.tipoerocione_id')
+      'fields' => array('Penfigoerocione.area_id', 'Penfigoerocione.tipoerocione_id'),
     ));
     $array_a_i = array();
     foreach ($erociones_i as $am) {
@@ -395,10 +423,10 @@ class PenfigosController extends AppController {
         'Area.tipo' => $tipo,
         'OR' => array(
           array('Penfigoerocione.importancia' => NULL),
-          array('Penfigoerocione.importancia' => 0)
-        )
+          array('Penfigoerocione.importancia' => 0),
+        ),
       ),
-      'fields' => array('Penfigoerocione.area_id', 'Penfigoerocione.tipoerocione_id')
+      'fields' => array('Penfigoerocione.area_id', 'Penfigoerocione.tipoerocione_id'),
     ));
     $array_a = array();
     foreach ($erociones as $am) {
@@ -412,7 +440,7 @@ class PenfigosController extends AppController {
     if (!empty($array_a_i)) {
       $n_erocion_i = $this->PacientesTipoerocione->find('count', array(
         'recursive' => 0,
-        'conditions' => $array_a_i
+        'conditions' => $array_a_i,
       ));
     } else {
       $n_erocion_i = 0;
@@ -421,7 +449,7 @@ class PenfigosController extends AppController {
     if (!empty($array_a)) {
       $n_erocion = $this->PacientesTipoerocione->find('count', array(
         'recursive' => 0,
-        'conditions' => $array_a
+        'conditions' => $array_a,
       ));
     } else {
       $n_erocion = 0;
