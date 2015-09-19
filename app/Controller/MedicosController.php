@@ -39,8 +39,8 @@ class MedicosController extends AppController {
 		$this->redirect(array('action' => 'ver', $this->Session->read('Auth.User.id')));
 	}
 
-	public function ver($idMedico = null) {
-		$medico = $this->Medico->findByid($idMedico, null, null, -1);
+	public function ver($idUser = null) {
+		$medico = $this->Medico->findByuser_id($idUser, null, null, -1);
 		/*debug($medico);
 		exit;*/
 		$this->set(compact('medico'));

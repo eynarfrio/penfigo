@@ -41,7 +41,7 @@
                           <td class="hidden-xs"><?php echo $me['Medico']['telefonos']; ?></td>
                           <td class="hidden-xs"><?php echo $me['Medico']['tipo_medico']; ?></td>
                           <td>
-                              <?= $this->Html->link('<i class="fa fa-eye"></i>', ['action' => 'ver', $me['Medico']['id']], array('class' => 'btn btn-primary btn-flat', 'escape' => false, 'title' => 'Datos del Medico')) ?>
+                              <?= $this->Html->link('<i class="fa fa-eye"></i>', ['action' => 'ver', $me['Medico']['user_id']], array('class' => 'btn btn-primary btn-flat', 'escape' => false, 'title' => 'Datos del Medico')) ?>
                               <?= $this->Html->link('<i class="fa fa-edit"></i>', ['action' => 'medico', $me['Medico']['id']], array('class' => 'btn btn-warning btn-flat', 'escape' => false, 'title' => 'Modificar Medico')) ?>
                               <?= $this->Html->link('<i class="fa fa-trash"></i>', ['action' => 'eliminar', $me['Medico']['id']], array('class' => 'btn btn-danger btn-flat', 'escape' => false, 'title' => 'Eliminar Medico','confirm' => 'Esta seguro de eliminar al medico??')) ?>
                           </td>
