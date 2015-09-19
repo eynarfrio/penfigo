@@ -53,7 +53,7 @@
                                 ?>
                             </th>
                             <th>
-                                eliminar
+                                eliminar<?php echo $this->Html->link('Eliminar',array('action' => 'delete',$pam['Penfigoampolla']['id']),array('confirm' => 'Esta seguro de eliminar '.$pam['Tipoampolla']['nombre']))?>
                             </th>
                         </tr>
                     <?php endforeach; ?>

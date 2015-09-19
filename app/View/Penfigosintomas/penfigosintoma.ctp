@@ -41,7 +41,7 @@
                               ?>
                           </th>
                           <th>
-                              eliminar
+                              Eliminar <?php echo $this->Html->link('Eliminar',array('action' => 'delete',$psi['Penfigosintoma']['id']),array('confirm' => 'Esta seguro de eliminar'.$psi['Pielsintoma']['nombre']))?>
                           </th>
                       </tr>
                     <?php endforeach; ?>
