@@ -44,7 +44,7 @@
                     <?php foreach ($pampolla as $pam): ?>
                         <tr>
                             <th><?php echo $pam['Area']['nombre'] ?></th>
-                            <th><?php echo $pam['Tipoampolla']['nombre']?></th>
+                            <th><?php echo $pam['Tipoampolla']['nombre'].' ('.$pam['Tipoampolla']['tipo'].')'?></th>
                             <th>
                                 <?php
                                 if ($pam['Penfigoampolla']['importancia']) {
