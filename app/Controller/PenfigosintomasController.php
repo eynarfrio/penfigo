@@ -32,5 +32,10 @@ class PenfigosintomasController extends AppController {
     }
     exit;
   }
+  
+  public function elimina($idPenfigo = NULL,$idpsin = null){
+    $this->Penfigosintoma->delete($idpsin);
+    $this->redirect(array('action' => 'penfigosintoma',$idPenfigo));
+  }
 
 }

@@ -6,7 +6,7 @@
                     <h3 class="box-title">Infomacion de Medico</h3>
                     <div class="box-tools pull-right">
                         <?php if ($this->Session->read('Auth.User.id') == $medico['Medico']['user_id']): ?>
-                          <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']) ?>'"><i class="fa fa-edit"></i></button>
+                          <button class="btn btn-box-tool" title="Editar" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']) ?>'"><i class="fa fa-edit"></i></button>
                         <?php endif; ?>
                     </div>
                 </div>

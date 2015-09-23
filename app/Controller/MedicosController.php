@@ -39,8 +39,8 @@ class MedicosController extends AppController {
 		$this->redirect(array('action' => 'ver', $this->Session->read('Auth.User.id')));
 	}
 
-	public function ver($idMedico = null) {
-		$medico = $this->Medico->findByid($idMedico, null, null, -1);
+	public function ver($idUser = null) {
+		$medico = $this->Medico->findByuser_id($idUser, null, null, -1);
 		/*debug($medico);
 		exit;*/
 		$this->set(compact('medico'));
@@ -72,11 +72,20 @@ class MedicosController extends AppController {
 	public function registra_medico2() {
 		//debug($this->request->data);exit;
 		if (!empty($this->request->data['User']['password2'])) {
-			$this->request->data['User']['password'];
+			$this->request->data['User']['password'] = $this->request->data['User']['password2'];
 		}
 		$this->request->data['User']['username'] = $this->request->data['Medico']['ci'];
-		$this->User->id = $this->request->data['User']['id'];
+		$this->request->data['User']['role'] = $this->request->data['Medico']['tipo_medico'];
+
+		$this->User->create();
 		$this->User->save($this->request->data['User']);
+		if (empty($this->request->data['User']['id'])) {
+			$idUser = $this->User->getLastInsertID();
+		} else {
+			$idUser = $this->request->data['User']['id'];
+		}
+
+		$this->request->data['Medico']['user_id'] = $idUser;
 		$this->Medico->create();
 		$this->Medico->save($this->request->data['Medico']);
 		$this->Session->setFlash("Se registro correctamente!!!", 'msgbueno');

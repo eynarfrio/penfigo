@@ -53,7 +53,7 @@
                                 ?>
                             </th>
                             <th>
-                                eliminar
+                                <a href="javascript:" class="label label-danger" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'elimina', $idPenfigo,$pam['Penfigoampolla']['id'])); ?>');">Eliminar</a>
                             </th>
                         </tr>
                     <?php endforeach; ?>
