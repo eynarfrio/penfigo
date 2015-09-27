@@ -14,17 +14,23 @@
                         <th>Estado</th>
                     </tr>
                     <?php foreach ($sintomas as $key => $sin): ?>
-                      <?php if ($sin['Sintoma']['nombre'] != 'Ampollas'): ?>
+                      <?php if ($sin['Sintoma']['nombre'] == 'Ampollas'): ?>
                         <tr>
-                            <td><?= $sin['Sintoma']['nombre'] ?></td>
-                            <td class="text-center">
-                                <?= $this->Form->hidden("PacientesSintoma.$key.id") ?>
-                                <?= $this->Form->hidden("PacientesSintoma.$key.paciente_id", ['value' => $idPaciente]) ?>
-                                <?= $this->Form->hidden("PacientesSintoma.$key.sintoma_id", ['value' => $sin['Sintoma']['id']]) ?>
-                                <?= $this->Form->checkbox("PacientesSintoma.$key.estado", ['class' => 'flat-red']) ?>
+                            <td colspan="2" class="text-center">
+                                <span style="font-size: 18px; font-weight: bold;">Signo Cardinal y/o Prefecto</span>
                             </td>
                         </tr>
                       <?php endif; ?>
+                      <tr>
+                          <td><?= $sin['Sintoma']['nombre'] ?></td>
+                          <td class="text-center">
+                              <?= $this->Form->hidden("PacientesSintoma.$key.id") ?>
+                              <?= $this->Form->hidden("PacientesSintoma.$key.paciente_id", ['value' => $idPaciente]) ?>
+                              <?= $this->Form->hidden("PacientesSintoma.$key.sintoma_id", ['value' => $sin['Sintoma']['id']]) ?>
+                              <?= $this->Form->checkbox("PacientesSintoma.$key.estado", ['class' => 'flat-red']) ?>
+                          </td>
+                      </tr>
+
                     <?php endforeach; ?>
                 </thead>
             </table>

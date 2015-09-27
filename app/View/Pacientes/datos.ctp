@@ -138,41 +138,7 @@
             </div>
         </div>
     </div>
-    <?php
-    $est_ampollas = $this->requestAction(array('controller' => 'Sintomas', 'action' => 'get_ult_ampollas', $idPaciente))
-    ?>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-primary">
-                
-                <h4 class="box-title text-center">Signo Cardinal y/o Prefecto</h4>
-                <div class="box-body">
-                    <div class="form-group">
-                        <label style="font-size: 16px;">
-                            <?php
-                            $check_amp = '';
-                            if ($est_ampollas) {
-                              $check_amp = 'checked';
-                            }
-                            ?>
-                            <?= $this->Form->checkbox("PacientesSintoma.estado", ['class' => '', 'id' => 'check-c-ampollas', $check_amp]) ?>
-                            &nbsp;&nbsp;&nbsp;El Paciente presenta actualmente ampollas en areas o alguna region en el cuerpo
-                        </label>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    <script>
-      $('#check-c-ampollas').click(function () {
-          if ($('#check-c-ampollas').prop('checked')) {
-              window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas', 'action' => 'guarda_ult_ampollas', $idPaciente, 1)); ?>';
-          } else {
-              window.location.href = '<?php echo $this->Html->url(array('controller' => 'Sintomas', 'action' => 'guarda_ult_ampollas', $idPaciente, 0)); ?>';
-          }
-      });
-    </script>
+
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
@@ -184,8 +150,8 @@
                         <?php if (!empty($num_sin)): ?>
                           <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'ajax_sintomas', $idPaciente, $num_sin]) ?>');"><i class="fa fa-edit"></i></button> 
                           <button class="btn btn-box-tool" title="Eliminar" onclick="if (confirm('Esta seguro de eliminar los sintomas??')) {
-                                    window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
-                                }"><i class="fa fa-remove"></i></button> 
+                                      window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
+                                  }"><i class="fa fa-remove"></i></button> 
                                 <?php endif; ?>
 
                     </div>
@@ -202,20 +168,26 @@
                         </thead>
                         <tbody>
                             <?php foreach ($sintomas as $key => $sin): ?>
-                              <?php if ($sin['Sintoma']['nombre'] != 'Ampollas'): ?>
+                              <?php if ($sin['Sintoma']['nombre'] == 'Ampollas'): ?>
                                 <tr>
-                                    <td class="hidden-xs"><?= ($key + 1) ?></td>
-                                    <td><?= $sin['Sintoma']['nombre'] ?></td>
-                                    <td><?php
-                                        if ($sin['PacientesSintoma']['estado']) {
-                                          echo '<span class="label label-primary">Si</span>';
-                                        } else {
-                                          echo 'No';
-                                        }
-                                        ?></td>
-                                    <td><?= $sin['PacientesSintoma']['modified'] ?></td>
+                                    <td class="text-center" colspan="4">
+                                        <span style="font-size: 18px;">Signo Cardinal y/o Prefecto</span>
+                                    </td>
                                 </tr>
                               <?php endif; ?>
+                              <tr>
+                                  <td class="hidden-xs"><?= ($key + 1) ?></td>
+                                  <td><?= $sin['Sintoma']['nombre'] ?></td>
+                                  <td><?php
+                                      if ($sin['PacientesSintoma']['estado']) {
+                                        echo '<span class="label label-primary">Si</span>';
+                                      } else {
+                                        echo 'No';
+                                      }
+                                      ?>
+                                  </td>
+                                  <td><?= $sin['PacientesSintoma']['modified'] ?></td>
+                              </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

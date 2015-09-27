@@ -28,6 +28,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    <?php echo $this->Form->textarea('tratamiento', ['class' => 'form-control', 'placeholder' => 'Ingrese tratamiento','rows' => 5]); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
                     No es penfigo 
                     <?php echo $this->Form->checkbox('no_penfigo'); ?>
                 </div>

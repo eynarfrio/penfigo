@@ -20,18 +20,22 @@
                       <?php endif; ?>
                   </p>
                   <?php if ($penfigo['Penfigo']['nombre'] == 1): ?>
-                  <div class="row hidden-xs">
-                      <div class="col-md-2">
-                        
-                      </div>
-                      <div class="col-md-8" align="center">
-                        <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="530px;" width="100%">
-                      </div>
-                      <div class="col-md-2">
-                        
-                      </div>
+                    <div class="row hidden-xs">
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-8" align="center">
+                            <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="530px;" width="100%">
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
                     </div>
                   <?php endif; ?>
+                  <h3 class="text-center text-success">TRATAMIENTO</h3>
+                  <p style="font-style: italic;font-size: 16px;">
+                      <?php echo $penfigo['Penfigo']['tratamiento']; ?>
+                  </p>
               </div>
           </div>
       </div>
