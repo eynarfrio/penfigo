@@ -34,10 +34,20 @@
                   <?php endif; ?>
                   <h3 class="text-center text-success">TRATAMIENTO</h3>
                   <p style="font-style: italic;font-size: 16px;">
-                      <?php echo $penfigo['Penfigo']['tratamiento']; ?>
+                      <?php
+                      $tratamiento = $this->requestAction(array('controller' => 'Tratamientos', 'action' => 'get_trat_pac',$idPaciente,$numero));
+                      if (!empty($tratamiento)) {
+                        echo $tratamiento['Tratamiento']['descripcion'];
+                      } else {
+                        echo $penfigo['Penfigo']['tratamiento'];
+                      }
+                      ?>
                   </p>
               </div>
           </div>
       </div>
   </div>
+  <script>
+    $('#b-edit-trat').show(400);
+  </script>
 <?php endif; ?>

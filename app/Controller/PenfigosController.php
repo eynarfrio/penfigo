@@ -128,7 +128,7 @@ class PenfigosController extends AppController {
 
     /* debug($penfigo);
       exit; */
-    $this->set(compact('penfigos', 'penfigo', 'diagnostico', 'idPenfigo'));
+    $this->set(compact('penfigos', 'penfigo', 'diagnostico', 'idPenfigo','idPaciente','numero'));
   }
 
   function get_sint_piel($idPaciente, $numero) {
