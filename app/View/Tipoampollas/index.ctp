@@ -18,7 +18,7 @@
                                 <th>Descripcion</th>
                                 <th>Imagen</th>
                                 <th>Tipo</th>
-                                <th>Acciones</th>
+                              <!--  <th>Acciones</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -35,12 +35,12 @@
                                       <?php endif; ?> 
                                   </td>
                                   <td><?php echo $tam['Tipoampolla']['tipo'] ?></td>
-                                  <td>
+                                 <!-- <td>
                                       <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'tipoampolla', $tam['Tipoampolla']['id'])); ?>');" class="btn btn-info" ><i class="glyphicon glyphicon-edit icon-white"></i>Editar</a>
                                       <a href="javascript:" class="btn btn-danger" onclick="if (confirm('Esta seguro de eliminar <?php echo $tam['Tipoampolla']['nombre'] ?>??')) {
                                                   window.location = '<?php echo $this->Html->url(array('action' => 'delete', $tam['Tipoampolla']['id'])); ?>';
                                               }"><i class="glyphicon glyphicon-trash icon-white"></i>Eliminar</a>
-                                  </td>
+                                  </td>-->
                               </tr>
                             <?php endforeach; ?>
                         </tbody>

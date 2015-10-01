@@ -17,7 +17,7 @@
                                 <th>Penfigo</th>
                                 <th>Examen</th>
                                 <th>Descripcion</th>
-                                <th>Acciones</th>
+                               <!-- <th>Acciones</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -27,12 +27,12 @@
                                     <td><?php echo $res['Penfigo']['nombre']; ?></td>
                                     <td><?php echo $res['Examene']['nombre']; ?></td>
                                     <td><?php echo $res['Resultado']['descripcion']; ?></td>      
-                                    <td>
+                                    <!--<td>
                                         <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'resultado', $res['Resultado']['id'])); ?>');" class="btn btn-info" ><i class="glyphicon glyphicon-edit icon-white"></i>Editar</a>
                                         <a href="javascript:" class="btn btn-danger" onclick="if (confirm('Esta seguro de eliminar <?php echo $res['Resultado']['id'] ?>??')) {
                                                     window.location = '<?php echo $this->Html->url(array('action' => 'delete', $res['Resultado']['id'])); ?>';
                                                 }"><i class="glyphicon glyphicon-trash icon-white"></i>Eliminar</a>
-                                    </td>
+                                    </td>-->
                                 </tr>
 <?php endforeach; ?>
                         </tbody>

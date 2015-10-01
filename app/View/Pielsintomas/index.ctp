@@ -17,7 +17,7 @@
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
                                 <th>Imagen</th>
-                                <th>Acciones</th>
+                               <!-- <th>Acciones</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -33,12 +33,12 @@
                                             <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="75px" width="75px">
                                         <?php endif; ?> 
                                     </td>     
-                                    <td>
+                                   <!-- <td>
                                         <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'pielsintoma', $psin['Pielsintoma']['id'])); ?>');" class="btn btn-info" ><i class="glyphicon glyphicon-edit icon-white"></i>Editar</a>
                                         <a href="javascript:" class="btn btn-danger" onclick="if (confirm('Esta seguro de eliminar <?php echo $psin['Pielsintoma']['nombre'] ?>??')) {
                                                     window.location = '<?php echo $this->Html->url(array('action' => 'delete', $psin['Pielsintoma']['id'])); ?>';
                                                 }"><i class="glyphicon glyphicon-trash icon-white"></i>Eliminar</a>
-                                    </td>
+                                    </td>-->
                                 </tr>
 <?php endforeach; ?>
                         </tbody>

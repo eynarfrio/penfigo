@@ -50,7 +50,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Sintomas', 'action' => 'lista']); ?>"><i class="fa fa-circle-o"></i> Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Sintomas', 'action' => 'sintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>         
+                <!--<li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Sintomas', 'action' => 'sintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Lugar</a></li>  -->       
             </ul>
         </li>
         <li class="treeview">
@@ -60,7 +60,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Pielsintomas', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Pielsintomas', 'action' => 'pielsintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Sintoma en la Piel</a></li>  
+                <!--<li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Pielsintomas', 'action' => 'pielsintoma')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Sintoma en la Piel</a></li> --> 
             </ul>
         </li>
         <li class="treeview">
@@ -70,7 +70,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Tipoampollas', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoampollas', 'action' => 'tipoampolla')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Ampolla</a></li>  
+                <!--<li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tipoampollas', 'action' => 'tipoampolla')) ?>');"><i class="fa fa-circle-o"></i>Nuevo Tipo de Ampolla</a></li> -->
             </ul>
         </li>
         <li class="treeview">
@@ -80,7 +80,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Penfigos', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Penfigos', 'action' => 'penfigo']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+               <!-- <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Penfigos', 'action' => 'penfigo']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>-->
             </ul>
         </li>
         <li class="treeview">
@@ -90,7 +90,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Areas', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Areas', 'action' => 'area']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+                <!--<li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Areas', 'action' => 'area']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>-->
             </ul>
         </li>
         <li class="treeview">
@@ -100,7 +100,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Signos', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Signos', 'action' => 'signo']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+               <!-- <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Signos', 'action' => 'signo']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>-->
             </ul>
         </li>
         <li class="treeview">
@@ -110,7 +110,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Laboratorios', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Laboratorios', 'action' => 'laboratorio']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+              <!--  <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Laboratorios', 'action' => 'laboratorio']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>-->
             </ul>
         </li>
         <li class="treeview">
@@ -120,7 +120,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Resultados', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Resultados', 'action' => 'resultado']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+               <!-- <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Resultados', 'action' => 'resultado']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>-->
             </ul>
         </li>
         <li class="treeview">
@@ -130,7 +130,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $this->Html->url(['controller' => 'Examenes', 'action' => 'index']); ?>"><i class="fa fa-circle-o"></i>Listado</a></li>
-                <li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Examenes', 'action' => 'examen']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+                <!--<li><a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(['controller' => 'Examenes', 'action' => 'examen']); ?>');"><i class="fa fa-circle-o"></i>Nuevo</a></li>-->
             </ul>
         </li>
     </ul>
