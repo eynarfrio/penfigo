@@ -19,7 +19,7 @@
                         <span class="text-aqua" style="font-size: 19px;font-weight: bold;"><?php echo $penfigo['Penfigo']['nombre']; ?></span>
                       <?php endif; ?>
                   </p>
-                  <?php if ($penfigo['Penfigo']['nombre'] == 1): ?>
+                  <?php if ($penfigo['Penfigo']['nombre'] == 'Penfigoide'): ?>
                     <div class="row hidden-xs">
                         <div class="col-md-2">
 
