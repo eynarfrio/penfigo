@@ -11,17 +11,17 @@
         <ul class="nav navbar-nav">
 
             <li class="dropdown tasks-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-wheelchair"></i>
-                    <span class="label label-danger">9</span>
+               <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+                    <!--<i class="fa fa-wheelchair"></i>-->
+                    <!--<span class="label label-danger">9</span>-->
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="header">You have 9 tasks</li>
+                    <!--<li class="header">You have 9 tasks</li>-->
                     <li>
                         <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                            <li><!-- Task item -->
-                                <a href="#">
+                      <!--  <ul class="menu">-->
+                           <!-- <li><!-- Task item -->
+                               <!-- <a href="#">
                                     <h3>
                                         Design some buttons
                                         <small class="pull-right">20%</small>
@@ -33,7 +33,7 @@
                                     </div>
                                 </a>
                             </li><!-- end task item -->
-                        </ul>
+                      <!--  </ul>-->
                     </li>
                     <li class="footer">
                         <a href="#">View all tasks</a>

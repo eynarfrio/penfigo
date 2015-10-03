@@ -30,19 +30,14 @@
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <?php echo $this->Form->select('sexo', ['Masculino' => 'Masculino', 'Femenino' => 'Femenino'], ['class' => 'form-control', 'empty' => 'Seleccione el Sexo','required']); ?>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <?php echo $this->Form->text('fecha_nacimiento', ['class' => 'form-control fecha-mask', 'placeholder' => 'Fecha de nacimiento','required']); ?>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <?php echo $this->Form->file('dimagen',['class'=>'form-control','placeholder'=>'Elegir una imagen de perfil de paciente']);?>
                         </div>
                     </div>
                 </div>

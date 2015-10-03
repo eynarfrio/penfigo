@@ -8,11 +8,7 @@
                     <h3 class="box-title">Paciente</h3>
                 </div>
                 <div class="box-body" align="center">         
-                    <?php if (!empty($pacientes['Paciente']['imagen'])): ?>
-                      <img src="<?php echo $this->webroot; ?>imagenes/<?php echo $pacientes['Paciente']['imagen']; ?>" height="112px" width="120px">
-                    <?php else: ?>
                       <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="112px" width="120px">
-                    <?php endif; ?> 
                 </div>
             </div>
         </div>

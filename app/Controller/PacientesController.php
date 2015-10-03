@@ -40,64 +40,29 @@ class PacientesController extends AppController {
     }
 
     public function paciente($idPaciente = null) {
-        if (!empty($this->request->data)) {
-            /* debug($this->request->data);
-              exit; */
-            App::uses('String', 'Utility');
-            $dato = $this->request->data;
-            $archivo = $this->request->data['Paciente']['dimagen'];
-            if (!empty($this->request->data['Paciente']['dimagen']['name'])) {
-                if ($archivo['error'] === UPLOAD_ERR_OK) {
-                    if ($archivo['type'] == 'image/jpeg') {
-                        $nombre = String::uuid();
-                        if (move_uploaded_file($archivo['tmp_name'], WWW_ROOT . 'imagenes' . DS . $nombre . '.jpg')) {
-                            $nombre_imagen = $nombre . '.jpg';
-
-                            $this->Paciente->create();
-                            $this->request->data['Paciente']['imagen'] = $nombre_imagen;
-                            $this->Paciente->save($this->request->data['Paciente']);
-                            if (!empty($this->request->data['Paciente']['id'])) {
-                                $idPaciente = $this->request->data['Paciente']['id'];
-                            } else {
-                                $idPaciente = $this->Paciente->getLastInsertID();
-                            }
-                            $this->Session->setFlash('Se registro correctamente', 'msgbueno');
-                            $this->redirect(array('action' => 'index'));
-                        }
-                    } else {
-                        $this->Session->setFlash("La imagen debe de ser formato jpeg o jpg", 'msgerror');
-                        $this->redirect($this->referer());
-                    }
-                } else {
-                    $this->Session->setFlash("Ocurrio un error intente nuevamente", 'msgerror');
-                    $this->redirect($this->referer());
-                }
-            } else {
-                $this->Paciente->create();
-                $this->Paciente->save($dato['Paciente']);
-                if (empty($dato['Paciente']['id'])) {
-                    //debug($dato['Paciente']['id']);exit;
-                    $idPaciente = $this->Paciente->getLastInsertID();
-                    $this->genera_med_pac($idPaciente);
-                } else {
-                    $idPaciente = $dato['Paciente']['id'];
-                }
-                $this->Session->setFlash('Se registro correctamente el paciente!!!', 'msgbueno');
-                $this->redirect(['action' => 'datos', $idPaciente]);
-            }
-        }
-        $this->Paciente->id = $idPaciente;
-        $this->request->data = $this->Paciente->read();
-        /* debug($this->request->data);
-          exit; */
-         $pacientes = $this->Paciente->find('first', [
-            'recursive' => 0,
-            'order' => ['Paciente.imagen']
-        ]);
-        $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);
-        $this->set(compact('lugares','pacientes'));
-        
+    if (!empty($this->request->data)) {
+       /*debug($this->request->data);
+        exit; */
+      $dato = $this->request->data;
+      $this->Paciente->create();
+      $this->Paciente->save($dato['Paciente']);
+      if (empty($dato['Paciente']['id'])) {
+        //debug($dato['Paciente']['id']);exit;
+        $idPaciente = $this->Paciente->getLastInsertID();
+        $this->genera_med_pac($idPaciente);
+      }else{
+        $idPaciente = $dato['Paciente']['id'];
+      }
+      $this->Session->setFlash('Se registro correctamente el paciente!!!', 'msgbueno');
+      $this->redirect(['action' => 'datos', $idPaciente]);
     }
+    $this->Paciente->id = $idPaciente;
+    $this->request->data = $this->Paciente->read();
+    /*debug($this->request->data);
+    exit;*/
+    $lugares = $this->Lugare->find('list', ['fields' => ['nombre', 'nombre']]);
+    $this->set(compact('lugares'));
+  }
 
     public function genera_med_pac($idPaciente = null) {
         $this->PacientesMedico->create();
