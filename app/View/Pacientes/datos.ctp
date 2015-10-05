@@ -403,7 +403,7 @@
                                     <th class="hidden-xs">Nro</th>
                                     <th>Examen</th>
                                     <th class="hidden-xs">Resultado</th>
-                                    <td>Penfigo</td>
+                                    <th class="hidden-xs">Penfigo</th>
                                     <th class="hidden-xs">Observacion</th>
                                     <th>Accion</th>
                                 </tr>
