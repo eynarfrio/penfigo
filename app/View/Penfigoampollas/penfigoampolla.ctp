@@ -7,7 +7,7 @@
     <?php echo $this->Form->create('Penfigoampolla', ['action' => "registra/$idPenfigo", 'id' => 'ajaxform']) ?>
     <?php echo $this->Form->hidden('penfigo_id', array('value' => $idPenfigo)); ?>
     <div class="form-group">
-        <div class="row">
+       <!-- <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <?php echo $this->Form->select('area_id', $arampollas, array('class' => 'form-control', 'empty' => 'Seleccione area', 'required')); ?>
@@ -23,17 +23,17 @@
                     <?php echo $this->Form->select('importancia', array(1 => 'Importante'), array('class' => 'form-control')); ?>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="row">
             <div class="col-md-4 text-right">
             </div>
             <div class="col-md-4 text-right">
             </div>
-            <div class="col-md-4 text-right">
+            <!--<div class="col-md-4 text-right">
                 <div class="form-group">
                     <button type="submit" class="btn btn-outline col-md-12">Registrar</button>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <?php echo $this->Form->end() ?>
@@ -45,7 +45,7 @@
                         <tr>
                             <th><?php echo $pam['Area']['nombre'] ?></th>
                             <th><?php echo $pam['Tipoampolla']['nombre'].' ('.$pam['Tipoampolla']['tipo'].')'?></th>
-                            <th>
+                          <!--  <th>
                                 <?php
                                 if ($pam['Penfigoampolla']['importancia']) {
                                     echo 'Importante';
@@ -54,7 +54,7 @@
                             </th>
                             <th>
                                 <a href="javascript:" class="label label-danger" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'elimina', $idPenfigo,$pam['Penfigoampolla']['id'])); ?>');">Eliminar</a>
-                            </th>
+                            </th>-->
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

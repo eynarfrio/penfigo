@@ -6,7 +6,7 @@
                     <h3 class="box-title">Infomacion de Medico</h3>
                     <div class="box-tools pull-right">
                         <?php if ($this->Session->read('Auth.User.id') == $medico['Medico']['user_id']): ?>
-                          <button class="btn btn-box-tool" title="Editar" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']) ?>'"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-box-tool" title="Editar" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']) ?>'"><i class="fa fa-edit"></i></button>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -14,10 +14,10 @@
                     <div class="row">
                         <div class="col-md-4" align="center">
                             <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
-                            <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="112px" width="40%">
-                            <?php else:?>
-                            <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="112px" width="40%">
-                            <?php endif;?>
+                                <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="112px" width="40%">
+                            <?php else: ?>
+                                <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="112px" width="40%">
+                            <?php endif; ?>
                         </div>
                         <div class="col-md-8">
                             <table class="table table-bordered">
@@ -45,6 +45,12 @@
                                         <td><?= $medico['Medico']['lugar'] ?></td>
                                         <td class="text-light-blue hidden-xs" style="font-weight: bold;">Fecha Nacimiento</td>
                                         <td><?= $medico['Medico']['fecha_nacimiento'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-light-blue hidden-xs" style="font-weight: bold;">Matricula Colegio de Medicos</td>
+                                        <td><?= $medico['Medico']['mat_colegio'] ?></td>
+                                        <td class="text-light-blue hidden-xs" style="font-weight: bold;">Matricula Ministerio de Salud</td>
+                                        <td><?= $medico['Medico']['mat_ministerio'] ?></td>
                                     </tr>
                                 </tbody>
                             </table>

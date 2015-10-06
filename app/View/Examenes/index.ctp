@@ -15,7 +15,7 @@
                                 <th class="hidden-xs">Id</th>
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
-                                <th>Acciones</th>
+                                <!--<th>Acciones</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -24,12 +24,12 @@
                                     <td class="hidden-xs"><?php echo $ex['Examene']['id']; ?></td>
                                     <td><?php echo $ex['Examene']['nombre']; ?></td>
                                     <td><?php echo $ex['Examene']['descripcion']; ?></td>      
-                                    <td>
+                                   <!-- <td>
                                         <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'examen', $ex['Examene']['id'])); ?>');" class="btn btn-info" ><i class="glyphicon glyphicon-edit icon-white"></i>Editar</a>
                                         <a href="javascript:" class="btn btn-danger" onclick="if (confirm('Esta seguro de eliminar <?php echo $ex['Examene']['id'] ?>??')) {
                                                     window.location = '<?php echo $this->Html->url(array('action' => 'delete', $ex['Examene']['id'])); ?>';
                                                 }"><i class="glyphicon glyphicon-trash icon-white"></i>Eliminar</a>
-                                    </td>
+                                    </td>-->
                                 </tr>
 <?php endforeach; ?>
                         </tbody>

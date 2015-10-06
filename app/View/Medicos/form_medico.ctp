@@ -52,6 +52,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <?php echo $this->Form->text('Medico.mat_colegio', ['class' => 'form-control', 'placeholder' => 'Matricula Colegio de medicos', 'required', 'data-inputmask' => '"mask": "#-9999"', 'data-mask']); ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <?php echo $this->Form->text('Medico.mat_ministerio', ['class' => 'form-control', 'placeholder' => 'Matricula del ministerio de salud', 'required', 'data-inputmask' => '"mask": "#-9999"', 'data-mask']); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <?php echo $this->Form->select('Medico.tipo_medico', ['Medico General' => 'Medico General', 'Dermatologo' => 'Dermatologo'], ['class' => 'form-control', 'empty' => 'Seleccione Tipo Medico', 'required']); ?>
                             </div>
                         </div>
@@ -83,3 +95,13 @@
         </div>
     </div>
 </section>
+
+<?php 
+echo $this->Html->script(array(
+  '../plugins/iCheck/icheck.min',
+  '../plugins/input-mask/jquery.inputmask',
+  '../plugins/input-mask/jquery.inputmask.date.extensions',
+  '../plugins/input-mask/jquery.inputmask.extensions',
+  'inimask'
+), array('block' => 'addscript'))
+?>

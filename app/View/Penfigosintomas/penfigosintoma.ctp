@@ -6,7 +6,7 @@
 <div class="modal-body">
     <?php echo $this->Form->create('Penfigosintoma', ['action' => "registra/$idPenfigo", 'id' => 'ajaxform']) ?>
     <?php echo $this->Form->hidden('penfigo_id', array('value' => $idPenfigo)); ?>
-    <div class="form-group">
+   <!-- <div class="form-group">
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <?php echo $this->Form->end() ?>
     <div class="row">
         <div class="col-md-12">
@@ -33,16 +33,16 @@
                     <?php foreach ($psintomas as $psi): ?>
                       <tr>
                           <th><?php echo $psi['Pielsintoma']['nombre'] ?></th>
-                          <th>
+                         <th>
                               <?php
                               if ($psi['Penfigosintoma']['importancia']) {
                                 echo 'Importante';
                               }
                               ?>
                           </th>
-                          <th>
+                         <!-- <th>
                               <a href="javascript:" class="label label-danger" onclick="cargarmodal('<?php echo $this->Html->url(array('action' => 'elimina', $idPenfigo,$psi['Penfigosintoma']['id'])); ?>');">Eliminar</a>
-                          </th>
+                          </th>-->
                       </tr>
                     <?php endforeach; ?>
                 </tbody>
