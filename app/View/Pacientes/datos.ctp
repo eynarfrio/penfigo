@@ -8,7 +8,7 @@
                     <h3 class="box-title">Paciente</h3>
                 </div>
                 <div class="box-body" align="center">         
-                      <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="112px" width="120px">
+                    <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="112px" width="120px">
                 </div>
             </div>
         </div>
@@ -150,8 +150,8 @@
                         <?php if (!empty($num_sin)): ?>
                           <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'ajax_sintomas', $idPaciente, $num_sin]) ?>');"><i class="fa fa-edit"></i></button> 
                           <button class="btn btn-box-tool" title="Eliminar" onclick="if (confirm('Esta seguro de eliminar los sintomas??')) {
-                                    window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
-                                }"><i class="fa fa-remove"></i></button> 
+                                      window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'elimina_sin', $idPaciente, $num_sin]) ?>';
+                                  }"><i class="fa fa-remove"></i></button> 
                                 <?php endif; ?>
 
                     </div>
@@ -241,133 +241,131 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header text-center">
-                        <h3 class="box-title">Ampollas en la Mucosa</h3>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Ampollas', 'action' => 'areasampollas_mu', $idPaciente, $amp['numero'], 'Mucosas']) ?>'"><i class="fa fa-edit"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="hidden-xs">Nro</th>
-                                    <th>Area</th>
-                                    <th>Tipos</th>
-                                    <th class="hidden-xs">Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($amp['areas_mu'] as $key2 => $amp2): ?>
-                                  <tr>
-                                      <td class="hidden-xs"><?php echo ($key2 + 1); ?></td>
-                                      <td><?php echo $amp2['Area']['nombre'] ?></td>
-                                      <td><?php echo $amp2['Areaampolla']['tipos'] ?></td>
-                                      <td class="hidden-xs"><?php echo $amp2['Areaampolla']['modified'] ?></td>
-                                  </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header text-center">
-                        <h3 class="box-title">Ampollas en la Piel</h3>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Registrar Ampollas en la Piel" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Ampollas', 'action' => 'areasampollas_mu', $idPaciente, $amp['numero'], 'Piel']) ?>'"><i class="fa fa-edit"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="hidden-xs">Nro</th>
-                                    <th>Area</th>
-                                    <th>Tipos</th>
-                                    <th class="hidden-xs">Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($amp['areas_pi'] as $key2 => $amp2): ?>
-                                  <tr>
-                                      <td class="hidden-xs"><?php echo ($key2 + 1); ?></td>
-                                      <td><?php echo $amp2['Area']['nombre'] ?></td>
-                                      <td><?php echo $amp2['Areaampolla']['tipos'] ?></td>
-                                      <td class="hidden-xs"><?php echo $amp2['Areaampolla']['modified'] ?></td>
-                                  </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header text-center">
-                        <h3 class="box-title">Laboratorios</h3>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Laboratorios" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Laboratorios', 'action' => 'paclaboratorio', $idPaciente, $amp['numero']]) ?>')"><i class="fa fa-edit"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="hidden-xs">Nro</th>
-                                    <th>Laboratorio</th>
-                                    <th>Hacer</th>
-                                    <th>Hecho</th>
-                                    <th class="hidden-xs">Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $laboratorios = $this->requestAction(array('controller' => 'Laboratorios', 'action' => 'get_laboratorios', $idPaciente, $amp['numero'])) ?>
-                                <?php //debug($laboratorios);exit;?>
-                                <?php foreach ($laboratorios as $key => $lab): ?>
-                                  <tr>
-                                      <td class="hidden-xs"><?= ($key + 1) ?></td>
-                                      <td><?= $lab['Laboratorio']['nombre'] ?></td>
-                                      <td>
-                                          <?php
-                                          if ($lab['PacientesLaboratorio']['hacer']) {
-                                            echo '<span class="label label-primary">Si</span>';
-                                          } else {
-                                            echo 'No';
-                                          }
-                                          ?>
-                                      </td>
-                                      <td>
-                                          <?php
-                                          if ($lab['PacientesLaboratorio']['hecho']) {
-                                            echo '<span class="label label-primary">Si</span>';
-                                          } else {
-                                            echo 'No';
-                                          }
-                                          ?>
-                                      </td>
-                                      <td class="hidden-xs"><?= $lab['PacientesLaboratorio']['modified'] ?></td>
-                                  </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
         <?php if (!$this->requestAction(array('controller' => 'Penfigos', 'action' => 'get_nikolsky', $idPaciente, $amp['numero']))): ?>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="box box-primary">
+                      <div class="box-header text-center">
+                          <h3 class="box-title">Ampollas en la Mucosa</h3>
+                          <div class="box-tools pull-right">
+                              <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Ampollas', 'action' => 'areasampollas_mu', $idPaciente, $amp['numero'], 'Mucosas']) ?>'"><i class="fa fa-edit"></i></button>
+                          </div>
+                      </div>
+                      <div class="box-body">
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th class="hidden-xs">Nro</th>
+                                      <th>Area</th>
+                                      <th>Tipos</th>
+                                      <th class="hidden-xs">Fecha</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($amp['areas_mu'] as $key2 => $amp2): ?>
+                                    <tr>
+                                        <td class="hidden-xs"><?php echo ($key2 + 1); ?></td>
+                                        <td><?php echo $amp2['Area']['nombre'] ?></td>
+                                        <td><?php echo $amp2['Areaampolla']['tipos'] ?></td>
+                                        <td class="hidden-xs"><?php echo $amp2['Areaampolla']['modified'] ?></td>
+                                    </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="box box-primary">
+                      <div class="box-header text-center">
+                          <h3 class="box-title">Ampollas en la Piel</h3>
+                          <div class="box-tools pull-right">
+                              <button class="btn btn-box-tool" title="Registrar Ampollas en la Piel" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Ampollas', 'action' => 'areasampollas_mu', $idPaciente, $amp['numero'], 'Piel']) ?>'"><i class="fa fa-edit"></i></button>
+                          </div>
+                      </div>
+                      <div class="box-body">
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th class="hidden-xs">Nro</th>
+                                      <th>Area</th>
+                                      <th>Tipos</th>
+                                      <th class="hidden-xs">Fecha</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($amp['areas_pi'] as $key2 => $amp2): ?>
+                                    <tr>
+                                        <td class="hidden-xs"><?php echo ($key2 + 1); ?></td>
+                                        <td><?php echo $amp2['Area']['nombre'] ?></td>
+                                        <td><?php echo $amp2['Areaampolla']['tipos'] ?></td>
+                                        <td class="hidden-xs"><?php echo $amp2['Areaampolla']['modified'] ?></td>
+                                    </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="box box-primary">
+                      <div class="box-header text-center">
+                          <h3 class="box-title">Laboratorios</h3>
+                          <div class="box-tools pull-right">
+                              <button class="btn btn-box-tool" title="Laboratorios" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Laboratorios', 'action' => 'paclaboratorio', $idPaciente, $amp['numero']]) ?>')"><i class="fa fa-edit"></i></button>
+                          </div>
+                      </div>
+                      <div class="box-body">
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th class="hidden-xs">Nro</th>
+                                      <th>Laboratorio</th>
+                                      <th>Hacer</th>
+                                      <th>Hecho</th>
+                                      <th class="hidden-xs">Fecha</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php $laboratorios = $this->requestAction(array('controller' => 'Laboratorios', 'action' => 'get_laboratorios', $idPaciente, $amp['numero'])) ?>
+                                  <?php //debug($laboratorios);exit;?>
+                                  <?php foreach ($laboratorios as $key => $lab): ?>
+                                    <tr>
+                                        <td class="hidden-xs"><?= ($key + 1) ?></td>
+                                        <td><?= $lab['Laboratorio']['nombre'] ?></td>
+                                        <td>
+                                            <?php
+                                            if ($lab['PacientesLaboratorio']['hacer']) {
+                                              echo '<span class="label label-primary">Si</span>';
+                                            } else {
+                                              echo 'No';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($lab['PacientesLaboratorio']['hecho']) {
+                                              echo '<span class="label label-primary">Si</span>';
+                                            } else {
+                                              echo 'No';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="hidden-xs"><?= $lab['PacientesLaboratorio']['modified'] ?></td>
+                                    </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
           <div class="row">
               <div class="col-md-12">
                   <div class="box box-primary">
@@ -383,6 +381,72 @@
           <script>
             $('#diagnostico<?= $key1 ?>').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'pre_diagnostico', $idPaciente, $amp['numero'])); ?>');
           </script>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="box box-danger">
+                      <div class="box-header text-center">
+                          <h3 class="box-title">Examenes</h3>
+                      </div>
+                      <div class="box-body">
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th class="hidden-xs">Nro</th>
+                                      <th>Examen</th>
+                                      <th class="hidden-xs">Resultado</th>
+                                      <th class="hidden-xs">Penfigo</th>
+                                      <th class="hidden-xs">Observacion</th>
+                                      <th>Accion</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($examenes as $key => $ex): ?>
+                                    <?php $resultado = $this->requestAction(array('controller' => 'Resultados', 'action' => 'get_res_pac', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>
+                                    <tr>
+                                        <td class="hidden-xs"><?php echo $key + 1; ?></td>
+                                        <td><?php echo $ex['Examene']['nombre'] ?></td>
+                                        <?php if (!empty($resultado)): ?>
+                                          <td class="hidden-xs">
+                                              <?php echo $resultado['Resultado']['descripcion']; ?>
+                                          </td>
+                                          <td class="success">
+                                              <h3><?= $r_pen = $this->requestAction(array('controller' => 'Resultados', 'action' => 'get_res_pen', $resultado['Resultado']['id'])) ?></h3>
+
+                                          </td>
+                                          <td class="hidden-xs"><?php echo $resultado['PacientesResultado']['observacion']; ?></td>
+
+                                          <td>
+                                              <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'], $resultado['PacientesResultado']['id'])) ?>')" class="btn btn-info btn-flat"><i class="fa fa-edit"></i></a>
+                                          </td>
+                                        <?php else: ?>
+                                          <td></td>
+                                          <td class="hidden-xs"></td>
+                                          <td>
+                                              <a href="javascript:"  onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>')" class="btn btn-success btn-flat" title="Editar"><i class="fa fa-plus"></i></a>
+                                          </td>
+                                        <?php endif; ?>
+                                    </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div id="diagnostico-f">
+
+          </div>
+
+          <script>
+            $('#diagnostico-f').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'diagnostico', $idPaciente, $amp['numero'])) ?>');
+          </script>
+
+          <div class="row" id="b-edit-trat" style="display:none;">
+              <div class="col-md-12">
+                  <a class="btn btn-block btn-info btn-lg col-md-12" href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tratamientos', 'action' => 'pac_tratamiento', $idPaciente, $amp['numero'])) ?>');">EDITAR TRATAMIENTO</a>
+              </div>
+          </div>
+
         <?php else: ?>
           <div class="alert alert-info alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -390,72 +454,7 @@
               NO SE PUEDE DEFINIR UN DIAGNOSTICO DEBIDO A QUE EL PACIENTE NO PRESENTA EL SIGNO DE NIKOLSKY SE RECOMIENDA TRANSFERIR AL PACIENTE A UN ESPECIALISTA!!
           </div>
         <?php endif; ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-danger">
-                    <div class="box-header text-center">
-                        <h3 class="box-title">Examenes</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="hidden-xs">Nro</th>
-                                    <th>Examen</th>
-                                    <th class="hidden-xs">Resultado</th>
-                                    <th class="hidden-xs">Penfigo</th>
-                                    <th class="hidden-xs">Observacion</th>
-                                    <th>Accion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($examenes as $key => $ex): ?>
-                                  <?php $resultado = $this->requestAction(array('controller' => 'Resultados', 'action' => 'get_res_pac', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>
-                                  <tr>
-                                      <td class="hidden-xs"><?php echo $key + 1; ?></td>
-                                      <td><?php echo $ex['Examene']['nombre'] ?></td>
-                                      <?php if (!empty($resultado)): ?>
-                                        <td class="hidden-xs">
-                                            <?php echo $resultado['Resultado']['descripcion']; ?>
-                                        </td>
-                                        <td class="success">
-                                            <h3><?= $r_pen = $this->requestAction(array('controller' => 'Resultados', 'action' => 'get_res_pen', $resultado['Resultado']['id'])) ?></h3>
 
-                                        </td>
-                                        <td class="hidden-xs"><?php echo $resultado['PacientesResultado']['observacion']; ?></td>
-
-                                        <td>
-                                            <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'], $resultado['PacientesResultado']['id'])) ?>')" class="btn btn-info btn-flat"><i class="fa fa-edit"></i></a>
-                                        </td>
-                                      <?php else: ?>
-                                        <td></td>
-                                        <td class="hidden-xs"></td>
-                                        <td>
-                                            <a href="javascript:"  onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>')" class="btn btn-success btn-flat" title="Editar"><i class="fa fa-plus"></i></a>
-                                        </td>
-                                      <?php endif; ?>
-                                  </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="diagnostico-f">
-
-        </div>
-
-        <script>
-          $('#diagnostico-f').load('<?php echo $this->Html->url(array('controller' => 'Penfigos', 'action' => 'diagnostico', $idPaciente, $amp['numero'])) ?>');
-        </script>
-
-        <div class="row" id="b-edit-trat" style="display:none;">
-            <div class="col-md-12">
-                <a class="btn btn-block btn-info btn-lg col-md-12" href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Tratamientos', 'action' => 'pac_tratamiento', $idPaciente, $amp['numero'])) ?>');">EDITAR TRATAMIENTO</a>
-            </div>
-        </div>
         <br>
         <!--<div class="row">
             <div class="col-md-12">

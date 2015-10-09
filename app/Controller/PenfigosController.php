@@ -59,7 +59,7 @@ class PenfigosController extends AppController {
         $penfigos[$key]['diagnostico'] = round($diagnostico_t / 2, 2);
       }
     }
-    /* debug($penfigos);
+     /*debug($penfigos);
       exit; */
     $this->set(compact('penfigos', 'verifica'));
   }
@@ -334,6 +334,15 @@ class PenfigosController extends AppController {
       $array_i_aux[$key]['PacientesTipoampolla.tipoampolla_id'] = $am['Penfigoampolla']['tipoampolla_id'];
     }
     $array_a_i['OR'] = $array_i_aux;
+    
+    if (!empty($array_a_i) && !empty($array_i_aux)) {
+      $n_ampolla_i = $this->PacientesTipoampolla->find('count', array(
+        'recursive' => 0,
+        'conditions' => $array_a_i,
+      ));
+    } else {
+      $n_ampolla_i = 0;
+    }
 
     $ampollas = $this->Penfigoampolla->find('all', array(
       'recursive' => 0,
@@ -359,16 +368,7 @@ class PenfigosController extends AppController {
     }
     $array_a['OR'] = $array_a_aux;
 
-    if (!empty($array_a_i)) {
-      $n_ampolla_i = $this->PacientesTipoampolla->find('count', array(
-        'recursive' => 0,
-        'conditions' => $array_a_i,
-      ));
-    } else {
-      $n_ampolla_i = 0;
-    }
-
-    if (!empty($ampollas)) {
+    if (!empty($ampollas) && !empty($array_a_aux)) {
       $n_ampolla = $this->PacientesTipoampolla->find('count', array(
         'recursive' => 0,
         'conditions' => $array_a,
@@ -376,7 +376,7 @@ class PenfigosController extends AppController {
     } else {
       $n_ampolla = 0;
     }
-    /*ebug("Ampollas de penfigo inmportantes " . count($ampollas_i));
+    /*debug("Ampollas de penfigo inmportantes " . count($ampollas_i));
     debug("Ampollas de penfigo " . count($ampollas));
     debug("ampollas de paciente $n_ampolla");
     debug("ampollas de paciente importante $n_ampolla_i");
