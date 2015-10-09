@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-              <?php echo $this->Form->textarea('descripcion',array('class' => 'form-control','placeholder' => 'Descripcion'))?>
+              <?php echo $this->Form->textarea('descripcion',array('class' => 'form-control','rows'=>15,'placeholder' => 'Descripcion', ))?>
             </div>
         </div>
     </div>

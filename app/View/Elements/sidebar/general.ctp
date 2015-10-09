@@ -38,7 +38,7 @@
           </li>
         <?php endif; ?>
         <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'index']); ?>"><i class="fa fa-stethoscope"></i> <span>Medicos</span></a></li>
-        <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']); ?>"><i class="fa fa-bar-chart"></i> <span>Reportes</span></a></li>
+       <!-- <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'form_medico']); ?>"><i class="fa fa-bar-chart"></i> <span>Reportes</span></a></li>-->
         <li><a href="<?php echo $this->Html->url(['controller' => 'Medicos', 'action' => 'informacion']); ?>"><i class="fa fa-book"></i> <span>Informacion</span></a></li>
 
     </ul>

@@ -106,7 +106,7 @@
                 <div class="box-header text-center">
                     <h3 class="box-title">Datos y Signos Vitales</h3>
                     <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" title="Registrar Sintomas" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Signos', 'action' => 'ajax_signos', $idPaciente]) ?>');"><i class="fa fa-plus-square"></i></button>
+                        <button class="btn btn-box-tool" title="Registrar Signos Vitales" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Signos', 'action' => 'ajax_signos', $idPaciente]) ?>');"><i class="fa fa-plus-square"></i></button>
                         <?php $num_signo = $this->requestAction(['controller' => 'Signos', 'action' => 'get_ult_num', $idPaciente]); ?>
                         <?php if (!empty($num_signo)): ?>
                           <button class="btn btn-box-tool" title="Editar" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Signos', 'action' => 'ajax_signos', $idPaciente, $num_signo]) ?>');"><i class="fa fa-edit"></i></button> 
@@ -204,7 +204,7 @@
                     <div class="box-header text-center">
                         <h3 class="box-title">Sintomas en la Piel</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'sintomas_piel', $idPaciente, $amp['numero']]) ?>'"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-box-tool" title="Registrar Sintomas en la Piel" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Sintomas', 'action' => 'sintomas_piel', $idPaciente, $amp['numero']]) ?>'"><i class="fa fa-edit"></i></button>
                         </div>
                     </div>
                     <?php $sintomaspiel = $this->requestAction(['controller' => 'Pacientes', 'action' => 'get_sintomaspiel', $idPaciente, $amp['numero']]) ?>
@@ -281,7 +281,7 @@
                     <div class="box-header text-center">
                         <h3 class="box-title">Ampollas en la Piel</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Ampollas', 'action' => 'areasampollas_mu', $idPaciente, $amp['numero'], 'Piel']) ?>'"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-box-tool" title="Registrar Ampollas en la Piel" onclick="window.location.href = '<?= $this->Html->url(['controller' => 'Ampollas', 'action' => 'areasampollas_mu', $idPaciente, $amp['numero'], 'Piel']) ?>'"><i class="fa fa-edit"></i></button>
                         </div>
                     </div>
                     <div class="box-body">
@@ -316,7 +316,7 @@
                     <div class="box-header text-center">
                         <h3 class="box-title">Laboratorios</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" title="Registrar Ampollas en la mucosa" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Laboratorios', 'action' => 'paclaboratorio', $idPaciente, $amp['numero']]) ?>')"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-box-tool" title="Laboratorios" onclick="cargarmodal('<?= $this->Html->url(['controller' => 'Laboratorios', 'action' => 'paclaboratorio', $idPaciente, $amp['numero']]) ?>')"><i class="fa fa-edit"></i></button>
                         </div>
                     </div>
                     <div class="box-body">
@@ -431,7 +431,7 @@
                                         <td></td>
                                         <td class="hidden-xs"></td>
                                         <td>
-                                            <a href="javascript:" onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>')" class="btn btn-success btn-flat"><i class="fa fa-plus"></i></a>
+                                            <a href="javascript:"  onclick="cargarmodal('<?php echo $this->Html->url(array('controller' => 'Resultados', 'action' => 'pac_examen', $idPaciente, $amp['numero'], $ex['Examene']['id'])) ?>')" class="btn btn-success btn-flat" title="Editar"><i class="fa fa-plus"></i></a>
                                         </td>
                                       <?php endif; ?>
                                   </tr>
