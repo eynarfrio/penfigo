@@ -2,20 +2,11 @@
 <link href="<?= $this->webroot; ?>plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
 <section class="content">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header text-center">
-                    <h3 class="box-title">Paciente</h3>
-                </div>
-                <div class="box-body" align="center">         
-                    <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" height="112px" width="120px">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="box box-primary">
-                <div class="box-header text-center">
-                    <h3 class="box-title">Informacion del Paciente</h3>
+                    <h3 class="box-title">HISTORIA CLINICA</h3> </br> </br>
+                    <h3 class="box-title">FILIACION (Informacion del Paciente)</h3>                     
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" title="Editar" onclick="window.location.href = '<?= $this->Html->url(['action' => 'paciente', $idPaciente]) ?>';"><i class="fa fa-edit"></i></button> 
                     </div>
@@ -40,6 +31,34 @@
                                 <td><?= $paciente['Paciente']['telefonos'] ?></td>
                             </tr>
                             <tr>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Estado civil</td>
+                                <td><?= $paciente['Paciente']['est_civil'] ?></td>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Ocupacion</td>
+                                <td><?= $paciente['Paciente']['ocupacion'] ?></td>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Residencia</td>
+                                <td><?= $paciente['Paciente']['residencia'] ?></td>
+                            </tr>
+                            <tr>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Fecha de Internacion</td>
+                                <td><?= $paciente['Paciente']['fecha_internacion'] ?></td>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Fecha de Historia Clinica</td>
+                                <td><?= $paciente['Paciente']['Fecha_clinica'] ?></td>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Hospital</td>
+                                <td><?= $paciente['Paciente']['hospital'] ?></td>
+                            </tr>
+                            <tr>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Servicio</td>
+                                <td><?= $paciente['Paciente']['servicio'] ?></td>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Nro. de Cama</td>
+                                <td><?= $paciente['Paciente']['cama'] ?></td>
+                            </tr>
+                            <tr>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Fuente de Informacion</td>
+                                <td><?= $paciente['Paciente']['fuente_info'] ?></td>
+                                <td class="text-light-blue hidden-xs" style="font-weight: bold;">Grado de Confianza</td>
+                                <td><?= $paciente['Paciente']['grado_confianza'] ?></td>
+                            </tr>
+                            <tr>
                                 <td class="text-light-blue hidden-xs" style="font-weight: bold;">C.I.</td>
                                 <td><?= $paciente['Paciente']['ci'] ?></td>
                                 <td class="text-light-blue hidden-xs" style="font-weight: bold;">Lugar</td>
@@ -54,16 +73,40 @@
             </div>
         </div>
     </div>
-    <?php if (!empty($paciente['Paciente']['antecedentes_personales']) || !empty($paciente['Paciente']['medicacion']) || !empty($paciente['Paciente']['antecedentes_familiares'])): ?>
+    <?php if (!empty($paciente['Paciente']['antecedentes_personales']) || !empty($paciente['Paciente']['medicacion']) || !empty($paciente['Paciente']['antecedentes_familiares']) || !empty($paciente['Paciente']['motivo']) || !empty($paciente['Paciente']['historia'])): ?>
       <div class="row">
           <div class="col-md-12">
               <div class="box box-primary">
                   <div class="box-body">
+                      <?php if (!empty($paciente['Paciente']['motivo'])): ?>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Motivo de Internacion</td>
+                                </tr>
+                                <tr>
+                                    <td><?= $paciente['Paciente']['motivo'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      <?php endif; ?>
+                      <?php if (!empty($paciente['Paciente']['historia'])): ?>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Historia de la enfermedad actual</td>
+                                </tr>
+                                <tr>
+                                    <td><?= $paciente['Paciente']['historia'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      <?php endif; ?>
                       <?php if (!empty($paciente['Paciente']['antecedentes_personales'])): ?>
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
-                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecentes personales</td>
+                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecentes personales patologicos</td>
                                 </tr>
                                 <tr>
                                     <td><?= $paciente['Paciente']['antecedentes_personales'] ?></td>
@@ -91,6 +134,42 @@
                                 </tr>
                                 <tr>
                                     <td><?= $paciente['Paciente']['antecedentes_familiares'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      <?php endif; ?>
+                      <?php if (!empty($paciente['Paciente']['antecedentes_ginecoobstetricos'])): ?>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Antecedentes Ginecoobstetricos</td>
+                                </tr>
+                                <tr>
+                                    <td><?= $paciente['Paciente']['antecedentes_ginecoobstetricos'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      <?php endif; ?>
+                      <?php if (!empty($paciente['Paciente']['examen_fisicos'])): ?>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Examen fisico</td>
+                                </tr>
+                                <tr>
+                                    <td><?= $paciente['Paciente']['examen_fisicos'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      <?php endif; ?>
+                      <?php if (!empty($paciente['Paciente']['examen_segmentario'])): ?>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="text-light-blue hidden-xs text-center" style="font-weight: bold;">Examen Fisico Segmentario</td>
+                                </tr>
+                                <tr>
+                                    <td><?= $paciente['Paciente']['examen_segmentario'] ?></td>
                                 </tr>
                             </tbody>
                         </table>
