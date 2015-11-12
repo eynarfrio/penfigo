@@ -97,7 +97,8 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url(array('controller' => 'Medicos', 'action' => 'ver', $this->request->data['Medico']['user_id'])) ?>';">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href = '<?php echo $this->Html->url($this->request->referer()) ?>';">Cancelar</button>
+                    <!--<button type="button" class="btn btn-danger" onclick="window.location.href = '<?php //echo $this->Html->url(array('controller' => 'Medicos', 'action' => 'ver', $this->request->data['Medico']['user_id'])) ?>';">Cancelar</button>-->
                     <button type="submit" class="btn btn-primary">Registrar</button>
                 </div>
                 <?php echo $this->Form->hidden('User.id'); ?>
