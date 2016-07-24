@@ -11,29 +11,29 @@
         <ul class="nav navbar-nav">
 
             <li class="dropdown tasks-menu">
-               <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-                    <!--<i class="fa fa-wheelchair"></i>-->
-                    <!--<span class="label label-danger">9</span>-->
+                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+                     <!--<i class="fa fa-wheelchair"></i>-->
+                     <!--<span class="label label-danger">9</span>-->
                 </a>
                 <ul class="dropdown-menu">
                     <!--<li class="header">You have 9 tasks</li>-->
                     <li>
                         <!-- inner menu: contains the actual data -->
-                      <!--  <ul class="menu">-->
-                           <!-- <li><!-- Task item -->
-                               <!-- <a href="#">
-                                    <h3>
-                                        Design some buttons
-                                        <small class="pull-right">20%</small>
-                                    </h3>
-                                    <div class="progress xs">
-                                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li><!-- end task item -->
-                      <!--  </ul>-->
+                        <!--  <ul class="menu">-->
+                        <!-- <li><!-- Task item -->
+                        <!-- <a href="#">
+                             <h3>
+                                 Design some buttons
+                                 <small class="pull-right">20%</small>
+                             </h3>
+                             <div class="progress xs">
+                                 <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                     <span class="sr-only">20% Complete</span>
+                                 </div>
+                             </div>
+                         </a>
+                     </li><!-- end task item -->
+                        <!--  </ul>-->
                     </li>
                     <li class="footer">
                         <a href="#">View all tasks</a>
@@ -43,21 +43,27 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
-                    <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="user-image" alt="User Image">
-                    <?php else:?>
-                    <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="user-image" alt="User Image">
-                    <?php endif;?>
-                      
+                    <?php if (!empty($medico['User']['imagen'])): ?>
+                        <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($medico['User']['imagen']) . '" height="160px" width="160px"class="user-image" alt="User Image"/>'; ?>
+                    <?php elseif ($medico['Medico']['sexo'] == 'Masculino'): ?>
+                        <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="user-image" alt="User Image"/>
+                    <?php else: ?>
+                        <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="user-image" alt="User Image" />
+                    <?php endif; ?>
+
+
                     <span class="hidden-xs"><?php echo $medico['Medico']['nombres'] ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                        <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
-                          <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+
+                        <?php if (!empty($medico['User']['imagen'])): ?>
+                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($medico['User']['imagen']) . '" height="160px" width="160px"class="img-circle" alt="User Image"/>'; ?>
+                        <?php elseif ($medico['Medico']['sexo'] == 'Masculino'): ?>
+                            <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image"/>
                         <?php else: ?>
-                          <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+                            <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image"/>
                         <?php endif; ?>
                         <p>
                             <?php echo $medico['Medico']['nombres'] ?> - <?php echo $medico['Medico']['tipo_medico'] ?>

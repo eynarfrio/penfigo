@@ -13,11 +13,15 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-4" align="center">
-                            <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
-                                <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="112px" width="40%">
-                            <?php else: ?>
-                                <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="112px" width="40%">
-                            <?php endif; ?>
+                            <?php if (!empty($medico['User']['imagen'])): ?>
+                                <?php echo '<img src="data:image/jpeg;base64,'.base64_encode( $medico['User']['imagen'] ).'"   width="45%"/>';?>
+                                        <?php elseif ($medico['Medico']['sexo'] == 'Masculino'): ?>
+                                    
+                                    <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="112px" width="40%">
+                                <?php else: ?>
+                                    
+                                    <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="112px" width="40%">
+                                <?php endif; ?>
                         </div>
                         <div class="col-md-8">
                             <table class="table table-bordered">

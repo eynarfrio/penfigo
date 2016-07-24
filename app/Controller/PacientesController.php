@@ -206,5 +206,6 @@ class PacientesController extends AppController {
         ]);
         return $sintomas;
     }
+    
 
 }

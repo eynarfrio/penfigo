@@ -4,10 +4,12 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
         <div class="pull-left image">
-            <?php if ($medico['Medico']['sexo'] == 'Masculino'): ?>
-              <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+            <?php if (!empty($medico['User']['imagen'])): ?>
+                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($medico['User']['imagen']) . '" class="img-circle" alt="User Image"/>'; ?>
+            <?php elseif ($medico['Medico']['sexo'] == 'Masculino'): ?>
+                <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" class="img-circle" alt="User Image" />
             <?php else: ?>
-              <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" height="160px" width="160px"class="img-circle" alt="User Image">
+                <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" class="img-circle" alt="User Image" />
             <?php endif; ?>
         </div>
         <div class="pull-left info">
