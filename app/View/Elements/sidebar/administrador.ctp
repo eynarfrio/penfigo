@@ -5,16 +5,7 @@ $usuario = $this->requestAction(array('controller' => 'Medicos', 'action' => 'ge
 <section class="sidebar">
     <!-- Sidebar user panel -->
     <div class="user-panel">
-        <div class="pull-left image">
-            <?php if (!empty($usuario['User']['imagen'])): ?>
-                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($usuario['User']['imagen']) . '" class="img-circle" alt="User Image"/>'; ?>
-            <?php elseif ($usuario['Medico']['sexo'] == 'Masculino'): ?>
-                <img src="<?php echo $this->webroot; ?>imagenes/doctor-icono.jpg" class="img-circle" alt="User Image" />
-            <?php else: ?>
-                <img src="<?php echo $this->webroot; ?>imagenes/doctora-icono.jpg" class="img-circle" alt="User Image" />
-            <?php endif; ?>
-
-        </div>
+        
         <div class="pull-left info">
             <p><?php echo $usuario['User']['username']; //$this->Session->read('Auth.User.username');   ?></p>
             <a href="javascript:"> <?php echo $usuario['User']['role']; //$this->Session->read('Auth.User.role');   ?></a>
