@@ -91,7 +91,7 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?php echo $this->webroot; ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                    <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" class="user-image" alt="User Image"/>
                     <span class="hidden-xs"><?php echo $this->Session->read('Auth.User.username'); ?></span>
                 </a>
                 <ul class="dropdown-menu">
@@ -99,24 +99,19 @@
                     <li class="user-header">
                         <img src="<?php echo $this->webroot; ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                         <p>
-                            <?php echo $this->Session->read('Auth.User.username'); ?>
+                            <?php echo $this->Session->read('Auth.User.username').' - '.$this->Session->read('Auth.User.role'); ?>
                         </p>
                     </li>
 
                     <li class="user-footer">
-                        <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                        </div>
+                        
                         <div class="pull-right">
                             <a href="<?php echo $this->Html->url(['controller' => 'Users', 'action' => 'salir']) ?>" class="btn btn-default btn-flat">Salir</a>
                         </div>
                     </li>
                 </ul>
             </li>
-            <!-- Control Sidebar Toggle Button -->
-            <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-            </li>
+
         </ul>
     </div>
 </nav>

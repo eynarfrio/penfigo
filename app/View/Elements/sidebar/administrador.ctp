@@ -5,10 +5,12 @@ $usuario = $this->requestAction(array('controller' => 'Medicos', 'action' => 'ge
 <section class="sidebar">
     <!-- Sidebar user panel -->
     <div class="user-panel">
-        
+        <div class="pull-left image">
+            <img src="<?php echo $this->webroot; ?>imagenes/instagram-Beta.png" class="img-circle" alt="User Image" />
+        </div>
         <div class="pull-left info">
-            <p><?php echo $usuario['User']['username']; //$this->Session->read('Auth.User.username');   ?></p>
-            <a href="javascript:"> <?php echo $usuario['User']['role']; //$this->Session->read('Auth.User.role');   ?></a>
+            <p><?php  echo $this->Session->read('Auth.User.username');   ?></p>
+            <a href="javascript:"> <?php echo $this->Session->read('Auth.User.role');   ?></a>
         </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
